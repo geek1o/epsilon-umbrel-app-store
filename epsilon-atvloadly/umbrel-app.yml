@@ -1,0 +1,40 @@
+manifestVersion: 1
+id: epsilon-atvloadly
+category: developer
+name: atvloadly
+version: "0.4.10"
+tagline: Sideload and refresh apps on Apple TV
+icon: https://raw.githubusercontent.com/bitxeno/atvloadly/v0.4.10/doc/preview/logo.png
+description: >-
+  atvloadly is a web-based tool for pairing with Apple TV, sideloading IPA files, and automatically refreshing installed apps before their signatures expire. This release supports Apple TV devices running tvOS 17.4 or later.
+
+
+  ⚠️ Use a dedicated Apple ID instead of your primary account. atvloadly does not support app-specific passwords, and Apple may apply account or regional risk controls. You will need access to a trusted phone number or an already signed-in Apple device to complete two-factor authentication.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Keep your Apple TV and Umbrel on the same local network and disable VPN connections during pairing. On Apple TV, open Settings, go to Remotes and Devices > Remote App and Devices, and leave the pairing screen open. Then launch atvloadly from Umbrel, select the discovered Apple TV, complete pairing, and upload an IPA from the device page.
+
+
+  Umbrel authentication protects the web interface. Device discovery requires access to the host system D-Bus and Avahi sockets, and upstream requires unconfined seccomp. This package does not enable privileged mode, host networking, or Docker socket access.
+releaseNotes: ""
+
+developer: bitxeno
+website: https://github.com/bitxeno/atvloadly
+dependencies: []
+repo: https://github.com/bitxeno/atvloadly
+support: https://github.com/bitxeno/atvloadly/issues
+
+port: 5533
+gallery:
+  - https://raw.githubusercontent.com/bitxeno/atvloadly/v0.4.10/doc/preview/home_en.png
+  - https://raw.githubusercontent.com/bitxeno/atvloadly/v0.4.10/doc/preview/install_en.png
+path: ""
+
+defaultUsername: ""
+defaultPassword: ""
+
+submitter: GeekIO
+submission: https://github.com/geek1o/umbrel

@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: epsilon-atvloadly_server_1
+      APP_PORT: 80
+
+  server:
+    image: ghcr.io/bitxeno/atvloadly:v0.4.10@sha256:527abbdc65d67412fa6d7213ef515d157a43b5749ae223af6058b8edc7034fd9
+    restart: on-failure
+    stop_grace_period: 30s
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      SERVICE_PORT: "80"
+      TZ: Europe/Moscow
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+      - /var/run/dbus:/var/run/dbus
+      - /var/run/avahi-daemon:/var/run/avahi-daemon
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:80/"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
