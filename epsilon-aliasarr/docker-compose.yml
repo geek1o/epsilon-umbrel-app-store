@@ -1,0 +1,33 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: epsilon-aliasarr_server_1
+      APP_PORT: 8989
+
+  server:
+    image: ghcr.io/lqwestl/aliasarr:v3.1.9@sha256:cb3c2d37b49dd95fdab9f67b09ab9f6ece8aa04e9ddcfc8bda0fe4797da52fed
+    restart: on-failure
+    stop_grace_period: 30s
+    environment:
+      DATABASE_URL: sqlite:////config/aliasarr.db
+      HOST: 0.0.0.0
+      PORT: "8989"
+      PUID: 1000
+      PGID: 1000
+      TZ: Europe/Moscow
+      UMASK: "0022"
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      - ${UMBREL_ROOT}/data/storage/downloads:/downloads
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8989/api/v1/health', timeout=5)
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s

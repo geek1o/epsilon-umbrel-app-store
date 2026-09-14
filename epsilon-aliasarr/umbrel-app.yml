@@ -1,0 +1,43 @@
+manifestVersion: 1
+id: epsilon-aliasarr
+category: media
+name: Aliasarr
+version: "3.1.9"
+tagline: Manage movies, TV series, and anime
+icon: https://raw.githubusercontent.com/geek1o/umbrel/main/epsilon-aliasarr/logo.svg
+description: >-
+  Aliasarr is a self-hosted media manager for movies, TV series, and anime. It combines library monitoring, release search, download-client integration, automatic imports, quality upgrades, and metadata management in one web interface.
+
+
+  It is designed for multilingual and non-standard releases, with localized title aliases, split-season and episode offsets, anime naming support, movie collections, multi-part movie merging, hardlinks, subtitles, and companion-file handling.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Add your indexers and download clients in Aliasarr, then select folders below /downloads for both completed downloads and media libraries. For example, use /downloads/movies, /downloads/series, and /downloads/anime. Keeping all paths below /downloads allows hardlinks to work without duplicating media files.
+
+
+  Umbrel protects the web interface with your Umbrel account. If you enable Aliasarr's own authentication and want a second login prompt, also disable passwordless access from local and private addresses in Aliasarr. Keep Aliasarr's built-in HTTPS disabled because Umbrel provides the application proxy.
+releaseNotes: ""
+
+developer: lQwestl
+website: https://github.com/lQwestl/aliasarr
+dependencies: []
+repo: https://github.com/lQwestl/aliasarr
+support: https://github.com/lQwestl/aliasarr/issues
+
+port: 8990
+gallery:
+  - https://raw.githubusercontent.com/lQwestl/aliasarr/v3.1.9/docs/screenshots/01_dashboard.jpg
+  - https://raw.githubusercontent.com/lQwestl/aliasarr/v3.1.9/docs/screenshots/02_library_grid.jpg
+  - https://raw.githubusercontent.com/lQwestl/aliasarr/v3.1.9/docs/screenshots/09_activity_queue.jpg
+path: ""
+
+defaultUsername: ""
+defaultPassword: ""
+
+permissions:
+  - STORAGE_DOWNLOADS
+submitter: GeekIO
+submission: https://github.com/geek1o/umbrel
