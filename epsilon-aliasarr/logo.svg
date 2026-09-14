@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title>Aliasarr</title>
+  <rect width="512" height="512" rx="136" fill="#0f1048"/>
+  <path d="M256 112 344 288" fill="none" stroke="#2a197c" stroke-width="56" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M120 392 256 112" fill="none" stroke="#6838f7" stroke-width="56" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M168 288h176l48 104" fill="none" stroke="#6838f7" stroke-width="56" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
