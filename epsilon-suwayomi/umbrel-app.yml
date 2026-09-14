@@ -7,15 +7,19 @@ category: media
 version: "preview_v2"
 port: 4567
 description: >-
-  Suwayomi is a free and open source manga reader server that runs extensions
-  built for Mihon (Tachiyomi).
+  Suwayomi is a free and open-source manga server that brings Mihon/Tachiyomi
+  extensions to the browser. Install source extensions, search their catalogues,
+  organise titles into categories, and keep your library on your own Umbrel.
 
-  Install sources as extensions, browse and search your library from the built-in
-  web UI, download chapters for offline reading, and sync progress with trackers
-  such as MyAnimeList, AniList, Kitsu and Bangumi. An OPDS endpoint lets external
-  readers pull chapters directly from the server.
+  The built-in reader supports single-page, double-page, continuous and webtoon
+  layouts on desktop and mobile. Suwayomi can check for new chapters automatically,
+  download them for offline reading, create Mihon-compatible backups, and sync
+  progress with services such as MyAnimeList, AniList and MangaUpdates. Compatible
+  reader apps can connect through the OPDS catalogue at `/api/opds/v1.2`.
 
-  Suwayomi is independent software compatible with Mihon (Tachiyomi) — it is not a fork.
+  After installation, open Browse → Extensions to add the sources you use, then
+  add titles to your library. No manga or source extensions are bundled. Suwayomi is
+  an independent project compatible with Mihon/Tachiyomi; it is not a fork.
 
 developer: Suwayomi
 website: https://suwayomi.org
@@ -23,7 +27,10 @@ submitter: GeekIO
 submission: https://github.com/Suwayomi/Suwayomi-Server
 repo: https://github.com/Suwayomi/Suwayomi-Server
 support: https://github.com/Suwayomi/Suwayomi-Server/issues
-gallery: []
+gallery:
+  - https://user-images.githubusercontent.com/226277/204056845-17fe70a7-e1b5-4fca-b126-ef92a3409d0e.png
+  - https://user-images.githubusercontent.com/226277/204057220-5da87265-c398-4637-982a-b4ccb5d2b0ab.png
+  - https://user-images.githubusercontent.com/226277/198554928-7e7e174e-1681-480f-a88a-5fbdc791e466.png
 releaseNotes: ""
 dependencies: []
 path: ""
