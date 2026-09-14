@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_ADD: "false"
 
   server:
-    image: xinjiawei1/emby_unlockd:latest
+    image: xinjiawei1/emby_unlockd:4.10.0.40@sha256:285461fc4fec55724c054b435d2a51bcfacc2ecd6c34fcaa155b4943bff25ba4
     environment:
       TZ: Europe/Moscow
       UID: 1000

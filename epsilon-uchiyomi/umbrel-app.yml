@@ -2,9 +2,9 @@ manifestVersion: 1
 id: epsilon-uchiyomi
 category: media
 name: Uchiyomi
-version: "0.19.0"
+version: "0.31.0"
 tagline: Manga & manhwa reader that also keeps up with new chapters
-icon: https://raw.githubusercontent.com/AngeloSha/uchiyomi/v0.19.0/web/public/icons/icon-512.png
+icon: https://raw.githubusercontent.com/AngeloSha/uchiyomi/v0.31.0/web/public/icons/icon-512.png
 description: >-
   Uchiyomi is a self-hosted manga and manhwa reader that also fetches new chapters: discover, grab,
   monitor, serve and read, in one app. Open it and create your admin account in the browser; there is no

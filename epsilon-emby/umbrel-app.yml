@@ -3,7 +3,7 @@ id: epsilon-emby
 name: Emby
 tagline: A personal media server
 category: media
-version: "latest_fix"
+version: "4.10.0.40"
 icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/emby.svg
 port: 8096
 description: >-
