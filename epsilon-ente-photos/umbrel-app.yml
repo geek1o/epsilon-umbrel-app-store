@@ -1,0 +1,50 @@
+manifestVersion: 1
+id: epsilon-ente-photos
+category: files
+name: Ente Photos
+version: "2026.09.10"
+tagline: End-to-end encrypted photo and video backup
+icon: https://raw.githubusercontent.com/dennysubke/dennys-umbrel-app-gallery/main/denny-ente-photos/logo.png
+description: >-
+  Ente Photos is a private, end-to-end encrypted home for your photos and videos.
+  Files are encrypted on your device before upload, so the server stores encrypted
+  data rather than a readable media library. Ente provides automatic camera backup,
+  albums and sharing, search, local face recognition, memories, and apps for mobile,
+  desktop and the web.
+
+
+  This package runs the complete self-hosted stack on Umbrel: the Photos and Albums
+  web apps, Museum API, PostgreSQL database, and MinIO object storage. Application
+  secrets are generated uniquely for your installation, and all persistent data stays
+  in the app's data directory. Back up that directory regularly; losing the database,
+  object storage, or encryption keys can make the library unrecoverable.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Open Ente Photos and create the first account. Without SMTP, the one-time verification
+  code is written to the Museum container log; see the included README for the exact
+  command. The first registered user becomes the initial administrator. To connect an
+  Ente mobile or desktop app, tap the onboarding screen seven times and set the custom
+  server endpoint to `http://umbrel.local:38080`.
+releaseNotes: ""
+
+developer: Ente
+website: https://ente.io
+dependencies: []
+repo: https://github.com/ente/ente
+support: https://github.com/ente/ente/discussions
+
+port: 33000
+gallery:
+  - https://raw.githubusercontent.com/dennysubke/dennys-umbrel-app-gallery/main/denny-ente-photos/1.jpg
+  - https://raw.githubusercontent.com/dennysubke/dennys-umbrel-app-gallery/main/denny-ente-photos/2.jpg
+  - https://raw.githubusercontent.com/dennysubke/dennys-umbrel-app-gallery/main/denny-ente-photos/3.jpg
+path: ""
+
+defaultUsername: ""
+defaultPassword: ""
+
+submitter: GeekIO
+submission: https://github.com/geek1o/umbrel
