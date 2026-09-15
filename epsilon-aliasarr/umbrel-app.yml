@@ -4,7 +4,7 @@ category: media
 name: Aliasarr
 version: "3.2.0"
 tagline: Manage movies, TV series, and anime
-icon: https://raw.githubusercontent.com/geek1o/umbrel/main/epsilon-aliasarr/logo.svg
+icon: https://raw.githubusercontent.com/geek1o/epsilon-umbrel-app-store/main/epsilon-aliasarr/logo.svg
 description: >-
   Aliasarr is a self-hosted media manager for movies, TV series, and anime. It combines library monitoring, release search, download-client integration, automatic imports, quality upgrades, and metadata management in one web interface.
 
@@ -40,4 +40,4 @@ defaultPassword: ""
 permissions:
   - STORAGE_DOWNLOADS
 submitter: GeekIO
-submission: https://github.com/geek1o/umbrel
+submission: https://github.com/geek1o/epsilon-umbrel-app-store

@@ -31,7 +31,7 @@ description: >-
 releaseNotes: ""
 
 developer: Ente
-website: https://ente.io
+website: https://ente.com
 dependencies: []
 repo: https://github.com/ente/ente
 support: https://github.com/ente/ente/discussions
@@ -47,4 +47,4 @@ defaultUsername: ""
 defaultPassword: ""
 
 submitter: GeekIO
-submission: https://github.com/geek1o/umbrel
+submission: https://github.com/geek1o/epsilon-umbrel-app-store

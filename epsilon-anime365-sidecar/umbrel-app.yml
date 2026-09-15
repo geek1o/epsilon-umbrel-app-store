@@ -4,7 +4,7 @@ category: media
 name: Anime365 Sidecar
 version: "0.13.1-ui.1"
 tagline: Download your Anime 365 list into Emby
-icon: https://raw.githubusercontent.com/geek1o/umbrel/main/epsilon-anime365-sidecar/logo.svg
+icon: https://smotret-anime.app/apple-touch-icon.png?v=pgrAWgkp53
 description: >-
   Anime365 Sidecar connects an Anime 365 account to Emby. It follows selected Anime 365 lists, downloads episodes and metadata into a shared Emby library, and marks episodes watched in Emby as watched on Anime 365.
 
@@ -34,7 +34,7 @@ support: https://github.com/flaksp/anime365-sidecar/issues
 
 port: 8365
 gallery:
-  - https://raw.githubusercontent.com/geek1o/umbrel/main/epsilon-anime365-sidecar/preview.png
+  - https://raw.githubusercontent.com/geek1o/epsilon-umbrel-app-store/main/epsilon-anime365-sidecar/preview.png
   - https://github.com/user-attachments/assets/734c2cb2-46a9-4597-bedb-a16b9a339b67
 path: ""
 
@@ -44,4 +44,4 @@ defaultPassword: ""
 permissions:
   - STORAGE_DOWNLOADS
 submitter: GeekIO
-submission: https://github.com/geek1o/umbrel
+submission: https://github.com/geek1o/epsilon-umbrel-app-store
