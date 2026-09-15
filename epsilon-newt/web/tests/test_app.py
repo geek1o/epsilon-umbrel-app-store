@@ -55,11 +55,11 @@ class NewtConfigTests(unittest.TestCase):
     def test_validation_rejects_bad_endpoint_and_duration(self):
         payload = self.payload()
         payload["endpoint"] = "pangolin.example.com"
-        with self.assertRaisesRegex(ValueError, "полный адрес"):
+        with self.assertRaisesRegex(ValueError, "full Pangolin URL"):
             app.validate_payload(payload, {})
         payload = self.payload()
         payload["pingInterval"] = "soon"
-        with self.assertRaisesRegex(ValueError, "неверный интервал"):
+        with self.assertRaisesRegex(ValueError, "invalid duration"):
             app.validate_payload(payload, {})
 
     def test_connected_state_uses_upstream_health_file(self):

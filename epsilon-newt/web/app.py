@@ -74,9 +74,9 @@ def public_config() -> dict[str, Any]:
 def validate_url(value: str) -> str:
     parsed = urllib.parse.urlsplit(value.strip())
     if parsed.scheme not in {"http", "https"} or not parsed.netloc:
-        raise ValueError("Укажите полный адрес Pangolin с http:// или https://")
+        raise ValueError("Enter the full Pangolin URL, including http:// or https://")
     if parsed.query or parsed.fragment:
-        raise ValueError("Адрес Pangolin не должен содержать параметры или фрагмент")
+        raise ValueError("The Pangolin URL must not contain a query string or fragment")
     return value.rstrip("/")
 
 
@@ -84,7 +84,7 @@ def validate_duration(name: str, value: str) -> str:
     import re
 
     if not re.fullmatch(r"(?:\d+(?:\.\d+)?(?:ns|us|µs|ms|s|m|h))+", value):
-        raise ValueError(f"{name}: неверный интервал; пример: 15s или 1m30s")
+        raise ValueError(f"{name}: invalid duration; use a value such as 15s or 1m30s")
     return value
 
 
@@ -105,9 +105,9 @@ def validate_payload(payload: dict[str, Any], existing: dict[str, Any]) -> dict[
     config["endpoint"] = validate_url(str(config["endpoint"]))
     for key in ("id", "secret"):
         if not str(config.get(key, "")).strip():
-            raise ValueError(f"Не заполнено обязательное поле: {key}")
+            raise ValueError(f"Required field is missing: {key}")
     if str(config["logLevel"]).upper() not in {"DEBUG", "INFO", "WARN", "ERROR"}:
-        raise ValueError("Уровень логов должен быть DEBUG, INFO, WARN или ERROR")
+        raise ValueError("Log level must be DEBUG, INFO, WARN, or ERROR")
     config["logLevel"] = str(config["logLevel"]).upper()
     for key in DURATION_FIELDS:
         config[key] = validate_duration(key, str(config[key]))
@@ -169,8 +169,8 @@ def test_endpoint(payload: dict[str, Any]) -> dict[str, Any]:
     except urllib.error.HTTPError as exc:
         code = exc.code
     if code >= 500:
-        raise ValueError(f"Pangolin отвечает с ошибкой HTTP {code}")
-    return {"ok": True, "message": f"Pangolin доступен (HTTP {code}). ID и secret проверит Newt после перезапуска."}
+        raise ValueError(f"Pangolin returned HTTP {code}")
+    return {"ok": True, "message": f"Pangolin is reachable (HTTP {code}). Newt will verify the ID and secret after restart."}
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -208,13 +208,13 @@ class Handler(BaseHTTPRequestHandler):
 
     def read_json(self) -> dict[str, Any]:
         if self.headers.get_content_type() != "application/json":
-            raise ValueError("Требуется Content-Type: application/json")
+            raise ValueError("Content-Type must be application/json")
         length = int(self.headers.get("Content-Length", "0"))
         if length < 1 or length > 32768:
-            raise ValueError("Некорректный размер запроса")
+            raise ValueError("Invalid request size")
         payload = json.loads(self.rfile.read(length))
         if not isinstance(payload, dict):
-            raise ValueError("Ожидался JSON-объект")
+            raise ValueError("Expected a JSON object")
         return payload
 
     def do_GET(self) -> None:
@@ -245,7 +245,7 @@ class Handler(BaseHTTPRequestHandler):
                 global restart_required
                 with LOCK:
                     restart_required = True
-                self.send_json({"ok": True, "message": "Настройки сохранены. Перезапустите Newt в Umbrel.", "restart_required": True})
+                self.send_json({"ok": True, "message": "Settings saved. Restart Newt from Umbrel to apply them.", "restart_required": True})
                 return
             if path == "/api/test":
                 self.send_json(test_endpoint(payload))
@@ -254,9 +254,9 @@ class Handler(BaseHTTPRequestHandler):
         except (ValueError, json.JSONDecodeError) as exc:
             self.send_json({"ok": False, "error": str(exc)}, HTTPStatus.BAD_REQUEST)
         except (OSError, urllib.error.URLError) as exc:
-            self.send_json({"ok": False, "error": f"Ошибка соединения или записи: {exc}"}, HTTPStatus.BAD_GATEWAY)
+            self.send_json({"ok": False, "error": f"Connection or write error: {exc}"}, HTTPStatus.BAD_GATEWAY)
         except Exception:
-            self.send_json({"ok": False, "error": "Внутренняя ошибка панели. Проверьте журнал UI."}, HTTPStatus.INTERNAL_SERVER_ERROR)
+            self.send_json({"ok": False, "error": "Internal panel error. Check the UI container logs."}, HTTPStatus.INTERNAL_SERVER_ERROR)
 
 
 def main() -> None:

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,44 +11,44 @@
   <div class="shell">
     <header>
       <div class="mark" aria-hidden="true">N</div>
-      <div><p class="eyebrow">PANGOLIN · UMBREL</p><h1>Newt</h1><p class="subtitle">Безопасный исходящий туннель к вашей сети Pangolin.</p></div>
-      <button class="ghost" id="refresh" type="button">Обновить</button>
+      <div><p class="eyebrow">PANGOLIN · UMBREL</p><h1>Newt</h1><p class="subtitle">A secure outbound tunnel to your Pangolin network.</p></div>
+      <button class="ghost" id="refresh" type="button">Refresh</button>
     </header>
 
     <section class="status" id="status-card">
       <span class="dot"></span>
-      <div><p id="status-label">Проверяем состояние…</p><strong id="status-title">Загрузка</strong><small id="status-note">Подождите несколько секунд.</small></div>
+      <div><p id="status-label">Checking status…</p><strong id="status-title">Loading</strong><small id="status-note">This should take only a moment.</small></div>
     </section>
 
-    <div class="notice hidden" id="restart-notice"><strong>Требуется перезапуск</strong><span>Newt читает конфигурацию при старте процесса.</span></div>
+    <div class="notice hidden" id="restart-notice"><strong>Restart required</strong><span>Newt reads its configuration when the process starts.</span></div>
 
     <form id="form">
       <section class="panel">
-        <div class="heading"><div><p class="eyebrow">ПОДКЛЮЧЕНИЕ</p><h2>Данные сайта Pangolin</h2></div><button class="secondary" id="test" type="button">Проверить сервер</button></div>
+        <div class="heading"><div><p class="eyebrow">CONNECTION</p><h2>Pangolin site credentials</h2></div><button class="secondary" id="test" type="button">Test server</button></div>
         <label class="wide"><span>Pangolin endpoint</span><input name="endpoint" type="url" required placeholder="https://app.pangolin.net"></label>
         <div class="grid">
           <label><span>Newt ID</span><input name="id" required autocomplete="off" placeholder="2ix2t8xk22ubpfy"></label>
-          <label><span>Newt secret</span><input name="secret" type="password" required autocomplete="new-password" placeholder="Вставьте secret"><small id="secret-hint"></small></label>
+          <label><span>Newt secret</span><input name="secret" type="password" required autocomplete="new-password" placeholder="Paste the secret"><small id="secret-hint"></small></label>
         </div>
-        <label class="wide"><span>Имя узла <em>необязательно</em></span><input name="name" placeholder="umbrel-home"></label>
-        <p class="help">Создайте Site в Pangolin и скопируйте готовые параметры Newt. Панель не отправляет secret никуда, кроме указанного Pangolin endpoint через сам Newt.</p>
+        <label class="wide"><span>Site name <em>optional</em></span><input name="name" placeholder="umbrel-home"></label>
+        <p class="help">Create a site in Pangolin and copy its generated Newt credentials. The panel stores the secret locally; only Newt sends it to the configured Pangolin endpoint.</p>
       </section>
 
       <details class="panel">
-        <summary>Расширенные настройки <span>⌄</span></summary>
+        <summary>Advanced settings <span>⌄</span></summary>
         <div class="advanced grid">
           <label><span>DNS</span><input name="dns" required></label>
-          <label><span>Уровень логов</span><select name="logLevel"><option>DEBUG</option><option>INFO</option><option>WARN</option><option>ERROR</option></select></label>
+          <label><span>Log level</span><select name="logLevel"><option>DEBUG</option><option>INFO</option><option>WARN</option><option>ERROR</option></select></label>
           <label><span>Ping interval</span><input name="pingInterval" required></label>
           <label><span>Ping timeout</span><input name="pingTimeout" required></label>
           <label><span>UDP idle timeout</span><input name="udpProxyIdleTimeout" required></label>
-          <label class="toggle"><input name="enforceHcCert" type="checkbox"><span>Проверять TLS-сертификаты health checks</span></label>
-          <label class="toggle"><input name="disableClients" type="checkbox"><span>Отключить клиентские туннели</span></label>
-          <label class="toggle"><input name="disableSsh" type="checkbox"><span>Отключить SSH-функции</span></label>
+          <label class="toggle"><input name="enforceHcCert" type="checkbox"><span>Verify health-check TLS certificates</span></label>
+          <label class="toggle"><input name="disableClients" type="checkbox"><span>Disable client tunnels</span></label>
+          <label class="toggle"><input name="disableSsh" type="checkbox"><span>Disable SSH features</span></label>
         </div>
       </details>
 
-      <div class="actions"><p id="result" aria-live="polite"></p><button class="primary" id="save" type="submit">Сохранить настройки</button></div>
+      <div class="actions"><p id="result" aria-live="polite"></p><button class="primary" id="save" type="submit">Save settings</button></div>
     </form>
   </div>
   <script src="/app.js" defer></script>
