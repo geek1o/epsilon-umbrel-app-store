@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-aliasarr
 category: media
 name: Aliasarr
-version: "3.1.9"
+version: "3.2.0"
 tagline: Manage movies, TV series, and anime
 icon: https://raw.githubusercontent.com/geek1o/umbrel/main/epsilon-aliasarr/logo.svg
 description: >-
@@ -29,9 +29,9 @@ support: https://github.com/lQwestl/aliasarr/issues
 
 port: 8990
 gallery:
-  - https://raw.githubusercontent.com/lQwestl/aliasarr/v3.1.9/docs/screenshots/01_dashboard.jpg
-  - https://raw.githubusercontent.com/lQwestl/aliasarr/v3.1.9/docs/screenshots/02_library_grid.jpg
-  - https://raw.githubusercontent.com/lQwestl/aliasarr/v3.1.9/docs/screenshots/09_activity_queue.jpg
+  - https://raw.githubusercontent.com/lQwestl/aliasarr/v3.2.0/docs/screenshots/01_dashboard.jpg
+  - https://raw.githubusercontent.com/lQwestl/aliasarr/v3.2.0/docs/screenshots/02_library_grid.jpg
+  - https://raw.githubusercontent.com/lQwestl/aliasarr/v3.2.0/docs/screenshots/09_activity_queue.jpg
 path: ""
 
 defaultUsername: ""
