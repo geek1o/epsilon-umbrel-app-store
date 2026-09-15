@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Anime365 Sidecar</title>
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <div class="brand-mark" aria-hidden="true"><span>365</span></div>
+      <div>
+        <p class="eyebrow">EPSILON · UMBREL</p>
+        <h1>Anime365 Sidecar</h1>
+        <p class="subtitle">Загрузка новых серий из Anime 365 в вашу медиатеку Emby.</p>
+      </div>
+      <button class="ghost-button" id="refresh-status" type="button">Обновить статус</button>
+    </header>
+
+    <main>
+      <section class="status-grid" aria-label="Состояние">
+        <article class="status-card status-primary">
+          <div class="status-topline">
+            <span class="status-dot" id="status-dot"></span>
+            <span id="status-label">Загрузка…</span>
+          </div>
+          <strong id="status-title">Проверяем конфигурацию</strong>
+          <p id="status-note">Подождите несколько секунд.</p>
+        </article>
+        <article class="status-card metric">
+          <span>Тайтлы</span>
+          <strong id="shows-count">—</strong>
+          <small>в manifest.json</small>
+        </article>
+        <article class="status-card metric">
+          <span>Эпизоды</span>
+          <strong id="episodes-count">—</strong>
+          <small id="translations-count">— переводов</small>
+        </article>
+        <article class="status-card metric">
+          <span>Свободно</span>
+          <strong id="disk-free">—</strong>
+          <small id="manifest-updated">медиатека ещё не создана</small>
+        </article>
+      </section>
+
+      <div class="notice hidden" id="restart-notice" role="status">
+        <div>
+          <strong>Настройки сохранены</strong>
+          <p>Откройте меню приложения в Umbrel и нажмите Restart, чтобы sidecar перечитал `.env`.</p>
+        </div>
+      </div>
+
+      <form id="config-form" novalidate>
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Источник</p>
+              <h2>Anime 365</h2>
+            </div>
+            <button class="secondary-button test-button" data-test="anime365" type="button">Проверить сайт</button>
+          </div>
+          <div class="form-grid">
+            <label class="field span-2">
+              <span>Адрес Anime 365</span>
+              <input name="anime365_base_url" type="url" required placeholder="https://smotret-anime.app">
+            </label>
+            <label class="field">
+              <span>Логин</span>
+              <input name="anime365_login" type="text" autocomplete="username" required placeholder="user@example.com">
+            </label>
+            <label class="field secret-field">
+              <span>Пароль</span>
+              <input name="anime365_password" type="password" autocomplete="current-password" data-secret required placeholder="Введите пароль">
+              <small class="secret-hint"></small>
+            </label>
+          </div>
+          <p class="hint">Для работы sidecar нужен аккаунт Anime 365 с активной премиум-подпиской.</p>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Медиасервер</p>
+              <h2>Emby</h2>
+            </div>
+            <button class="secondary-button test-button" data-test="emby" type="button">Проверить API</button>
+          </div>
+          <div class="form-grid">
+            <label class="field span-2">
+              <span>Внутренний адрес Emby</span>
+              <input name="emby_base_url" type="url" required placeholder="http://epsilon-emby_server_1:8096/emby">
+              <small>Для Emby из Epsilon оставьте адрес по умолчанию.</small>
+            </label>
+            <label class="field span-2">
+              <span>Публичный адрес Emby</span>
+              <input name="emby_public_base_url" type="url" placeholder="http://umbrel.local:8096">
+              <small>Используется только в ссылках Telegram.</small>
+            </label>
+            <label class="field secret-field span-2">
+              <span>API key</span>
+              <input name="emby_api_key" type="password" data-secret required placeholder="Ключ из Emby → Advanced → API Keys">
+              <small class="secret-hint"></small>
+            </label>
+            <label class="field">
+              <span>Library ID</span>
+              <input name="emby_library_id" type="text" required placeholder="3">
+              <small>Значение `parentId` из URL библиотеки.</small>
+            </label>
+            <label class="field">
+              <span>User ID</span>
+              <input name="emby_user_id" type="text" required placeholder="9283b8ae8bee4ccba61174e310ff0ab1">
+              <small>ID пользователя на странице Users.</small>
+            </label>
+          </div>
+          <div class="path-callout">
+            <span>Общая папка медиатеки Emby</span>
+            <code>/downloads/anime365</code>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">Загрузка</p>
+              <h2>Серии и переводы</h2>
+            </div>
+          </div>
+          <div class="form-grid">
+            <label class="field span-2">
+              <span>Источники сканирования</span>
+              <input name="scan_sources" type="text" required placeholder="list_watching,list_planned">
+              <small>`list_watching`, `list_planned` или ID тайтлов через запятую.</small>
+            </label>
+            <label class="field span-2">
+              <span>Переводы</span>
+              <input name="translations" type="text" required placeholder="ru_subtitles,ru_dub">
+              <small>Формат: `ru_subtitles`, `ru_dub`, `ja_raw`.</small>
+            </label>
+            <label class="field span-2">
+              <span>Приоритетные авторы перевода</span>
+              <input name="preferred_translation_authors" type="text" placeholder="erai-raws,kazoku project">
+            </label>
+            <label class="field span-2">
+              <span>Исключённые авторы перевода</span>
+              <input name="blacklisted_translation_authors" type="text" placeholder="author one,author two">
+            </label>
+            <label class="field">
+              <span>Серий загружать наперёд</span>
+              <input name="episodes_to_download_ahead" type="number" min="0" max="10000" required>
+            </label>
+            <label class="toggle-field">
+              <input name="delete_removed_translations" type="checkbox">
+              <span class="toggle"></span>
+              <span><strong>Удалять исчезнувшие переводы</strong><small>По умолчанию выключено.</small></span>
+            </label>
+          </div>
+        </section>
+
+        <details class="panel advanced-panel">
+          <summary>
+            <span><span class="section-kicker">Точная настройка</span><strong>Интервалы, интеграции и сеть</strong></span>
+            <span class="chevron">⌄</span>
+          </summary>
+          <div class="advanced-content">
+            <div class="form-grid">
+              <label class="field">
+                <span>Интервал сканирования</span>
+                <input name="scan_idle_interval" type="text" required placeholder="5m">
+              </label>
+              <label class="field">
+                <span>Обновление метаданных</span>
+                <input name="metadata_refresh_idle_interval" type="text" required placeholder="1h">
+              </label>
+              <label class="field">
+                <span>Свежие метаданные</span>
+                <input name="fresh_items_metadata_refresh_idle_interval" type="text" required placeholder="1m">
+              </label>
+              <label class="field">
+                <span>Обновление базы аниме</span>
+                <input name="anime_list_refresh_idle_interval" type="text" required placeholder="24h">
+              </label>
+              <label class="field">
+                <span>Таймаут изображения</span>
+                <input name="download_timeout_image" type="text" required placeholder="1m">
+              </label>
+              <label class="field">
+                <span>Таймаут видео</span>
+                <input name="download_timeout_video" type="text" required placeholder="1h">
+              </label>
+              <label class="field span-2">
+                <span>База соответствий аниме</span>
+                <input name="anime_list_database_url" type="url" required>
+              </label>
+              <label class="field span-2">
+                <span>Адрес Shikimori</span>
+                <input name="shikimori_base_url" type="url" required>
+              </label>
+              <label class="field secret-field span-2">
+                <span>Telegram Bot API credentials</span>
+                <input name="telegram_bot_api_credentials" type="password" data-secret placeholder="telegram://token@api.telegram.org/?recipient=123">
+                <small class="secret-hint"></small>
+              </label>
+              <label class="field">
+                <span>Уровень логов</span>
+                <select name="log_level">
+                  <option>DEBUG</option>
+                  <option>INFO</option>
+                  <option>WARN</option>
+                  <option>ERROR</option>
+                </select>
+              </label>
+              <div></div>
+              <label class="field span-2">
+                <span>HTTP proxy</span>
+                <input name="http_proxy" type="password" data-secret placeholder="http://user:password@proxy:3128">
+                <small class="secret-hint"></small>
+              </label>
+              <label class="field span-2">
+                <span>HTTPS proxy</span>
+                <input name="https_proxy" type="password" data-secret placeholder="http://user:password@proxy:3128">
+                <small class="secret-hint"></small>
+              </label>
+              <label class="field span-2">
+                <span>NO_PROXY</span>
+                <input name="no_proxy" type="text">
+              </label>
+            </div>
+          </div>
+        </details>
+
+        <div class="action-bar">
+          <div class="save-result" id="save-result" aria-live="polite"></div>
+          <button class="primary-button" id="save-button" type="submit">Сохранить настройки</button>
+        </div>
+      </form>
+    </main>
+
+    <footer>
+      Веб-панель управляет только конфигурацией. Состояние контейнера sidecar смотрите в Umbrel.
+    </footer>
+  </div>
+  <script src="/app.js" defer></script>
+</body>
+</html>
