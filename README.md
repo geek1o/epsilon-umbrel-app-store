@@ -15,7 +15,7 @@ and checked for both `linux/amd64` and `linux/arm64` support before publication.
 3. Click **Add** and enter this repository URL:
 
    ```text
-   https://github.com/geek1o/umbrel
+   https://github.com/geek1o/epsilon-umbrel-app-store
    ```
 
 4. Open the **Epsilon** store and install the application you need.
@@ -34,7 +34,6 @@ trusting their upstream developers.
 | [Emby](epsilon-emby) | Media | Personal media server for organising and streaming movies, TV shows, music, photos, and home videos. | [MediaBrowser/Emby](https://github.com/MediaBrowser/Emby) |
 | [Ente Photos](epsilon-ente-photos) | Files | End-to-end encrypted photo and video backup with self-hosted web apps, API, database, and object storage. | [ente/ente](https://github.com/ente/ente) |
 | [Suwayomi](epsilon-suwayomi) | Media | Browser-based manga server and reader compatible with Mihon/Tachiyomi extensions. | [Suwayomi/Suwayomi-Server](https://github.com/Suwayomi/Suwayomi-Server) |
-| [Uchiyomi](epsilon-uchiyomi) | Media | Self-hosted manga and manhwa library with downloads, automatic chapter updates, OPDS, and multi-user progress. | [AngeloSha/uchiyomi](https://github.com/AngeloSha/uchiyomi) |
 
 Some applications need extra first-run steps or access to shared Umbrel storage.
 Read the full description in the App Store before installation. Ente Photos also
@@ -56,7 +55,7 @@ application's release notes and backup important data before updating.
 
 ## Support and contributions
 
-Use this repository's [issues](https://github.com/geek1o/umbrel/issues) for problems
+Use this repository's [issues](https://github.com/geek1o/epsilon-umbrel-app-store/issues) for problems
 with installation, container wiring, storage paths, ports, icons, or App Store
 metadata. Report bugs in the application itself to the corresponding upstream
 project linked in the table above.
