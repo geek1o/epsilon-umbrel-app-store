@@ -1,0 +1,108 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    depends_on:
+      - web
+    environment:
+      APP_HOST: epsilon-ente-photos_web_1
+      APP_PORT: 3000
+      # Ente provides its own end-to-end-encrypted account authentication.
+      PROXY_AUTH_ADD: "false"
+
+  museum:
+    image: ghcr.io/ente/server:163f45c26f130090abed03649530f53d2d976565@sha256:3511ff25db3bf950abeb3983928eeadeed7f53b690ee94704c14be72fa719b1d
+    restart: on-failure
+    stop_grace_period: 30s
+    depends_on:
+      postgres:
+        condition: service_healthy
+      minio-provision:
+        condition: service_completed_successfully
+    ports:
+      - "38080:8080"
+    extra_hosts:
+      # Museum signs object URLs with this host, so it must resolve both inside
+      # the container and from browsers and native clients on the local network.
+      - "${DEVICE_DOMAIN_NAME}:host-gateway"
+    environment:
+      ENTE_DB_HOST: postgres
+      ENTE_DB_PORT: "5432"
+      ENTE_DB_NAME: ente
+      ENTE_DB_USER: ente
+      ENTE_DB_PASSWORD: ${APP_ENTE_DB_PASSWORD}
+
+      ENTE_S3_ARE_LOCAL_BUCKETS: "true"
+      ENTE_S3_USE_PATH_STYLE_URLS: "true"
+      ENTE_S3_B2_EU_CEN_KEY: ente-minio
+      ENTE_S3_B2_EU_CEN_SECRET: ${APP_ENTE_MINIO_PASSWORD}
+      ENTE_S3_B2_EU_CEN_ENDPOINT: ${DEVICE_DOMAIN_NAME}:33200
+      ENTE_S3_B2_EU_CEN_REGION: eu-central-2
+      ENTE_S3_B2_EU_CEN_BUCKET: b2-eu-cen
+      ENTE_S3_WASABI_EU_CENTRAL_2_V3_KEY: ente-minio
+      ENTE_S3_WASABI_EU_CENTRAL_2_V3_SECRET: ${APP_ENTE_MINIO_PASSWORD}
+      ENTE_S3_WASABI_EU_CENTRAL_2_V3_ENDPOINT: ${DEVICE_DOMAIN_NAME}:33200
+      ENTE_S3_WASABI_EU_CENTRAL_2_V3_REGION: eu-central-2
+      ENTE_S3_WASABI_EU_CENTRAL_2_V3_BUCKET: wasabi-eu-central-2-v3
+      ENTE_S3_WASABI_EU_CENTRAL_2_V3_COMPLIANCE: "false"
+      ENTE_S3_SCW_EU_FR_V3_KEY: ente-minio
+      ENTE_S3_SCW_EU_FR_V3_SECRET: ${APP_ENTE_MINIO_PASSWORD}
+      ENTE_S3_SCW_EU_FR_V3_ENDPOINT: ${DEVICE_DOMAIN_NAME}:33200
+      ENTE_S3_SCW_EU_FR_V3_REGION: eu-central-2
+      ENTE_S3_SCW_EU_FR_V3_BUCKET: scw-eu-fr-v3
+
+      ENTE_APPS_PUBLIC_ALBUMS: http://${DEVICE_DOMAIN_NAME}:33002
+      ENTE_KEY_ENCRYPTION: ${APP_ENTE_KEY_ENCRYPTION}
+      ENTE_KEY_HASH: ${APP_ENTE_KEY_HASH}
+      ENTE_JWT_SECRET: ${APP_ENTE_JWT_SECRET}
+
+  web:
+    image: ghcr.io/ente/web:86d67574787055d13512d15f19089f66c5fe1f96@sha256:71bd42b1459d04f6b5d109e170d5c1af00da133e0a134787f15b73532f54c9f9
+    restart: on-failure
+    depends_on:
+      - museum
+    ports:
+      - "33002:3002"
+    environment:
+      ENTE_API_ORIGIN: http://${DEVICE_DOMAIN_NAME}:38080
+
+  postgres:
+    image: postgres:15@sha256:9b1d34adbce1dd07ee6e94b4a2cf698884b89bd44a6c9c12f5da8f3acbfe4957
+    restart: on-failure
+    stop_grace_period: 1m
+    environment:
+      POSTGRES_DB: ente
+      POSTGRES_USER: ente
+      POSTGRES_PASSWORD: ${APP_ENTE_DB_PASSWORD}
+    volumes:
+      - ${APP_DATA_DIR}/data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -q -d $$POSTGRES_DB -U $$POSTGRES_USER"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+
+  minio:
+    image: quay.io/minio/minio:RELEASE.2025-09-07T16-13-09Z@sha256:14cea493d9a34af32f524e538b8346cf79f3321eff8e708c1e2960462bd8936e
+    restart: on-failure
+    command: server /data --address ":3200"
+    ports:
+      - "33200:3200"
+    environment:
+      MINIO_ROOT_USER: ente-minio
+      MINIO_ROOT_PASSWORD: ${APP_ENTE_MINIO_PASSWORD}
+    volumes:
+      - ${APP_DATA_DIR}/data/minio:/data
+
+  minio-provision:
+    image: quay.io/minio/mc:RELEASE.2025-08-13T08-35-41Z@sha256:a7fe349ef4bd8521fb8497f55c6042871b2ae640607cf99d9bede5e9bdf11727
+    depends_on:
+      - minio
+    restart: on-failure
+    environment:
+      MINIO_ROOT_USER: ente-minio
+      MINIO_ROOT_PASSWORD: ${APP_ENTE_MINIO_PASSWORD}
+    volumes:
+      - ${APP_DATA_DIR}/scripts/provision-minio.sh:/provision-minio.sh:ro
+    entrypoint: ["sh", "/provision-minio.sh"]
