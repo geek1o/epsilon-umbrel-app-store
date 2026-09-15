@@ -1,0 +1,28 @@
+{
+	admin off
+}
+
+https://{$DEVICE_DOMAIN_NAME} {
+	tls internal
+	reverse_proxy server:1411
+}
+
+:8080 {
+	header {
+		Content-Security-Policy "default-src 'self'; style-src 'self'; script-src 'self'"
+		Referrer-Policy "no-referrer"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+	}
+
+	@root_certificate path /root.crt
+	handle @root_certificate {
+		header Content-Disposition "attachment; filename=pocket-id-root-ca.crt"
+		root * /data/caddy/pki/authorities/local
+		rewrite * /root.crt
+		file_server
+	}
+
+	root * /srv
+	file_server
+}

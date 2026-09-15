@@ -5,8 +5,10 @@ It provides separately maintained packages for installing and updating self-host
 applications through umbrelOS.
 
 The store currently focuses on media management, private photo storage, manga
-reading, and local developer tools. Application containers are pinned by digest
-and checked for both `linux/amd64` and `linux/arm64` support before publication.
+reading, networking, identity, certificates, and local developer tools.
+Application containers are pinned by digest and normally checked for both
+`linux/amd64` and `linux/arm64` support before publication. Architecture-specific
+exceptions are identified explicitly in the application description.
 
 ## Add the store to Umbrel
 
@@ -33,6 +35,9 @@ trusting their upstream developers.
 | [atvloadly](epsilon-atvloadly) | Developer | Web interface for pairing with Apple TV, sideloading IPA files, and refreshing signed applications. | [bitxeno/atvloadly](https://github.com/bitxeno/atvloadly) |
 | [Emby](epsilon-emby) | Media | Personal media server for organising and streaming movies, TV shows, music, photos, and home videos. | [MediaBrowser/Emby](https://github.com/MediaBrowser/Emby) |
 | [Ente Photos](epsilon-ente-photos) | Files | End-to-end encrypted photo and video backup with self-hosted web apps, API, database, and object storage. | [ente/ente](https://github.com/ente/ente) |
+| [LocalCA](epsilon-localca) | Networking | Private certificate authority for issuing internal TLS and mutual-TLS certificates on x86-64 Umbrel systems. | [tgangte/LocalCA](https://github.com/tgangte/LocalCA) |
+| [Newt](epsilon-newt) | Networking | Userspace WireGuard connector that links an Umbrel to a Pangolin network without opening inbound ports. | [fosrl/newt](https://github.com/fosrl/newt) |
+| [Pocket ID](epsilon-pocket-id) | Networking | Passkey-only OpenID Connect provider with a local trusted-HTTPS setup powered by Caddy. | [pocket-id/pocket-id](https://github.com/pocket-id/pocket-id) |
 | [Suwayomi](epsilon-suwayomi) | Media | Browser-based manga server and reader compatible with Mihon/Tachiyomi extensions. | [Suwayomi/Suwayomi-Server](https://github.com/Suwayomi/Suwayomi-Server) |
 
 Some applications need extra first-run steps or access to shared Umbrel storage.

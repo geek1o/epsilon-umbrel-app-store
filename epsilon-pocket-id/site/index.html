@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Pocket ID · HTTPS setup</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="card">
+    <div class="logo" aria-hidden="true">P</div>
+    <p class="eyebrow">POCKET ID · UMBREL</p>
+    <h1>Сначала доверьте сертификат</h1>
+    <p class="lead">Passkey работает только через HTTPS. Caddy уже создал локальный сертификат для вашего Umbrel.</p>
+
+    <ol>
+      <li><span>1</span><div><strong>Скачайте корневой сертификат</strong><p>Это публичная часть локального центра сертификации Pocket ID.</p></div></li>
+      <li><span>2</span><div><strong>Добавьте его в доверенные корневые</strong><p>После установки полностью перезапустите браузер.</p></div></li>
+      <li><span>3</span><div><strong>Откройте Pocket ID</strong><p>Используйте имя Umbrel, а не его IP-адрес.</p></div></li>
+    </ol>
+
+    <div class="actions">
+      <a class="secondary" href="/root.crt" download>Скачать root CA</a>
+      <button class="primary" id="open-pocket-id" type="button">Открыть Pocket ID</button>
+    </div>
+
+    <p class="warning"><strong>Важно:</strong> закрытый ключ CA находится только в данных приложения. Защищайте его и резервные копии.</p>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
