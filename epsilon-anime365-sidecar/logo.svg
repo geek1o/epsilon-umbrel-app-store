@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Anime365 Sidecar</title>
+  <desc id="desc">A violet rounded square with a play symbol and the number 365</desc>
+  <defs>
+    <linearGradient id="background" x1="72" y1="48" x2="448" y2="464" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9B5CFF"/>
+      <stop offset="1" stop-color="#5424C9"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#21104D" flood-opacity=".35"/>
+    </filter>
+  </defs>
+  <rect x="28" y="28" width="456" height="456" rx="112" fill="url(#background)"/>
+  <circle cx="256" cy="218" r="122" fill="#fff" fill-opacity=".12" stroke="#fff" stroke-opacity=".24" stroke-width="4"/>
+  <path d="M225 157c0-12 13-19 23-13l101 63c10 6 10 21 0 27l-101 63c-10 6-23-1-23-13V157Z" fill="#fff" filter="url(#shadow)"/>
+  <rect x="105" y="350" width="302" height="86" rx="43" fill="#1B103C" fill-opacity=".86"/>
+  <text x="256" y="414" text-anchor="middle" font-family="system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="72" font-weight="800" letter-spacing="8" fill="#fff">365</text>
+</svg>

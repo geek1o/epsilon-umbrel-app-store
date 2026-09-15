@@ -29,6 +29,7 @@ trusting their upstream developers.
 | Application | Category | Description | Upstream |
 | --- | --- | --- | --- |
 | [Aliasarr](epsilon-aliasarr) | Media | Media manager for movies, series, and anime with multilingual titles, download automation, imports, and hardlink support. | [lQwestl/aliasarr](https://github.com/lQwestl/aliasarr) |
+| [Anime365 Sidecar](epsilon-anime365-sidecar) | Media | Anime 365 and Emby integration with automated episode downloads, metadata, watch-state sync, and a dedicated configuration panel. | [flaksp/anime365-sidecar](https://github.com/flaksp/anime365-sidecar) |
 | [atvloadly](epsilon-atvloadly) | Developer | Web interface for pairing with Apple TV, sideloading IPA files, and refreshing signed applications. | [bitxeno/atvloadly](https://github.com/bitxeno/atvloadly) |
 | [Emby](epsilon-emby) | Media | Personal media server for organising and streaming movies, TV shows, music, photos, and home videos. | [MediaBrowser/Emby](https://github.com/MediaBrowser/Emby) |
 | [Ente Photos](epsilon-ente-photos) | Files | End-to-end encrypted photo and video backup with self-hosted web apps, API, database, and object storage. | [ente/ente](https://github.com/ente/ente) |

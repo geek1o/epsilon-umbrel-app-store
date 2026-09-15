@@ -1,0 +1,47 @@
+manifestVersion: 1
+id: epsilon-anime365-sidecar
+category: media
+name: Anime365 Sidecar
+version: "0.13.1-ui.1"
+tagline: Download your Anime 365 list into Emby
+icon: https://raw.githubusercontent.com/geek1o/umbrel/main/epsilon-anime365-sidecar/logo.svg
+description: >-
+  Anime365 Sidecar connects an Anime 365 account to Emby. It follows selected Anime 365 lists, downloads episodes and metadata into a shared Emby library, and marks episodes watched in Emby as watched on Anime 365.
+
+
+  This Umbrel package keeps the official sidecar container unchanged and adds a separate browser-based configuration panel. The panel stores the upstream environment variables, checks Anime 365 reachability and Emby API access, and reports statistics from the generated library manifest.
+
+
+  ⚠️ An Anime 365 account with an active premium subscription is required. The upstream project is under active development and may change between releases. Downloaded media can require substantial storage space.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Install Emby first. In Emby, create a TV Shows library that points to /downloads/anime365, enable real-time monitoring, and create an API key. Open Anime365 Sidecar, enter your Anime 365 credentials and the Emby API key, Library ID, and User ID, then save the configuration. Restart this app from Umbrel after every configuration change because the official sidecar reads environment variables only at startup.
+
+
+  Umbrel authentication protects the configuration panel. Secrets are stored in the app data directory with restricted file permissions and are never returned to the browser after saving. The media library is stored in Umbrel's shared downloads directory so Emby can access it.
+releaseNotes: >-
+  Initial Umbrel package for Anime365 Sidecar 0.13.1 with a separate configuration and status panel.
+
+developer: flaksp
+website: https://github.com/flaksp/anime365-sidecar
+dependencies:
+  - epsilon-emby
+repo: https://github.com/flaksp/anime365-sidecar
+support: https://github.com/flaksp/anime365-sidecar/issues
+
+port: 8365
+gallery:
+  - https://raw.githubusercontent.com/geek1o/umbrel/main/epsilon-anime365-sidecar/preview.png
+  - https://github.com/user-attachments/assets/734c2cb2-46a9-4597-bedb-a16b9a339b67
+path: ""
+
+defaultUsername: ""
+defaultPassword: ""
+
+permissions:
+  - STORAGE_DOWNLOADS
+submitter: GeekIO
+submission: https://github.com/geek1o/umbrel
