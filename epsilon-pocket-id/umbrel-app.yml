@@ -1,0 +1,38 @@
+manifestVersion: 1
+id: epsilon-pocket-id
+category: networking
+name: Pocket ID
+version: "2.14.0"
+tagline: Passkey authentication for your self-hosted services
+icon: https://raw.githubusercontent.com/pocket-id/pocket-id/v2.14.0/frontend/static/img/static-logo-rounded-512.png
+description: >-
+  Pocket ID is an OpenID Connect Certified and OAuth 2.0 identity provider for self-hosted services. It replaces passwords with passkeys backed by a device, password manager, or hardware security key and provides a focused administration interface for users, groups, API keys, and OIDC clients.
+
+
+  WebAuthn requires a trusted HTTPS origin. This package places Pocket ID behind Caddy at https://umbrel.local:1411 and generates a private local certificate authority. Open the Umbrel app first, download the public root certificate, install it as trusted on each client device, then open the secure Pocket ID URL and create the first administrator at /setup.
+
+
+  🔐 Trusting a private root CA is a security-sensitive action. Protect the app's Caddy data and backups because they contain the CA private key. Remove the root certificate from every device if the app data is compromised or permanently removed. Do not share the root private key.
+
+
+  The Pocket ID endpoint itself is not protected by Umbrel authentication because OIDC clients and passkey login flows must reach it directly. Pocket ID provides its own authentication. The setup and root-certificate download page remains protected by Umbrel.
+releaseNotes: >-
+  Initial package for Pocket ID 2.14.0 with local HTTPS provided by Caddy.
+
+developer: Pocket ID
+website: https://pocket-id.org
+dependencies: []
+repo: https://github.com/pocket-id/pocket-id
+support: https://github.com/pocket-id/pocket-id/issues
+
+port: 1412
+gallery:
+  - https://raw.githubusercontent.com/geek1o/epsilon-umbrel-app-store/main/epsilon-pocket-id/preview.png
+  - https://github.com/user-attachments/assets/1e99ba44-76da-4b47-9b8a-dbe9b7f84512
+path: ""
+
+defaultUsername: ""
+defaultPassword: ""
+
+submitter: GeekIO
+submission: https://github.com/geek1o/epsilon-umbrel-app-store

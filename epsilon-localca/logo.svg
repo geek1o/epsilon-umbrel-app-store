@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">LocalCA</title>
+  <desc id="desc">A certificate seal with a check mark</desc>
+  <defs>
+    <linearGradient id="bg" x1="56" y1="44" x2="456" y2="468" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#0F2A65"/>
+    </linearGradient>
+  </defs>
+  <rect x="24" y="24" width="464" height="464" rx="112" fill="url(#bg)"/>
+  <path d="M256 92 383 142v99c0 83-50 145-127 179-77-34-127-96-127-179v-99l127-50Z" fill="#fff" fill-opacity=".14" stroke="#fff" stroke-width="18"/>
+  <path d="m190 254 42 42 91-98" fill="none" stroke="#7DD3FC" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m210 380-20 66 66-28 66 28-20-66" fill="#FBBF24" stroke="#fff" stroke-width="12" stroke-linejoin="round"/>
+  <circle cx="256" cy="250" r="40" fill="#FBBF24" stroke="#fff" stroke-width="12"/>
+</svg>

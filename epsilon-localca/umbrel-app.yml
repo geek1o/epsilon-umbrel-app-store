@@ -1,0 +1,42 @@
+manifestVersion: 1
+id: epsilon-localca
+category: networking
+name: LocalCA
+version: "2025.06.25"
+tagline: Manage a private certificate authority for your home network
+icon: https://raw.githubusercontent.com/geek1o/epsilon-umbrel-app-store/main/epsilon-localca/logo.svg
+description: >-
+  LocalCA is a web interface for creating and managing a private certificate authority. It can generate root, intermediate, server, client, and mutual-TLS certificates for internal services such as Proxmox, Home Assistant, AdGuard Home, Grafana, and media servers.
+
+
+  ⚠️ This package supports x86-64 (amd64) Umbrel devices only because upstream publishes separate architecture-specific images. It will not run on Raspberry Pi or other ARM-based Umbrel systems.
+
+
+  🔐 LocalCA stores CA private keys unencrypted inside its SQLite database. Keep the app local, protect its data and backups, and never expose it directly to the internet. Anyone who obtains the CA private key can issue certificates trusted by devices on which you installed its root certificate.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Sign in with username admin and password password, then change the password immediately in the Django administration page. Create a root CA, install only its public certificate as a trusted root on your devices, and keep private-key downloads and backups restricted. Umbrel authentication remains enabled in front of LocalCA.
+releaseNotes: >-
+  Initial amd64-only package using the latest upstream-published LocalCA images.
+
+developer: Sonny Gangte
+website: https://practicalsre.com/localca/
+dependencies: []
+repo: https://github.com/tgangte/LocalCA
+support: https://github.com/tgangte/LocalCA/issues
+
+port: 8444
+gallery:
+  - https://raw.githubusercontent.com/tgangte/LocalCA/08db7042efae88458b4def37e519200c3fca0932/screenshots/localca-1.1.1.png
+  - https://raw.githubusercontent.com/tgangte/LocalCA/08db7042efae88458b4def37e519200c3fca0932/screenshots/localca-1.1.2.png
+  - https://raw.githubusercontent.com/tgangte/LocalCA/08db7042efae88458b4def37e519200c3fca0932/screenshots/localca-1.1.3.png
+path: ""
+
+defaultUsername: admin
+defaultPassword: password
+
+submitter: GeekIO
+submission: https://github.com/geek1o/epsilon-umbrel-app-store

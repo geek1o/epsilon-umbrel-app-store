@@ -1,0 +1,35 @@
+manifestVersion: 1
+id: epsilon-newt
+category: networking
+name: Newt
+version: "1.16.0-ui.1"
+tagline: Connect this Umbrel to a Pangolin network
+icon: https://avatars.githubusercontent.com/u/183037913?v=4
+description: >-
+  Newt is the lightweight, fully userspace WireGuard tunnel client for Pangolin. It connects this Umbrel to a Pangolin server and securely relays configured TCP, UDP, and HTTP resources without opening inbound ports or managing a kernel WireGuard interface.
+
+
+  This package runs the official Newt image unchanged and adds a separate browser-based configuration panel. Create a site in Pangolin, copy its endpoint, Newt ID, and secret into the panel, save, and restart the app. The panel reports whether the configuration is complete and whether Newt has established its tunnel.
+
+
+  Newt initiates outbound connections to the configured Pangolin server. It does not receive access to the Docker socket, host network, privileged mode, or extra Linux capabilities. Services published through Pangolin become reachable according to the access policies you configure there, so review every target carefully.
+releaseNotes: >-
+  Initial package for Newt 1.16.0 with a separate configuration and tunnel-status panel.
+
+developer: Pangolin
+website: https://docs.pangolin.net/manage/sites/understanding-sites
+dependencies: []
+repo: https://github.com/fosrl/newt
+support: https://github.com/fosrl/newt/issues
+
+port: 8310
+gallery:
+  - https://raw.githubusercontent.com/geek1o/epsilon-umbrel-app-store/main/epsilon-newt/preview.png
+  - https://raw.githubusercontent.com/fosrl/newt/v1.16.0/public/screenshots/preview.png
+path: ""
+
+defaultUsername: ""
+defaultPassword: ""
+
+submitter: GeekIO
+submission: https://github.com/geek1o/epsilon-umbrel-app-store
