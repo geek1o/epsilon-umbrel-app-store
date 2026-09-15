@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-newt
 category: networking
 name: Newt
-version: "1.16.0-ui.2"
+version: "1.17.0-ui.2"
 tagline: Connect this Umbrel to a Pangolin network
 icon: https://avatars.githubusercontent.com/u/183037913?v=4
 description: >-
@@ -25,7 +25,7 @@ support: https://github.com/fosrl/newt/issues
 port: 8310
 gallery:
   - https://raw.githubusercontent.com/geek1o/epsilon-umbrel-app-store/main/epsilon-newt/preview.png
-  - https://raw.githubusercontent.com/fosrl/newt/v1.16.0/public/screenshots/preview.png
+  - https://raw.githubusercontent.com/fosrl/newt/1.17.0/public/screenshots/preview.png
 path: ""
 
 defaultUsername: ""

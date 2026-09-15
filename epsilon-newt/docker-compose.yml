@@ -7,7 +7,7 @@ services:
       APP_PORT: 8080
 
   ui:
-    image: python:3.13-alpine@sha256:7415fbc3c9e4979cc717d92377ab2bc7b2b4a2af1ac03cc52b5f3f88efedaf3a
+    image: python:3.13.15-alpine3.24@sha256:7415fbc3c9e4979cc717d92377ab2bc7b2b4a2af1ac03cc52b5f3f88efedaf3a
     restart: on-failure
     user: "1000:1000"
     command: ["python", "/app/app.py"]
@@ -59,7 +59,7 @@ services:
       retries: 3
       start_period: 10s
   newt:
-    image: fosrl/newt:1.16.0@sha256:345fdeb369be6608d82c41d70637636c78b2c04a6112ff6ec20fc21c48afc899
+    image: fosrl/newt:1.17.0@sha256:3465d85200cceb0f46dad8e63a40b69ec043a81df66ed0c514714302e9b83dde
     restart: on-failure
     user: "1000:1000"
     stop_grace_period: 20s
