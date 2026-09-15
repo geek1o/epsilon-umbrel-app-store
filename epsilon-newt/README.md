@@ -18,13 +18,29 @@ not returned to the browser after saving.
 
 ## Publish Umbrel services
 
-Configure resources and access policies in Pangolin. From the Newt container,
-use an address that is reachable over the local network, such as the Umbrel
-host name and the service's published port. `127.0.0.1` refers to the Newt
-container itself, not to the Umbrel host.
+Open the site's resource editor in Pangolin and use Docker discovery to select
+an Umbrel container. Newt reports only containers that share its Umbrel network,
+so the listed container names and private ports are reachable from Newt. In most
+cases, select an app's `app_proxy` container and its HTTP port; this preserves
+the app's normal proxy routing instead of exposing a database or other internal
+service directly.
 
-Newt does not receive the Docker socket, host networking, privileged mode, or
-additional Linux capabilities. It creates its WireGuard tunnel in userspace.
+Containers on isolated application-only networks are intentionally omitted.
+For services published on the Umbrel host, you can still enter the Umbrel host
+name and published port manually. `127.0.0.1` refers to the Newt container, not
+to the Umbrel host.
+
+Newt does not receive the Docker socket directly. A separate socket proxy gives
+it read-only access to the container list, container metadata, and Docker event
+stream. Mutating requests, exec, logs, process lists, archives, and filesystem
+exports are denied. The proxy has no network interface and exposes its filtered
+API only through a private Unix socket mounted into Newt. It is not reachable
+from other Umbrel applications or the LAN and does not appear as a publishable
+container in Pangolin. Container metadata can still contain sensitive operational
+information, so enable only resources that you intend to publish through Pangolin.
+
+Newt does not use host networking, privileged mode, or additional Linux
+capabilities. It creates its WireGuard tunnel in userspace.
 
 ## Backups and removal
 

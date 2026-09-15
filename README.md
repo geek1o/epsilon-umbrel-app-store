@@ -36,7 +36,7 @@ trusting their upstream developers.
 | [Emby](epsilon-emby) | Media | Personal media server for organising and streaming movies, TV shows, music, photos, and home videos. | [MediaBrowser/Emby](https://github.com/MediaBrowser/Emby) |
 | [Ente Photos](epsilon-ente-photos) | Files | End-to-end encrypted photo and video backup with self-hosted web apps, API, database, and object storage. | [ente/ente](https://github.com/ente/ente) |
 | [LocalCA](epsilon-localca) | Networking | Private certificate authority for issuing internal TLS and mutual-TLS certificates on x86-64 Umbrel systems. | [tgangte/LocalCA](https://github.com/tgangte/LocalCA) |
-| [Newt](epsilon-newt) | Networking | Userspace WireGuard connector that links an Umbrel to a Pangolin network without opening inbound ports. | [fosrl/newt](https://github.com/fosrl/newt) |
+| [Newt](epsilon-newt) | Networking | Userspace WireGuard connector with Pangolin discovery for containers on the shared Umbrel network. | [fosrl/newt](https://github.com/fosrl/newt) |
 | [Pocket ID](epsilon-pocket-id) | Networking | Passkey-only OpenID Connect provider with a local trusted-HTTPS setup powered by Caddy. | [pocket-id/pocket-id](https://github.com/pocket-id/pocket-id) |
 | [Suwayomi](epsilon-suwayomi) | Media | Browser-based manga server and reader compatible with Mihon/Tachiyomi extensions. | [Suwayomi/Suwayomi-Server](https://github.com/Suwayomi/Suwayomi-Server) |
 

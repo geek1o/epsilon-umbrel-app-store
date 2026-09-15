@@ -26,6 +26,38 @@ services:
       retries: 3
       start_period: 10s
 
+  docker_socket_proxy:
+    image: ghcr.io/linuxserver/socket-proxy:3.4.4-r0-ls97@sha256:ba211325155c463a1a6e6a038c928f21447a8e60ce02ecf41302047974097e84
+    restart: on-failure
+    read_only: true
+    network_mode: none
+    entrypoint: ["/bin/sh", "/config/socket-proxy-entrypoint.sh"]
+    tmpfs:
+      - /run
+    environment:
+      CONTAINERS: "1"
+      EVENTS: "1"
+      PING: "1"
+      VERSION: "1"
+      LIBPOD_PING: "0"
+      LIBPOD_VERSION: "0"
+      POST: "0"
+      ALLOW_ARCHIVE: "0"
+      ALLOW_CHANGES: "0"
+      ALLOW_EXPORT: "0"
+      ALLOW_LOGS: "0"
+      ALLOW_TOP: "0"
+      LOG_LEVEL: warning
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${APP_DATA_DIR}/data/docker-proxy:/proxy
+      - ${APP_DATA_DIR}/socket-proxy-entrypoint.sh:/config/socket-proxy-entrypoint.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "test -S /proxy/docker.sock"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
   newt:
     image: fosrl/newt:1.16.0@sha256:345fdeb369be6608d82c41d70637636c78b2c04a6112ff6ec20fc21c48afc899
     restart: on-failure
@@ -34,9 +66,14 @@ services:
     environment:
       CONFIG_FILE: /config/config.json
       HEALTH_FILE: /status/health
+      DOCKER_SOCKET: unix:///docker-api/docker.sock
+      DOCKER_ENFORCE_NETWORK_VALIDATION: "true"
     volumes:
       - ${APP_DATA_DIR}/data/config:/config
       - ${APP_DATA_DIR}/data/status:/status
+      - ${APP_DATA_DIR}/data/docker-proxy:/docker-api:ro
     depends_on:
       ui:
+        condition: service_healthy
+      docker_socket_proxy:
         condition: service_healthy

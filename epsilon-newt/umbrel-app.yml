@@ -2,19 +2,19 @@ manifestVersion: 1
 id: epsilon-newt
 category: networking
 name: Newt
-version: "1.16.0-ui.1"
+version: "1.16.0-ui.2"
 tagline: Connect this Umbrel to a Pangolin network
 icon: https://avatars.githubusercontent.com/u/183037913?v=4
 description: >-
   Newt is the lightweight, fully userspace WireGuard tunnel client for Pangolin. It connects this Umbrel to a Pangolin server and securely relays configured TCP, UDP, and HTTP resources without opening inbound ports or managing a kernel WireGuard interface.
 
 
-  This package runs the official Newt image unchanged and adds a separate browser-based configuration panel. Create a site in Pangolin, copy its endpoint, Newt ID, and secret into the panel, save, and restart the app. The panel reports whether the configuration is complete and whether Newt has established its tunnel.
+  This package runs the official Newt image unchanged and adds a separate browser-based configuration panel. Create a site in Pangolin, copy its endpoint, Newt ID, and secret into the panel, save, and restart the app. The panel reports whether the configuration is complete and whether Newt has established its tunnel. Pangolin can also discover the Umbrel containers that share Newt's network and offer their private ports as resource targets.
 
 
-  Newt initiates outbound connections to the configured Pangolin server. It does not receive access to the Docker socket, host network, privileged mode, or extra Linux capabilities. Services published through Pangolin become reachable according to the access policies you configure there, so review every target carefully.
+  Newt initiates outbound connections to the configured Pangolin server. Docker discovery is provided through a network-isolated read-only socket proxy and a private Unix socket mounted only into Newt. It denies container changes, exec, logs, archives, process lists, and filesystem exports. Newt does not use host networking, privileged mode, or extra Linux capabilities. Services published through Pangolin become reachable according to the access policies you configure there, so review every target carefully.
 releaseNotes: >-
-  Initial package for Newt 1.16.0 with a separate configuration and tunnel-status panel.
+  Adds Docker container discovery for services on Newt's Umbrel network through an isolated read-only Docker socket proxy and translates the configuration panel to English.
 
 developer: Pangolin
 website: https://docs.pangolin.net/manage/sites/understanding-sites
