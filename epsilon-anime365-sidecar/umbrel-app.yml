@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-anime365-sidecar
 category: media
 name: Anime365 Sidecar
-version: "0.13.1-ui.1"
+version: "0.13.1-ui.2"
 tagline: Download your Anime 365 list into Emby
 icon: https://smotret-anime.app/apple-touch-icon.png?v=pgrAWgkp53
 description: >-
@@ -23,7 +23,7 @@ description: >-
 
   Umbrel authentication protects the configuration panel. Secrets are stored in the app data directory with restricted file permissions and are never returned to the browser after saving. The media library is stored in Umbrel's shared downloads directory so Emby can access it.
 releaseNotes: >-
-  Initial Umbrel package for Anime365 Sidecar 0.13.1 with a separate configuration and status panel.
+  Fix translation downloads by creating the writable temporary directory required by Anime365 Sidecar.
 
 developer: flaksp
 website: https://github.com/flaksp/anime365-sidecar
