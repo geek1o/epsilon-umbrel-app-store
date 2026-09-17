@@ -3,7 +3,7 @@ id: epsilon-netbootxyz
 name: netboot.xyz
 version: "0.7.6-nbxyz24"
 tagline: Your favorite operating systems in one place - network boot menu
-icon: https://netboot.xyz/favicon.ico
+icon: https://raw.githubusercontent.com/netbootxyz/webapp/master/public/img/favicon/android-icon-192x192.png
 category: networking
 port: 3000
 description: >-

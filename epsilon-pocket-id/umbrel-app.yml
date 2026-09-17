@@ -27,7 +27,6 @@ support: https://github.com/pocket-id/pocket-id/issues
 
 port: 1412
 gallery:
-  - https://raw.githubusercontent.com/geek1o/epsilon-umbrel-app-store/main/epsilon-pocket-id/preview.png
   - https://github.com/user-attachments/assets/1e99ba44-76da-4b47-9b8a-dbe9b7f84512
 path: ""
 
