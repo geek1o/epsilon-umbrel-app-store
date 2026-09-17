@@ -1,0 +1,49 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: epsilon-zerobyte_app_1
+      APP_PORT: 4096
+
+  init:
+    image: alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1
+    restart: "no"
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    command:
+      - sh
+      - -c
+      - |
+        mkdir -p /data/secrets
+        if [ ! -s /data/secrets/app_secret ]; then
+          head -c 32 /dev/urandom | base64 | tr -d '\n' > /data/secrets/app_secret
+        fi
+        chmod 600 /data/secrets/app_secret
+        echo "app secret ready"
+
+  app:
+    image: ghcr.io/nicotsx/zerobyte:v0.42.0@sha256:08d1766977b28b3530054fc9df8b1a0ba3f7f9861c5367b03aa3e9ab71c2102f
+    restart: on-failure
+    stop_grace_period: 30s
+    cap_add:
+      - SYS_ADMIN # required for mounting NFS/SMB/WebDAV/SFTP volumes
+    devices:
+      - /dev/fuse:/dev/fuse
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    environment:
+      PORT: "4096"
+      BASE_URL: http://localhost:4096
+      APP_SECRET_FILE: /data/secrets/app_secret
+      TRUST_PROXY: "true"
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+      - /etc/localtime:/etc/localtime:ro
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:4096/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
