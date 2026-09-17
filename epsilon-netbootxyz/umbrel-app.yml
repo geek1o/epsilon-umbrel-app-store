@@ -1,0 +1,47 @@
+manifestVersion: 1
+id: epsilon-netbootxyz
+name: netboot.xyz
+version: "0.7.6-nbxyz24"
+tagline: Your favorite operating systems in one place - network boot menu
+icon: https://netboot.xyz/favicon.ico
+category: networking
+port: 3000
+description: >-
+  netboot.xyz is a menu-based network boot environment built on iPXE. It lets
+  you boot operating system installers and live environments for dozens of
+  Linux distributions, BSD, and utility images directly over the network, so
+  machines without optical drives or USB boot support can be installed with a
+  single DHCP setting.
+
+
+  This package runs the official netboot.xyz container unchanged. The web
+  configuration interface is available in Umbrel for editing menus, retrieving
+  the latest menu release, and mirroring downloadable assets from GitHub to
+  your machine for faster boots. The container also serves menus over TFTP on
+  UDP port 69 and over HTTP on host port 8080.
+
+
+  Booting over the network requires an existing DHCP server on your network.
+  In your DHCP server or router, set the TFTP server (next-server) option to
+  your Umbrel IP address and set the boot file name to `netboot.xyz.kpxe` for
+  legacy BIOS clients or `netboot.xyz.efi` for UEFI clients. The container
+  does not provide a DHCP service itself and cannot change your existing DHCP
+  setup on its own.
+releaseNotes: >-
+  Initial release of netboot.xyz 0.7.6 (container tag 0.7.6-nbxyz24) in the
+  Epsilon store.
+developer: netboot.xyz
+website: https://netboot.xyz
+dependencies: []
+repo: https://github.com/netbootxyz/docker-netbootxyz
+support: https://github.com/netbootxyz/docker-netbootxyz/issues
+
+gallery:
+  - https://raw.githubusercontent.com/geek1o/epsilon-umbrel-app-store/main/epsilon-netbootxyz/preview.jpg
+path: ""
+
+defaultUsername: ""
+defaultPassword: ""
+
+submitter: GeekIO
+submission: https://github.com/geek1o/epsilon-umbrel-app-store
