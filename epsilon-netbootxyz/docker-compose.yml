@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: epsilon-netbootxyz_app_1
+      APP_PORT: 3000
+
+  app:
+    image: netbootxyz/netbootxyz:0.7.6-nbxyz24@sha256:7bd0964fd3648cd3323772ad6ad8b0a507afe797385e4c0f587a8c23972ee4e3
+    restart: on-failure
+    stop_grace_period: 20s
+    environment:
+      NGINX_PORT: "8080"
+      WEB_APP_PORT: "3000"
+    ports:
+      - "8080:8080" # HTTP mirror of the iPXE menus
+      - "69:69/udp" # TFTP server for PXE clients
+    volumes:
+      - ${APP_DATA_DIR}/data/config:/config
+      - ${APP_DATA_DIR}/data/assets:/assets
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:3000/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

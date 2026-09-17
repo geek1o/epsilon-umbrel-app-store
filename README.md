@@ -5,7 +5,7 @@ It provides separately maintained packages for installing and updating self-host
 applications through umbrelOS.
 
 The store currently focuses on media management, private photo storage, manga
-reading, networking, identity, certificates, and local developer tools.
+reading, networking, network booting, identity, certificates, and local developer tools.
 Application containers are pinned by digest and normally checked for both
 `linux/amd64` and `linux/arm64` support before publication. Architecture-specific
 exceptions are identified explicitly in the application description.
@@ -35,6 +35,7 @@ trusting their upstream developers.
 | [atvloadly](epsilon-atvloadly) | Developer | Web interface for pairing with Apple TV, sideloading IPA files, and refreshing signed applications. | [bitxeno/atvloadly](https://github.com/bitxeno/atvloadly) |
 | [Emby](epsilon-emby) | Media | Personal media server for organising and streaming movies, TV shows, music, photos, and home videos. | [MediaBrowser/Emby](https://github.com/MediaBrowser/Emby) |
 | [Ente Photos](epsilon-ente-photos) | Files | End-to-end encrypted photo and video backup with self-hosted web apps, API, database, and object storage. | [ente/ente](https://github.com/ente/ente) |
+| [netboot.xyz](epsilon-netbootxyz) | Networking | Menu-based network boot environment for booting OS installers and live images over the network via iPXE, with a web menu editor and TFTP/HTTP menu hosting. | [netbootxyz/docker-netbootxyz](https://github.com/netbootxyz/docker-netbootxyz) |
 | [Newt](epsilon-newt) | Networking | Userspace WireGuard connector with Pangolin discovery for containers on the shared Umbrel network. | [fosrl/newt](https://github.com/fosrl/newt) |
 | [Pocket ID](epsilon-pocket-id) | Networking | Passkey-only OpenID Connect provider with a local trusted-HTTPS setup powered by Caddy. | [pocket-id/pocket-id](https://github.com/pocket-id/pocket-id) |
 | [Suwayomi](epsilon-suwayomi) | Media | Browser-based manga server and reader compatible with Mihon/Tachiyomi extensions. | [Suwayomi/Suwayomi-Server](https://github.com/Suwayomi/Suwayomi-Server) |
