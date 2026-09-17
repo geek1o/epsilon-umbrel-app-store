@@ -1,7 +1,7 @@
 manifestVersion: 1
 id: epsilon-zerobyte
 name: Zerobyte
-version: "0.42.0"
+version: "0.42.0-1"
 tagline: Backup automation for self-hosters, built on restic
 icon: https://zerobyte.app/favicon.ico
 category: files
