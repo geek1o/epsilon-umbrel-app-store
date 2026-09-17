@@ -7,7 +7,11 @@ checks, notifications, and mirror sync to secondary repositories.
 
 ## What this package changes
 
-- The web UI (port 4096) is proxied through the Umbrel UI.
+- The web UI (port 4096) is proxied through the Umbrel UI and served at
+  `https://umbrel.local:4096`. `BASE_URL` and `TRUSTED_ORIGINS` are preset to
+  that origin so that authentication (passkey/admin signup) passes origin
+  validation. If you rename your Umbrel device, update these two values in
+  the app's compose configuration accordingly.
 - Remote mount support (NFS, SMB, WebDAV, SFTP) is enabled, which requires the
   `SYS_ADMIN` Linux capability and the host `/dev/fuse` device. These are used
   only to mount configured network shares inside the container. See the

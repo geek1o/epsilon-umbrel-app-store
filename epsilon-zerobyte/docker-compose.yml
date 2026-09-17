@@ -35,8 +35,9 @@ services:
         condition: service_completed_successfully
     environment:
       PORT: "4096"
-      BASE_URL: http://localhost:4096
+      BASE_URL: https://umbrel.local:4096
       APP_SECRET_FILE: /data/secrets/app_secret
+      TRUSTED_ORIGINS: https://umbrel.local:4096
       TRUST_PROXY: "true"
     volumes:
       - ${APP_DATA_DIR}/data:/data
