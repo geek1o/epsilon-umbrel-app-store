@@ -57,7 +57,7 @@ services:
       ENTE_JWT_SECRET: ${APP_ENTE_JWT_SECRET}
 
   web:
-    image: ghcr.io/ente/web:86d67574787055d13512d15f19089f66c5fe1f96@sha256:71bd42b1459d04f6b5d109e170d5c1af00da133e0a134787f15b73532f54c9f9
+    image: ghcr.io/ente/web:59989de7eec29314d12cebed2f9af3280c79be09@sha256:3fc9b2a59ace953b62767aae11ce9064ed483722f78ce51632f2dc2a45a086b0
     restart: on-failure
     depends_on:
       - museum
