@@ -1,0 +1,45 @@
+manifestVersion: 1
+id: epsilon-zerobyte
+name: Zerobyte
+version: "0.42.0"
+tagline: Backup automation for self-hosters, built on restic
+icon: https://zerobyte.app/favicon.ico
+category: files
+port: 4096
+description: >-
+  Zerobyte is backup automation for self-hosters, built on top of restic. Define
+  volumes (local directories or NFS, SMB, WebDAV, and SFTP shares), create
+  encrypted restic repositories (local, S3, GCS, Azure, or rclone-supported
+  cloud storage), and schedule snapshots with retention policies, compression,
+  health checks, notifications via Shoutrrr, and webhook support.
+
+
+  Backups are encrypted end-to-end by restic and can be restored to any
+  location, with mirror synchronization to secondary repositories. The bundled
+  rclone adds 40+ cloud storage providers.
+
+
+  This package runs the official Zerobyte image with remote mount support
+  enabled. For that it requires the SYS_ADMIN Linux capability and the host
+  /dev/fuse device, which are used only to mount configured network shares
+  inside the container. An application secret is generated automatically on
+  first start and stored in the app data directory; keep a backup of it, as it
+  encrypts sensitive data in the database. Zerobyte is best reached on a
+  trusted network, not exposed directly to the internet.
+releaseNotes: >-
+  Initial release of Zerobyte 0.42.0 in the Epsilon store.
+developer: nicotsx
+website: https://zerobyte.app
+dependencies: []
+repo: https://github.com/nicotsx/zerobyte
+support: https://github.com/nicotsx/zerobyte/issues
+
+gallery:
+  - https://raw.githubusercontent.com/geek1o/epsilon-umbrel-app-store/main/epsilon-zerobyte/preview.jpg
+path: ""
+
+defaultUsername: ""
+defaultPassword: ""
+
+submitter: GeekIO
+submission: https://github.com/geek1o/epsilon-umbrel-app-store
