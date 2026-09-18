@@ -1,0 +1,127 @@
+version: "3.7"
+
+# Epsilon n8n package based on n8n's official get-n8n compose stack.
+# Includes external task runners required by n8n Assistant workspace execution.
+services:
+  app_proxy:
+    environment:
+      APP_HOST: epsilon-n8n_server_1
+      APP_PORT: 5678
+      PROXY_AUTH_WHITELIST: "/webhook-test/*,/webhook/*,/form-test/*,/form/*,/form-waiting/*"
+
+  sandbox-certs:
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.3.4@sha256:fb14de143c66aef84a2f0f81332365cd2aa2acab4149226d8f1e533cec5ab
+    restart: on-failure
+    user: '0:0'
+    entrypoint: ['sh', '-c']
+    command:
+      - >
+        bootstrap-mtls.sh --out-dir /tls --api-san sandbox-api
+        --control-san-prefix sandbox-runner --world-readable &&
+        chown -R sandbox-api:sandbox-api /tls/api && chmod -R a+rX /tls
+    environment:
+      NUM_RUNNERS: '1'
+    volumes:
+      - ${APP_DATA_DIR}/sandbox-tls:/tls
+
+  sandbox-api:
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.3.4@sha256:fb14de143c66aef84a2f0f81332365cd2aa2acab4149226d8f1e533cec5ab
+    restart: on-failure
+    depends_on:
+      - sandbox-certs
+    environment:
+      SANDBOX_API_GRPC_TLS_CERT_FILE: /tls/api/grpc-server.crt
+      SANDBOX_API_GRPC_TLS_KEY_FILE: /tls/api/grpc-server.key
+      SANDBOX_API_GRPC_TLS_CLIENT_CA_FILE: /tls/api/ca.crt
+      SANDBOX_API_RUNNER_CONTROL_GRPC_TLS_CA_FILE: /tls/api/ca.crt
+      SANDBOX_API_RUNNER_CONTROL_GRPC_TLS_CERT_FILE: /tls/api/control-grpc-api-client.crt
+      SANDBOX_API_RUNNER_CONTROL_GRPC_TLS_KEY_FILE: /tls/api/control-grpc-api-client.key
+      SANDBOX_API_RUNNER_CONTROL_GRPC_TLS_SERVER_NAME: sandbox-runner-1
+      SANDBOX_API_KEYS: 9546cf40f33b0153607d4a806086981447c09f1cef8a3f23
+      SANDBOX_API_RUNNER_REGISTRATION_TOKEN: 3a5ecae8c24580fee12c5d08289330cf5808af50606dedee
+      SANDBOX_API_RUNNER_API_KEY: 6d9e6667ce85e484f0b967d2ace97fb7d9c821e03fbd2756
+    volumes:
+      - ${APP_DATA_DIR}/sandbox-tls:/tls:ro
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://localhost:8080/healthz']
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+
+  sandbox-runner-1:
+    image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind:1.3.4@sha256:a065eb3480600104a8e5bdcb23d73f7057d61dbf53f749cf4901b075612c51db
+    privileged: true
+    restart: on-failure
+    depends_on:
+      - sandbox-api
+    environment:
+      SANDBOX_RUNNER_API_GRPC_ADDR: sandbox-api:9090
+      SANDBOX_RUNNER_HTTP_BASE_URL: https://sandbox-runner-1:8080
+      SANDBOX_RUNNER_CONTROL_GRPC_LISTEN_ADDR: ':9091'
+      SANDBOX_RUNNER_CONTROL_GRPC_ADVERTISE_ADDR: sandbox-runner-1:9091
+      SANDBOX_RUNNER_ID: runner-1
+      SANDBOX_RUNNER_DOCKER_SANDBOX_IMAGE: ghcr.io/n8n-io/n8n-sandbox-service-sandbox:1.3.4@sha256:634b2c28f03db91803cc8d0b0a03bbf75f9d5d09b531277ecd5c82877ef7ae5d
+      SANDBOX_RUNNER_REGISTRATION_TOKEN: 3a5ecae8c24580fee12c5d08289330cf5808af50606dedee
+      SANDBOX_RUNNER_API_KEYS: 6d9e6667ce85e484f0b967d2ace97fb7d9c821e03fbd2756
+      SANDBOX_RUNNER_REGISTRATION_GRPC_CA_FILE: /tls/runner/ca.crt
+      SANDBOX_RUNNER_REGISTRATION_GRPC_CERT_FILE: /tls/runner/grpc-client.crt
+      SANDBOX_RUNNER_REGISTRATION_GRPC_KEY_FILE: /tls/runner/grpc-client.key
+      SANDBOX_RUNNER_REGISTRATION_GRPC_SERVER_NAME: sandbox-api
+      SANDBOX_RUNNER_CONTROL_GRPC_TLS_CERT_FILE: /tls/runner/control-grpc-server.crt
+      SANDBOX_RUNNER_CONTROL_GRPC_TLS_KEY_FILE: /tls/runner/control-grpc-server.key
+      SANDBOX_RUNNER_CONTROL_GRPC_TLS_CLIENT_CA_FILE: /tls/runner/ca.crt
+    volumes:
+      - ${APP_DATA_DIR}/sandbox-tls:/tls:ro
+
+  server:
+    image: docker.io/n8nio/n8n:2.39.7@sha256:54323be085a6086acd87f612a25752d6582d3a0c0b07cc93c2b40a9356c3203b
+    restart: on-failure
+    depends_on:
+      - sandbox-api
+    stop_grace_period: 1m
+    environment:
+      PUID: '1000'
+      PGID: '1000'
+      N8N_HOST: $DEVICE_DOMAIN_NAME
+      N8N_SECURE_COOKIE: 'false'
+      N8N_DIAGNOSTICS_ENABLED: 'false'
+      N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: 'true'
+      N8N_PROXY_HOPS: '1'
+      N8N_RUNNERS_MODE: external
+      N8N_RUNNERS_BROKER_LISTEN_ADDRESS: 0.0.0.0
+      N8N_RUNNERS_AUTH_TOKEN: 2f1b1f3dd3e441e9b19f0d1fc2a85f57
+      N8N_INSTANCE_AI_SANDBOX_ENABLED: 'true'
+      N8N_INSTANCE_AI_SANDBOX_PROVIDER: n8n-sandbox
+      N8N_SANDBOX_SERVICE_URL: http://sandbox-api:8080
+      N8N_SANDBOX_SERVICE_API_KEY: 9546cf40f33b0153607d4a806086981447c09f1cef8a3f23
+      N8N_INSTANCE_AI_SEARXNG_URL: http://searxng:8080
+    volumes:
+      - ${APP_DATA_DIR}/data:/home/node/.n8n
+
+  runners:
+    image: ghcr.io/n8n-io/runners:2.39.7@sha256:d8da4acaad269005cf4a2c4b95d7ffc5fb963d83996ce9d0ecfdc46e86670fa6
+    restart: on-failure
+    depends_on:
+      - server
+    environment:
+      N8N_RUNNERS_AUTH_TOKEN: 2f1b1f3dd3e441e9b19f0d1fc2a85f57
+      N8N_RUNNERS_TASK_BROKER_URI: http://server:5679
+      N8N_RUNNERS_AUTO_SHUTDOWN_TIMEOUT: '15'
+
+  searxng:
+    image: ghcr.io/searxng/searxng:latest@sha256:e0027a772aeeea55bf642256aae6fb3344ffa5f25ca665898c2ea821101334c4
+    restart: on-failure
+    depends_on:
+      - searxng-init
+    environment:
+      SEARXNG_SECRET: 92192300ef69a4cb744db56240d95e534367415299bbd761
+    volumes:
+      - ${APP_DATA_DIR}/searxng:/etc/searxng
+
+  searxng-init:
+    image: busybox:1.36.1-musl@sha256:3c6ae8008e2c2eedd141725c30b20d9c36b026eb796688f88205845ef17aa213
+    restart: 'no'
+    volumes:
+      - ${APP_DATA_DIR}/searxng:/data
+    command: ['/bin/sh', '-c', "rm -rf /data/settings.yml && printf '%s\\n' 'use_default_settings: true' 'search:' '  formats:' '    - html' '    - json' > /data/settings.yml"]
