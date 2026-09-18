@@ -95,7 +95,7 @@ services:
     environment:
       SEARXNG_SECRET: 92192300ef69a4cb744db56240d95e534367415299bbd761
     volumes:
-      - ./searxng-settings.yml:/etc/searxng/settings.yml:ro
+      - ./settings.yml:/etc/searxng:ro
     # Internal-only: n8n reaches it by its Umbrel main-network name.
 
   web:
