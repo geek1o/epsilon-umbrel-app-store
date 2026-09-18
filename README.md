@@ -5,7 +5,7 @@ It provides separately maintained packages for installing and updating self-host
 applications through umbrelOS.
 
 The store currently focuses on media management, private photo storage, manga
-reading, networking, network booting, backup, identity, certificates, and local developer tools.
+reading, workflow automation, networking, network booting, backup, identity, certificates, and local developer tools.
 Application containers are pinned by digest and normally checked for both
 `linux/amd64` and `linux/arm64` support before publication. Architecture-specific
 exceptions are identified explicitly in the application description.
@@ -36,6 +36,7 @@ trusting their upstream developers.
 | [Emby](epsilon-emby) | Media | Personal media server for organising and streaming movies, TV shows, music, photos, and home videos. | [MediaBrowser/Emby](https://github.com/MediaBrowser/Emby) |
 | [Ente Photos](epsilon-ente-photos) | Files | End-to-end encrypted photo and video backup with self-hosted web apps, API, database, and object storage. | [ente/ente](https://github.com/ente/ente) |
 | [netboot.xyz](epsilon-netbootxyz) | Networking | Menu-based network boot environment for booting OS installers and live images over the network via iPXE, with a web menu editor and TFTP/HTTP menu hosting. | [netbootxyz/docker-netbootxyz](https://github.com/netbootxyz/docker-netbootxyz) |
+| [n8n Assistant Sandbox](epsilon-n8n-assistant) | Automation | Self-hosted sandbox provider (official n8n sandbox service) and bundled SearXNG web search that enable the n8n Assistant in the official n8n app, following n8n's "Set up n8n Assistant" guide. Depends on n8n from the official Umbrel App Store. | [n8n-io/n8n-sandbox-service](https://github.com/n8n-io/n8n-sandbox-service) |
 | [Newt](epsilon-newt) | Networking | Userspace WireGuard connector with Pangolin discovery for containers on the shared Umbrel network. | [fosrl/newt](https://github.com/fosrl/newt) |
 | [Zerobyte](epsilon-zerobyte) | Files | Encrypted restic backup automation with schedules, retention, notifications, and mirror sync for local and remote volumes. | [nicotsx/zerobyte](https://github.com/nicotsx/zerobyte) |
 | [Pocket ID](epsilon-pocket-id) | Networking | Passkey-only OpenID Connect provider with a local trusted-HTTPS setup powered by Caddy. | [pocket-id/pocket-id](https://github.com/pocket-id/pocket-id) |
