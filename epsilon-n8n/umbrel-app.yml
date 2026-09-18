@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-n8n
 category: automation
 name: n8n
-version: "2.39.7-2"
+version: "2.39.8"
 tagline: n8n with external task runners and Assistant sandbox
 icon: https://raw.githubusercontent.com/n8n-io/n8n/master/packages/@n8n/mcp-browser-extension/icons/icon-128.png
 description: >-
@@ -15,8 +15,8 @@ description: >-
   n8n design creates isolated Docker sandboxes; it is never exposed directly
   to the host.
 releaseNotes: >-
-  First Epsilon build of n8n 2.39.7 with external task runners and the
-  official n8n Assistant sandbox provider.
+  n8n 2.39.7 with external task runners, the official n8n Assistant sandbox,
+  and a startup ownership fix for the persistent data directory.
 developer: n8n
 website: https://n8n.io
 repo: https://github.com/n8n-io/n8n
