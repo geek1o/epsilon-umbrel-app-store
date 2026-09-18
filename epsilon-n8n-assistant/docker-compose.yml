@@ -92,11 +92,24 @@ services:
   searxng:
     image: ghcr.io/searxng/searxng:latest@sha256:e0027a772aeeea55bf642256aae6fb3344ffa5f25ca665898c2ea821101334c4
     restart: on-failure
+    depends_on:
+      - searxng-init
     environment:
       SEARXNG_SECRET: 92192300ef69a4cb744db56240d95e534367415299bbd761
     volumes:
-      - ./settings.yml:/etc/searxng:ro
+      - ${APP_DATA_DIR}/searxng:/etc/searxng
     # Internal-only: n8n reaches it by its Umbrel main-network name.
+
+  searxng-init:
+    image: busybox:1.36.1-musl@sha256:3c6ae8008e2c2eedd141725c30b20d9c36b026eb796688f88205845ef17aa213
+    restart: "no"
+    volumes:
+      - ${APP_DATA_DIR}/searxng:/data
+      - ./settings.yml:/seed/settings.yml:ro
+    command:
+      - /bin/sh
+      - -c
+      - cp /seed/settings.yml /data/settings.yml
 
   web:
     image: busybox:1.36.1-musl@sha256:3c6ae8008e2c2eedd141725c30b20d9c36b026eb796688f88205845ef17aa213
