@@ -7,7 +7,7 @@ services:
       APP_PORT: 8989
 
   server:
-    image: ghcr.io/lqwestl/aliasarr:v3.3.0@sha256:b82b74ed8aef55eb13932e8d2b858966a09bd19908bc7f553736426a6801629f
+    image: ghcr.io/lqwestl/aliasarr:v3.4.0@sha256:9af5427f251bc2ec386b893671d856141d3a6ce0bf798c44e86f0f8a307ba3a2
     restart: on-failure
     stop_grace_period: 30s
     environment:

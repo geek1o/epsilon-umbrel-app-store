@@ -7,7 +7,7 @@ services:
       APP_PORT: 4096
 
   init:
-    image: alpine:3.22.5@sha256:14358309a308569c32bdc37e2e0e9694be33a9d99e68afb0f5ff33cc1f695dce
+    image: alpine:3.22.6@sha256:abd29214470819ed7667c87c1ceebc89aae766453a5b3cc09e8a52b9f796fd5a
     restart: "no"
     volumes:
       - ${APP_DATA_DIR}/data:/data
