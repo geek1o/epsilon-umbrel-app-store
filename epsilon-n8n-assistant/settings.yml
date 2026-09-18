@@ -1,7 +1,0 @@
-# Enables the JSON API n8n Assistant web search needs.
-# https://docs.n8n.io/deploy/host-n8n/configure-n8n/set-up-n8n-assistant/
-use_default_settings: true
-search:
-  formats:
-    - html
-    - json

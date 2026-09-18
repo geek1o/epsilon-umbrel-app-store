@@ -105,11 +105,12 @@ services:
     restart: "no"
     volumes:
       - ${APP_DATA_DIR}/searxng:/data
-      - ./settings.yml:/seed/settings.yml:ro
     command:
       - /bin/sh
       - -c
-      - cp /seed/settings.yml /data/settings.yml
+      - >-
+        printf '%s\n' 'use_default_settings: true' 'search:' '  formats:'
+        '    - html' '    - json' > /data/settings.yml
 
   web:
     image: busybox:1.36.1-musl@sha256:3c6ae8008e2c2eedd141725c30b20d9c36b026eb796688f88205845ef17aa213
