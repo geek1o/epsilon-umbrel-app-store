@@ -109,7 +109,7 @@ services:
       - /bin/sh
       - -c
       - >-
-        printf '%s\n' 'use_default_settings: true' 'search:' '  formats:'
+        rm -rf /data/settings.yml && printf '%s\n' 'use_default_settings: true' 'search:' '  formats:'
         '    - html' '    - json' > /data/settings.yml
 
   web:
