@@ -23,9 +23,8 @@ description: >-
   Daytona provider for production.
 
 
-  This companion is retained for users who keep the official n8n app. For a
-  fully integrated installation with external task runners, install the
-  epsilon-n8n alternative instead. The n8n Assistant itself is enabled by
+  This companion is retained for users who keep the official n8n app. The
+  n8n Assistant itself is enabled by
   adding a model API key (Anthropic, OpenAI or OpenRouter) in the n8n editor's
   AI settings.
 releaseNotes: >-
@@ -37,7 +36,7 @@ releaseNotes: >-
 developer: n8n
 website: https://docs.n8n.io/deploy/host-n8n/configure-n8n/set-up-n8n-assistant/
 dependencies:
-  - epsilon-n8n
+  - n8n
 repo: https://github.com/n8n-io/n8n-sandbox-service
 support: https://community.n8n.io
 
