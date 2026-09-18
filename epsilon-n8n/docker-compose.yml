@@ -87,8 +87,10 @@ services:
     image: docker.io/n8nio/n8n:2.39.7@sha256:54323be085a6086acd87f612a25752d6582d3a0c0b07cc93c2b40a9356c3203b
     restart: on-failure
     depends_on:
-      - sandbox-api
-      - n8n-data-init
+      sandbox-api:
+        condition: service_started
+      n8n-data-init:
+        condition: service_completed_successfully
     stop_grace_period: 1m
     environment:
       PUID: '1000'
