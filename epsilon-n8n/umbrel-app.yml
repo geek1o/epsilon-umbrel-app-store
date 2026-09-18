@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-n8n
 category: automation
 name: n8n
-version: "2.39.7-epsilon.1"
+version: "2.39.7-1"
 tagline: n8n with external task runners and Assistant sandbox
 icon: https://raw.githubusercontent.com/n8n-io/n8n/master/packages/@n8n/mcp-browser-extension/icons/icon-128.png
 description: >-
