@@ -10,7 +10,7 @@ services:
       PROXY_AUTH_WHITELIST: "/webhook-test/*,/webhook/*,/form-test/*,/form/*,/form-waiting/*"
 
   sandbox-certs:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.3.4@sha256:fb14de143c66aef84a2f0f81332365cd2aa2acab4149226d8f1e533cec5ab
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.3.4@sha256:fb14de143c66aef84a2f0f81332365cd2aa2acab4140549226d8f1e533cec5ab
     restart: on-failure
     user: '0:0'
     entrypoint: ['sh', '-c']
@@ -25,7 +25,7 @@ services:
       - ${APP_DATA_DIR}/sandbox-tls:/tls
 
   sandbox-api:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.3.4@sha256:fb14de143c66aef84a2f0f81332365cd2aa2acab4149226d8f1e533cec5ab
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.3.4@sha256:fb14de143c66aef84a2f0f81332365cd2aa2acab4140549226d8f1e533cec5ab
     restart: on-failure
     depends_on:
       - sandbox-certs
