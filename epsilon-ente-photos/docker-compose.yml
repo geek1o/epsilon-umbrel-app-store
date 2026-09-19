@@ -67,7 +67,7 @@ services:
       ENTE_API_ORIGIN: http://${DEVICE_DOMAIN_NAME}:38080
 
   postgres:
-    image: postgres:15.19@sha256:cf99051c6547f43cb3ac1d109b8877b62e96bcef6afc4280a56c5e6aaef3eccc
+    image: postgres:15.19@sha256:dfbbb0ad8cab91d41e99123664e37a9b25d0413426d4fb3154e4d668e5d35246
     restart: on-failure
     stop_grace_period: 1m
     environment:
