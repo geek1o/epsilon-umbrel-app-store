@@ -1,7 +1,7 @@
 manifestVersion: 1
 id: epsilon-playwright
 name: Playwright
-version: "0.0.82-2"
+version: "0.0.82-3"
 tagline: Remote browser automation with Playwright MCP
 icon: https://playwright.dev/img/playwright-logo.svg
 category: developer
