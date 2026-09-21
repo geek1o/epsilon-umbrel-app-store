@@ -90,7 +90,7 @@ services:
     # Never expose this container's ports — it runs privileged Docker-in-Docker.
 
   searxng:
-    image: ghcr.io/searxng/searxng:latest@sha256:547fdc19b45510ea1c0bc65ffadab3fcdde1ab1efd7fe696602284ba54d795ca
+    image: ghcr.io/searxng/searxng:latest@sha256:1ef964f6dcc811a60e01049717b6e526b25a1c52935350143f04e0ae291b3dbd
     restart: on-failure
     depends_on:
       - searxng-init

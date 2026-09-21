@@ -7,7 +7,7 @@ services:
       APP_PORT: 8080
 
   ui:
-    image: python:3.13.15-alpine3.24@sha256:1a63a53928ce53d2b0baf08092a703f4840ac5dfbd61fd48802dbf48e08c801e
+    image: python:3.13.15-alpine3.24@sha256:79e7a9b9ff1cbceff819f856fb374477792a5967759d94df266de7b7b4120e6f
     restart: on-failure
     user: "1000:1000"
     command: ["python", "/app/app.py"]
