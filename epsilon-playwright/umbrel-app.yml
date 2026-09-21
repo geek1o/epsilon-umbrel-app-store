@@ -1,0 +1,34 @@
+manifestVersion: 1
+id: epsilon-playwright
+name: Playwright
+version: "0.0.82-1"
+tagline: Remote browser automation with Playwright MCP
+icon: https://playwright.dev/img/playwright-logo.svg
+category: developer
+port: 8931
+description: >-
+  Playwright MCP is Microsoft's official Model Context Protocol server for
+  browser automation. It provides an HTTP MCP endpoint backed by headless
+  Chromium, with structured accessibility snapshots, navigation, interaction,
+  screenshots, network inspection, and browser storage support.
+
+
+  This package uses the official Playwright MCP container and persists its
+  browser profile under the app data directory. The endpoint is exposed through
+  Umbrel's reverse proxy; keep it on a trusted network because clients that can
+  reach the endpoint can control the browser and access sites opened in it.
+releaseNotes: >-
+  Initial release of Playwright MCP 0.0.82 in the Epsilon store.
+developer: Microsoft
+website: https://playwright.dev
+dependencies: []
+repo: https://github.com/microsoft/playwright-mcp
+support: https://github.com/microsoft/playwright-mcp/issues
+gallery: []
+path: ""
+
+defaultUsername: ""
+defaultPassword: ""
+
+submitter: GeekIO
+submission: https://github.com/geek1o/epsilon-umbrel-app-store
