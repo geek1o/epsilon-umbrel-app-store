@@ -5,6 +5,11 @@ services:
     environment:
       APP_HOST: epsilon-playwright_app_1
       APP_PORT: 8931
+      # MCP clients speak JSON-RPC over POST /mcp (streamable HTTP) and /sse;
+      # they cannot complete Umbrel's browser login, so bypass proxy auth for
+      # the MCP endpoints only. Anyone on the network can then drive the
+      # browser — keep the device on a trusted network.
+      PROXY_AUTH_WHITELIST: "/mcp*,/sse*"
 
   app:
     image: mcr.microsoft.com/playwright/mcp:v0.0.82@sha256:77dccc5ce9e94cb8ae7ebea87ddbb6cd54b05760c4d63c54e16accf2726b8734
