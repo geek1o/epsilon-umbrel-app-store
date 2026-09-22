@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-newt
 category: networking
 name: Newt
-version: "1.17.0-ui.2"
+version: "1.17.0-ui.3"
 tagline: Connect this Umbrel to a Pangolin network
 icon: https://avatars.githubusercontent.com/u/183037913?v=4
 description: >-

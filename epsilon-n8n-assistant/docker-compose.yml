@@ -19,7 +19,7 @@ services:
       APP_PORT: 8080
 
   sandbox-certs:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.3.4@sha256:fb14de143c66aef84a2f0f81332365cd2aa2acab4140549226d8f1e533cec5ab
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.4.0@sha256:33d01f44779fba0bc49fa051818ac2f4054c68ead17862543b684ba6a7c3b693
     restart: on-failure
     user: '0:0'
     entrypoint: ['sh', '-c']
@@ -34,7 +34,7 @@ services:
       - ${APP_DATA_DIR}/tls:/tls
 
   sandbox-api:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.3.4@sha256:fb14de143c66aef84a2f0f81332365cd2aa2acab4140549226d8f1e533cec5ab
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.4.0@sha256:33d01f44779fba0bc49fa051818ac2f4054c68ead17862543b684ba6a7c3b693
     restart: on-failure
     depends_on:
       - sandbox-certs
@@ -63,7 +63,7 @@ services:
     # n8n reaches this container by its Umbrel main-network name.
 
   sandbox-runner-1:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind:1.3.4@sha256:a065eb3480600104a8e5bdcb23d73f7057d61dbf53f749cf4901b075612c51db
+    image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind:1.4.0@sha256:ccb9b68e70d845bf8ee87083e51732e8eb898558110c541751ea7995a66128ad
     # Required by the upstream n8n sandbox design: Docker-in-Docker.
     privileged: true
     restart: on-failure
@@ -101,7 +101,7 @@ services:
     # Internal-only: n8n reaches it by its Umbrel main-network name.
 
   searxng-init:
-    image: busybox:1.36.1-musl@sha256:3c6ae8008e2c2eedd141725c30b20d9c36b026eb796688f88205845ef17aa213
+    image: busybox:1.38.0-musl@sha256:32b5cdad7cce41dfd53d0ae06baebcf8357a147ee7694dc706911c373bc30c37
     restart: "no"
     volumes:
       - ${APP_DATA_DIR}/searxng:/data
@@ -113,7 +113,7 @@ services:
         '    - html' '    - json' > /data/settings.yml
 
   web:
-    image: busybox:1.36.1-musl@sha256:3c6ae8008e2c2eedd141725c30b20d9c36b026eb796688f88205845ef17aa213
+    image: busybox:1.38.0-musl@sha256:32b5cdad7cce41dfd53d0ae06baebcf8357a147ee7694dc706911c373bc30c37
     restart: on-failure
     command:
       - /bin/sh

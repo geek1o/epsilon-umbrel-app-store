@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-pocket-id
 category: networking
 name: Pocket ID
-version: "2.14.0"
+version: "2.16.0"
 tagline: Passkey authentication for your self-hosted services
 icon: https://raw.githubusercontent.com/pocket-id/pocket-id/v2.14.0/frontend/static/img/static-logo-rounded-512.png
 description: >-
