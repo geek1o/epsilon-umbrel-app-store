@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-n8n-assistant
 category: automation
 name: n8n Assistant Sandbox
-version: "1.4.0-1"
+version: "1.4.0-2"
 tagline: Self-hosted sandbox and web search for the n8n Assistant
 icon: https://raw.githubusercontent.com/n8n-io/n8n/master/packages/@n8n/mcp-browser-extension/icons/icon-128.png
 description: >-

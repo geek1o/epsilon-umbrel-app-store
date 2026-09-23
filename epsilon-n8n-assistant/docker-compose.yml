@@ -75,7 +75,7 @@ services:
       SANDBOX_RUNNER_CONTROL_GRPC_LISTEN_ADDR: ':9091'
       SANDBOX_RUNNER_CONTROL_GRPC_ADVERTISE_ADDR: sandbox-runner-1:9091
       SANDBOX_RUNNER_ID: runner-1
-      SANDBOX_RUNNER_DOCKER_SANDBOX_IMAGE: ghcr.io/n8n-io/n8n-sandbox-service-sandbox:1.3.4@sha256:634b2c28f03db91803cc8d0b0a03bbf75f9d5d09b531277ecd5c82877ef7ae5d
+      SANDBOX_RUNNER_DOCKER_SANDBOX_IMAGE: ghcr.io/n8n-io/n8n-sandbox-service-sandbox:1.4.0@sha256:78be9ecdbf644add3f6fb3b5a5b7d889ee533f74ea6b435c0144a1ff1b867883
       SANDBOX_RUNNER_REGISTRATION_TOKEN: 3a5ecae8c24580fee12c5d08289330cf5808af50606dedee
       SANDBOX_RUNNER_API_KEYS: 6d9e6667ce85e484f0b967d2ace97fb7d9c821e03fbd2756
       SANDBOX_RUNNER_REGISTRATION_GRPC_CA_FILE: /tls/runner/ca.crt
@@ -90,7 +90,7 @@ services:
     # Never expose this container's ports — it runs privileged Docker-in-Docker.
 
   searxng:
-    image: ghcr.io/searxng/searxng:latest@sha256:1ef964f6dcc811a60e01049717b6e526b25a1c52935350143f04e0ae291b3dbd
+    image: ghcr.io/searxng/searxng:latest@sha256:f6f67c89efdac7b1bd4805703764ecaa9d0777b86a101b86cae4f1563de4d627
     restart: on-failure
     depends_on:
       - searxng-init
@@ -101,7 +101,7 @@ services:
     # Internal-only: n8n reaches it by its Umbrel main-network name.
 
   searxng-init:
-    image: busybox:1.38.0-musl@sha256:32b5cdad7cce41dfd53d0ae06baebcf8357a147ee7694dc706911c373bc30c37
+    image: busybox:1.38.0-musl@sha256:5475de08c557c2c25ffd4a9444e0a1b630e708903792b6c90f6565ef5d0d8c8f
     restart: "no"
     volumes:
       - ${APP_DATA_DIR}/searxng:/data
@@ -113,7 +113,7 @@ services:
         '    - html' '    - json' > /data/settings.yml
 
   web:
-    image: busybox:1.38.0-musl@sha256:32b5cdad7cce41dfd53d0ae06baebcf8357a147ee7694dc706911c373bc30c37
+    image: busybox:1.38.0-musl@sha256:5475de08c557c2c25ffd4a9444e0a1b630e708903792b6c90f6565ef5d0d8c8f
     restart: on-failure
     command:
       - /bin/sh
