@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-aliasarr
 category: media
 name: Aliasarr
-version: "3.4.3"
+version: "3.5.0"
 tagline: Manage movies, TV series, and anime
 icon: https://raw.githubusercontent.com/geek1o/epsilon-umbrel-app-store/main/epsilon-aliasarr/logo.svg
 description: >-

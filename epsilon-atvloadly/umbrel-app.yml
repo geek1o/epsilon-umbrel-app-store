@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-atvloadly
 category: developer
 name: atvloadly
-version: "0.4.10"
+version: "0.5.0"
 tagline: Sideload and refresh apps on Apple TV
 icon: https://raw.githubusercontent.com/bitxeno/atvloadly/v0.4.10/doc/preview/logo.png
 description: >-
