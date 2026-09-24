@@ -1,7 +1,7 @@
 manifestVersion: 1
 id: epsilon-hermes-webui
 name: Hermes WebUI
-version: "0.52.116"
+version: "0.52.117"
 tagline: Browser interface for the Hermes Agent already on your Umbrel
 icon: https://raw.githubusercontent.com/nesquena/hermes-webui/master/static/favicon-512.png
 category: ai
@@ -24,8 +24,8 @@ description: >-
   others) keep running in the Hermes Agent app; cron-style scheduled jobs are
   visible and manually runnable from the WebUI Tasks panel.
 releaseNotes: >-
-  0.52.116: bind the Hermes home via UMBREL_ROOT (the /Apps/... virtual path is
-  not visible to dockerd). Agent features (run_agent) now work.
+  0.52.117: allow the agent source editable install (HERMES_NIX_BUILD=1
+  documented bypass for the wheel-build guard); agent deps install on start.
 developer: nesquena
 website: https://github.com/nesquena/hermes-webui
 dependencies:

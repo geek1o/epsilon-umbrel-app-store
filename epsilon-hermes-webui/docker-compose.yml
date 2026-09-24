@@ -24,6 +24,11 @@ services:
       # WebUI state (sessions DB, webui settings) lives inside the shared
       # Hermes home, next to the agent's own state.
       HERMES_WEBUI_STATE_DIR: /home/hermeswebui/.hermes/webui
+      # hermes-agent's setup.py forbids wheel/sdist builds (installer-only);
+      # the WebUI init does an editable `uv pip install -e` of the agent source
+      # in build isolation, which still goes through setup.py. HERMES_NIX_BUILD=1
+      # is the documented bypass (nix/python.nix uses the same flag).
+      HERMES_NIX_BUILD: "1"
       # umbrelOS app proxy is the auth boundary; WebUI password auth stays off.
       HERMES_WEBUI_PASSWORD: ""
     volumes:
