@@ -368,7 +368,7 @@ services:
 
   api:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-api:v1@sha256:bf07d114c1877a275a503dd6f5b0d5346730ddac1ac7feafdb297fe680c356df
+    image: ghcr.io/fluxerapp/fluxer-api:v1@sha256:95a9d4d680b33ccad9d666eebd06712e27eeed32f2052d8f1de60a7ac6412eb1
     deploy:
       resources:
         limits:
@@ -405,7 +405,7 @@ services:
 
   worker:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-api:v1@sha256:bf07d114c1877a275a503dd6f5b0d5346730ddac1ac7feafdb297fe680c356df
+    image: ghcr.io/fluxerapp/fluxer-api:v1@sha256:95a9d4d680b33ccad9d666eebd06712e27eeed32f2052d8f1de60a7ac6412eb1
     deploy:
       resources:
         limits:
@@ -438,7 +438,7 @@ services:
 
   gateway:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-gateway:v1@sha256:15bd69c6e9b7290a59e0ced9d51569c15d75598616852168a78068e344586a29
+    image: ghcr.io/fluxerapp/fluxer-gateway:v1@sha256:66910e3b1f0953fab40dbd2356fadec2a8bf2d3b2a15aea73556e79e6318397b
     deploy:
       resources:
         limits:
@@ -488,7 +488,7 @@ services:
 
   push:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-push:v1@sha256:d640aacceb70e628708c15bb3e3e4593c9d239993895083b37d5f6f504dc9cbf
+    image: ghcr.io/fluxerapp/fluxer-push:v1@sha256:605a9ebd00112a4d91dccc1d812f4103a9c38ef33b5df960c98b58e148a6a7e7
     deploy:
       resources:
         limits:
@@ -525,7 +525,7 @@ services:
 
   app-proxy:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-app-proxy-self-hosted:v1@sha256:df80730703ab62e4b942032504c3699a2451c8c099ec9de6d8e3093771587a9f
+    image: ghcr.io/fluxerapp/fluxer-app-proxy-self-hosted:v1@sha256:25cc5b387c1cebcd51359f9161777cca8cfccfd434ea48fe04fb8d83ea21fc4b
     deploy:
       resources:
         limits:
@@ -726,7 +726,7 @@ services:
 
   admin:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-admin:v1@sha256:6d884e7e75fb9759e63a561a0a4491cfd9951e5590af5fe6da820a5e3ef11b9b
+    image: ghcr.io/fluxerapp/fluxer-admin:v1@sha256:02d4b73307a33a5e57634839e3c686a5322721314b912dfdb8019766b06cc5ad
     deploy:
       resources:
         limits:

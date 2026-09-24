@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-lampac
 category: media
 name: Lampac
-version: "1.59.2"
+version: "1.59.4"
 tagline: Media aggregator server for the Lampa client
 icon: https://raw.githubusercontent.com/lampac-nextgen/lampac/main/docs/assets/logo-mark.png
 description: >-

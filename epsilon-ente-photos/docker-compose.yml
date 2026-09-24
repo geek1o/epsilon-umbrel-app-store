@@ -57,7 +57,7 @@ services:
       ENTE_JWT_SECRET: ${APP_ENTE_JWT_SECRET}
 
   web:
-    image: ghcr.io/ente/web:b940993aef44643614d3463e9963328a63264ec0@sha256:bf3c9c22b37e49598153127a0c9cfcbd7198a1ee7ae84e2f89c7821dc31d4816
+    image: ghcr.io/ente/web:1a623f325ad9b6ba68e23c1298eb6cf4486f27c8@sha256:200a1d33e369459662177ec601f8b267e088f4966f7124562aa81cd0528cea52
     restart: on-failure
     depends_on:
       - museum
@@ -67,7 +67,7 @@ services:
       ENTE_API_ORIGIN: http://${DEVICE_DOMAIN_NAME}:38080
 
   postgres:
-    image: postgres:15.19@sha256:dfbbb0ad8cab91d41e99123664e37a9b25d0413426d4fb3154e4d668e5d35246
+    image: postgres:15.19@sha256:724292da1f2e50bdccfc3302ce75bbba7f4a6076701b588cc795fcac65683550
     restart: on-failure
     stop_grace_period: 1m
     environment:
