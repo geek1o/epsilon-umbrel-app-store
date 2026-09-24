@@ -29,11 +29,13 @@ services:
     volumes:
       # Same persistent Hermes home as the official hermes-agent app.
       # The official hermes-agent app ships no exports.sh, so umbrelOS never
-      # defines APP_HERMES_AGENT_DATA_DIR — docker compose would silently mount
-      # an empty path. Fall back to the default (non-relocated) data root; the
-      # agent home is <data-root>/hermes (see official compose: APP_DATA_DIR/data/hermes).
-      # Only append /hermes: the root already includes the /data component.
-      - ${APP_HERMES_AGENT_DATA_DIR:-/Apps/hermes-agent/data}/hermes:/home/hermeswebui/.hermes
+      # defines APP_HERMES_AGENT_DATA_DIR. The /Apps/... paths are virtual and
+      # NOT visible to dockerd — bind mounts must use the real root. umbreld
+      # exports UMBREL_ROOT to compose interpolation; the agent home is
+      # <UMBREL_ROOT>/app-data/hermes-agent/data/hermes (its compose mounts
+      # APP_DATA_DIR/data/hermes to /opt/data). Falls back only if the agent
+      # data root is relocated (then re-point this path).
+      - ${UMBREL_ROOT}/app-data/hermes-agent/data/hermes:/home/hermeswebui/.hermes
       # Browsable workspace offered to the WebUI file panel.
       - ${APP_DATA_DIR}/data/workspace:/workspace
       - /etc/localtime:/etc/localtime:ro
