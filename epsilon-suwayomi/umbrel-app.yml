@@ -4,7 +4,7 @@ name: Suwayomi
 tagline: Read manga - self-hosted server for Mihon/Tachiyomi extensions
 icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/suwayomi.svg
 category: media
-version: "2.3.2361"
+version: "2.3.2363"
 port: 4567
 description: >-
   Suwayomi is a free and open-source manga server that brings Mihon/Tachiyomi
