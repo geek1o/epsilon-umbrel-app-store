@@ -1,7 +1,7 @@
 manifestVersion: 1
 id: epsilon-hermes-webui
 name: Hermes WebUI
-version: "0.52.114"
+version: "0.52.115"
 tagline: Browser interface for the Hermes Agent already on your Umbrel
 icon: https://raw.githubusercontent.com/nesquena/hermes-webui/master/static/favicon-512.png
 category: ai
@@ -24,8 +24,9 @@ description: >-
   others) keep running in the Hermes Agent app; cron-style scheduled jobs are
   visible and manually runnable from the WebUI Tasks panel.
 releaseNotes: >-
-  0.52.114: fix Hermes home mount (APP_HERMES_AGENT_DATA_DIR already includes
-  the data root); agent source now discovered, run_agent import works.
+  0.52.115: fix Hermes home mount — umbrelOS does not export data-dir variables
+  for dependencies without exports.sh, so fall back to the default data root.
+  Agent source (run_agent) is now discovered and agent features work.
 developer: nesquena
 website: https://github.com/nesquena/hermes-webui
 dependencies:
