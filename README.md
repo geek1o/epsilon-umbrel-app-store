@@ -42,6 +42,7 @@ trusting their upstream developers.
 | [Zerobyte](epsilon-zerobyte) | Files | Encrypted restic backup automation with schedules, retention, notifications, and mirror sync for local and remote volumes. | [nicotsx/zerobyte](https://github.com/nicotsx/zerobyte) |
 | [Pocket ID](epsilon-pocket-id) | Networking | Passkey-only OpenID Connect provider with a local trusted-HTTPS setup powered by Caddy. | [pocket-id/pocket-id](https://github.com/pocket-id/pocket-id) |
 | [Suwayomi](epsilon-suwayomi) | Media | Browser-based manga server and reader compatible with Mihon/Tachiyomi extensions. | [Suwayomi/Suwayomi-Server](https://github.com/Suwayomi/Suwayomi-Server) |
+| [Hermes WebUI](epsilon-hermes-webui) | AI | Browser interface for Hermes Agent with streaming chat, sessions, workspace browsing, and tasks; connects to the official Hermes Agent app data. | [nesquena/hermes-webui](https://github.com/nesquena/hermes-webui) |
 
 Some applications need extra first-run steps or access to shared Umbrel storage.
 Read the full description in the App Store before installation. Ente Photos also

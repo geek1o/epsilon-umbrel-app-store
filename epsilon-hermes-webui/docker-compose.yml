@@ -1,0 +1,34 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: epsilon-hermes-webui_web_1
+      APP_PORT: 8787
+
+  web:
+    image: ghcr.io/nesquena/hermes-webui:0.52.113@sha256:48ba6ee4a837079955c00e997b751065cc0324ae6eaa0f2fec592c8f4b2a746e
+    restart: on-failure
+    stop_grace_period: 1m
+    environment:
+      # Match the Hermes Agent app sandbox user so both containers can read
+      # and write the shared Hermes home without ownership churn.
+      WANTED_UID: "1000"
+      WANTED_GID: "1000"
+      HERMES_WEBUI_HOST: 0.0.0.0
+      HERMES_WEBUI_PORT: "8787"
+      # The Hermes home is owned and actively used by the Hermes Agent app.
+      # Skip the WebUI's startup permission fixer so it never chmods files
+      # that the agent container manages.
+      HERMES_SKIP_CHMOD: "1"
+      # WebUI state (sessions DB, webui settings) lives inside the shared
+      # Hermes home, next to the agent's own state.
+      HERMES_WEBUI_STATE_DIR: /home/hermeswebui/.hermes/webui
+      # umbrelOS app proxy is the auth boundary; WebUI password auth stays off.
+      HERMES_WEBUI_PASSWORD: ""
+    volumes:
+      # Same persistent Hermes home as the official hermes-agent app.
+      - ${APP_HERMES_AGENT_DATA_DIR}/data/hermes:/home/hermeswebui/.hermes
+      # Browsable workspace offered to the WebUI file panel.
+      - ${APP_DATA_DIR}/data/workspace:/workspace
+      - /etc/localtime:/etc/localtime:ro
