@@ -1,0 +1,41 @@
+manifestVersion: 1
+id: epsilon-hermes-webui
+name: Hermes WebUI
+version: "0.52.113"
+tagline: Browser interface for the Hermes Agent already on your Umbrel
+icon: https://raw.githubusercontent.com/nesquena/hermes-webui/master/static/favicon-512.png
+category: ai
+port: 8787
+description: >-
+  Hermes WebUI is a lightweight, dark-themed web app for Hermes Agent with near
+  1:1 parity with the CLI: streaming chat, session management, workspace file
+  browsing, model/profile controls, tasks, and mobile support. No build step,
+  just Python and vanilla JS.
+
+
+  This package connects to the Hermes Agent app installed from the official
+  Umbrel store. It mounts the same Hermes home directory, so the WebUI uses the
+  existing configuration, providers, sessions, memory, and skills - no
+  additional model or provider setup is needed. Authentication is handled by
+  the umbrelOS app proxy.
+
+
+  The WebUI runs the agent in-process. Messaging integrations (Telegram and
+  others) keep running in the Hermes Agent app; cron-style scheduled jobs are
+  visible and manually runnable from the WebUI Tasks panel.
+releaseNotes: >-
+  Initial release of Hermes WebUI 0.52.113 in the Epsilon store.
+developer: nesquena
+website: https://github.com/nesquena/hermes-webui
+dependencies:
+  - hermes-agent
+repo: https://github.com/nesquena/hermes-webui
+support: https://github.com/nesquena/hermes-webui/issues
+gallery:
+  - https://raw.githubusercontent.com/nesquena/hermes-webui/master/docs/images/ui-sessions.png
+  - https://raw.githubusercontent.com/nesquena/hermes-webui/master/docs/images/ui-workspace.png
+path: "/"
+defaultUsername: ""
+defaultPassword: ""
+submitter: GeekIO
+submission: https://github.com/geek1o/epsilon-umbrel-app-store
