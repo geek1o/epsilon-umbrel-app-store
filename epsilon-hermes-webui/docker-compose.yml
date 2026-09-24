@@ -28,7 +28,10 @@ services:
       HERMES_WEBUI_PASSWORD: ""
     volumes:
       # Same persistent Hermes home as the official hermes-agent app.
-      - ${APP_HERMES_AGENT_DATA_DIR}/data/hermes:/home/hermeswebui/.hermes
+      # APP_HERMES_AGENT_DATA_DIR already points at the dependency's data root
+      # (/Apps/hermes-agent/data), so only append /hermes — a doubled /data would
+      # resolve to a nonexistent path and Docker silently mounts an empty dir.
+      - ${APP_HERMES_AGENT_DATA_DIR}/hermes:/home/hermeswebui/.hermes
       # Browsable workspace offered to the WebUI file panel.
       - ${APP_DATA_DIR}/data/workspace:/workspace
       - /etc/localtime:/etc/localtime:ro
