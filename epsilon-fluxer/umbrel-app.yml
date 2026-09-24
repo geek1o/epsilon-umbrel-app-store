@@ -1,0 +1,46 @@
+manifestVersion: 1
+id: epsilon-fluxer
+category: social
+name: Fluxer
+version: "2026.09.24"
+tagline: Self-hosted chat, communities, and voice
+icon: https://raw.githubusercontent.com/fluxerapp/fluxer/main/fluxer_static/web/android-chrome-512x512.png
+description: >-
+  Fluxer is a self-hosted real-time chat platform for communities, teams, and
+  friends. It provides persistent text channels, direct messages, file and
+  media uploads, search, moderation tools, web push notifications, passkeys,
+  and voice rooms.
+
+
+  This package runs the complete Fluxer self-hosted stack with PostgreSQL,
+  Valkey, NATS, Meilisearch, SeaweedFS, LiveKit, the Fluxer API services, and
+  the web edge. Persistent data and generated secrets are kept in the Umbrel
+  app data directory. Back up that directory before moving or reinstalling the
+  app.
+
+
+  Fluxer must be opened through the Umbrel HTTPS address shown by the app.
+  Passkeys and browser notifications depend on that origin. Voice requires
+  TCP port 37881 and UDP port 37882 to be reachable from clients; text chat
+  and uploads use the normal Umbrel app proxy.
+releaseNotes: >-
+  Initial Fluxer package based on the upstream self-hosting stack at
+  fluxerapp/fluxer commit dcd5f09.
+
+developer: Fluxer contributors
+website: https://fluxer.app
+dependencies: []
+repo: https://github.com/fluxerapp/fluxer
+support: https://github.com/fluxerapp/fluxer/issues
+
+port: 8080
+gallery:
+  - https://raw.githubusercontent.com/fluxerapp/fluxer/main/fluxer_static/marketing/screenshots/desktop-1920w.png
+  - https://raw.githubusercontent.com/fluxerapp/fluxer/main/fluxer_static/marketing/screenshots/desktop-readme-1920w.png
+path: ""
+
+defaultUsername: ""
+defaultPassword: ""
+
+submitter: GeekIO
+submission: https://github.com/geek1o/epsilon-umbrel-app-store
