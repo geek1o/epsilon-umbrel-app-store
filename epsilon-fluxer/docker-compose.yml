@@ -368,7 +368,7 @@ services:
 
   api:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-api:v1@sha256:95a9d4d680b33ccad9d666eebd06712e27eeed32f2052d8f1de60a7ac6412eb1
+    image: ghcr.io/fluxerapp/fluxer-api:v1@sha256:be1ecb53be37e6dab532cb6950ca885613565ca33bb304d6bae96cc5de133755
     deploy:
       resources:
         limits:
@@ -405,7 +405,7 @@ services:
 
   worker:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-api:v1@sha256:95a9d4d680b33ccad9d666eebd06712e27eeed32f2052d8f1de60a7ac6412eb1
+    image: ghcr.io/fluxerapp/fluxer-api:v1@sha256:be1ecb53be37e6dab532cb6950ca885613565ca33bb304d6bae96cc5de133755
     deploy:
       resources:
         limits:
@@ -525,7 +525,7 @@ services:
 
   app-proxy:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-app-proxy-self-hosted:v1@sha256:25cc5b387c1cebcd51359f9161777cca8cfccfd434ea48fe04fb8d83ea21fc4b
+    image: ghcr.io/fluxerapp/fluxer-app-proxy-self-hosted:v1@sha256:3b1386b9d1dfcc55ad8b5515c773cd6d0fe30c3d952dd974f568f6e246039e91
     deploy:
       resources:
         limits:
