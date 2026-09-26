@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-n8n-assistant
 category: automation
 name: n8n Assistant Sandbox
-version: "1.4.0-2"
+version: "1.5.0-1"
 tagline: Self-hosted sandbox and web search for the n8n Assistant
 icon: https://raw.githubusercontent.com/n8n-io/n8n/master/packages/@n8n/mcp-browser-extension/icons/icon-128.png
 description: >-
@@ -28,10 +28,8 @@ description: >-
   adding a model API key (Anthropic, OpenAI or OpenRouter) in the n8n editor's
   AI settings.
 releaseNotes: >-
-  Fixes the status web page startup by avoiding a file mount that Umbrel
-  materializes as a directory. The n8n Assistant sandbox provider remains on
-  sandbox service 1.3.4, the release paired with current n8n stable by the
-  official get-n8n.sh installer.
+  Updates the n8n Assistant sandbox stack to 1.5.0 and refreshes the bundled
+  SearXNG image.
 
 developer: n8n
 website: https://docs.n8n.io/deploy/host-n8n/configure-n8n/set-up-n8n-assistant/

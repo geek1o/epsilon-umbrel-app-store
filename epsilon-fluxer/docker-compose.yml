@@ -159,7 +159,7 @@ services:
       admin: {condition: service_started}
 
   postgres:
-    image: postgres:16-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea
+    image: postgres:16.15-alpine@sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea
     deploy:
       resources:
         limits:
@@ -206,7 +206,7 @@ services:
       retries: 10
 
   valkey:
-    image: valkey/valkey:9.1-alpine@sha256:48332870af354a799964c0012ae1194a0bf2bf894eb508f945810596dc2d8d11
+    image: valkey/valkey:9.1.2-alpine@sha256:48332870af354a799964c0012ae1194a0bf2bf894eb508f945810596dc2d8d11
     deploy:
       resources:
         limits:
@@ -368,7 +368,7 @@ services:
 
   api:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-api:v1@sha256:be1ecb53be37e6dab532cb6950ca885613565ca33bb304d6bae96cc5de133755
+    image: ghcr.io/fluxerapp/fluxer-api:2026.925.203739@sha256:b3019ed3ad243e1ebdbf620d0ee91b550130806826a7145d3c88452bc3dad1d0
     deploy:
       resources:
         limits:
@@ -405,7 +405,7 @@ services:
 
   worker:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-api:v1@sha256:be1ecb53be37e6dab532cb6950ca885613565ca33bb304d6bae96cc5de133755
+    image: ghcr.io/fluxerapp/fluxer-api:2026.925.203739@sha256:b3019ed3ad243e1ebdbf620d0ee91b550130806826a7145d3c88452bc3dad1d0
     deploy:
       resources:
         limits:
@@ -438,7 +438,7 @@ services:
 
   gateway:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-gateway:v1@sha256:66910e3b1f0953fab40dbd2356fadec2a8bf2d3b2a15aea73556e79e6318397b
+    image: ghcr.io/fluxerapp/fluxer-gateway:2026.924.151247@sha256:66910e3b1f0953fab40dbd2356fadec2a8bf2d3b2a15aea73556e79e6318397b
     deploy:
       resources:
         limits:
@@ -466,7 +466,7 @@ services:
 
   media-proxy:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-media-proxy:v1@sha256:740e236db7ad9efd9cc1213ba769d6d8e9e24a079975a1cb431539d58fceba5c
+    image: ghcr.io/fluxerapp/fluxer-media-proxy:2026.918.140053@sha256:740e236db7ad9efd9cc1213ba769d6d8e9e24a079975a1cb431539d58fceba5c
     deploy:
       resources:
         limits:
@@ -488,7 +488,7 @@ services:
 
   push:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-push:v1@sha256:605a9ebd00112a4d91dccc1d812f4103a9c38ef33b5df960c98b58e148a6a7e7
+    image: ghcr.io/fluxerapp/fluxer-push:2026.924.130703@sha256:605a9ebd00112a4d91dccc1d812f4103a9c38ef33b5df960c98b58e148a6a7e7
     deploy:
       resources:
         limits:
@@ -512,7 +512,7 @@ services:
 
   static-proxy:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-static:v1@sha256:a530a6bd70c5f8b618e0f93001913de5d0f5149f0fc07142979bb884d681d393
+    image: ghcr.io/fluxerapp/fluxer-static:2026.918.165027@sha256:a530a6bd70c5f8b618e0f93001913de5d0f5149f0fc07142979bb884d681d393
     deploy:
       resources:
         limits:
@@ -525,7 +525,7 @@ services:
 
   app-proxy:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-app-proxy-self-hosted:v1@sha256:3b1386b9d1dfcc55ad8b5515c773cd6d0fe30c3d952dd974f568f6e246039e91
+    image: ghcr.io/fluxerapp/fluxer-app-proxy-self-hosted:2026.925.203701@sha256:46cf0ea2831875d7a51aadd907b1f7e0859a54087a51c5924a5c2af52cb74851
     deploy:
       resources:
         limits:
@@ -557,7 +557,7 @@ services:
 
   snowflakes:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-snowflakes:v1@sha256:efea576af300039233652f3e01002327a484303f50cd53e9b0f5bbc58164c698
+    image: ghcr.io/fluxerapp/fluxer-snowflakes:2026.913.154309@sha256:efea576af300039233652f3e01002327a484303f50cd53e9b0f5bbc58164c698
     deploy:
       resources:
         limits:
@@ -572,7 +572,7 @@ services:
 
   snowflakes-shard:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-snowflakes:v1@sha256:efea576af300039233652f3e01002327a484303f50cd53e9b0f5bbc58164c698
+    image: ghcr.io/fluxerapp/fluxer-snowflakes:2026.913.154309@sha256:efea576af300039233652f3e01002327a484303f50cd53e9b0f5bbc58164c698
     deploy:
       resources:
         limits:
@@ -588,7 +588,7 @@ services:
 
   users:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-users:v1@sha256:be0c2ab6c3fb7852c97a41e49de10e20efc03e90aeabd49e97c97e3e0c05b7b6
+    image: ghcr.io/fluxerapp/fluxer-users:2026.913.154317@sha256:be0c2ab6c3fb7852c97a41e49de10e20efc03e90aeabd49e97c97e3e0c05b7b6
     deploy:
       resources:
         limits:
@@ -604,7 +604,7 @@ services:
 
   users-shard:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-users:v1@sha256:be0c2ab6c3fb7852c97a41e49de10e20efc03e90aeabd49e97c97e3e0c05b7b6
+    image: ghcr.io/fluxerapp/fluxer-users:2026.913.154317@sha256:be0c2ab6c3fb7852c97a41e49de10e20efc03e90aeabd49e97c97e3e0c05b7b6
     deploy:
       resources:
         limits:
@@ -623,7 +623,7 @@ services:
 
   gifs:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-gifs:v1@sha256:48202c8588a758d41e15f1c2adadd4816feeee1a7000b2f3a65f483e5dbdf111
+    image: ghcr.io/fluxerapp/fluxer-gifs:2026.913.154309@sha256:48202c8588a758d41e15f1c2adadd4816feeee1a7000b2f3a65f483e5dbdf111
     deploy:
       resources:
         limits:
@@ -639,7 +639,7 @@ services:
 
   gifs-shard:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-gifs:v1@sha256:48202c8588a758d41e15f1c2adadd4816feeee1a7000b2f3a65f483e5dbdf111
+    image: ghcr.io/fluxerapp/fluxer-gifs:2026.913.154309@sha256:48202c8588a758d41e15f1c2adadd4816feeee1a7000b2f3a65f483e5dbdf111
     deploy:
       resources:
         limits:
@@ -656,7 +656,7 @@ services:
 
   messages:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-messages:v1@sha256:b8cd7522e92ab7e3ac210477a773ed36d93f65f1f0272d6f9f0423bed5f0cd8d
+    image: ghcr.io/fluxerapp/fluxer-messages:2026.918.140044@sha256:b8cd7522e92ab7e3ac210477a773ed36d93f65f1f0272d6f9f0423bed5f0cd8d
     deploy:
       resources:
         limits:
@@ -672,7 +672,7 @@ services:
 
   messages-shard:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-messages:v1@sha256:b8cd7522e92ab7e3ac210477a773ed36d93f65f1f0272d6f9f0423bed5f0cd8d
+    image: ghcr.io/fluxerapp/fluxer-messages:2026.918.140044@sha256:b8cd7522e92ab7e3ac210477a773ed36d93f65f1f0272d6f9f0423bed5f0cd8d
     deploy:
       resources:
         limits:
@@ -691,7 +691,7 @@ services:
 
   unfurl:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-unfurl:v1@sha256:9c71c9e9eef02461fc5918951225f27113687f7ffae20c677109143db4fd906f
+    image: ghcr.io/fluxerapp/fluxer-unfurl:2026.913.154247@sha256:9c71c9e9eef02461fc5918951225f27113687f7ffae20c677109143db4fd906f
     deploy:
       resources:
         limits:
@@ -708,7 +708,7 @@ services:
 
   unfurl-shard:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-unfurl:v1@sha256:9c71c9e9eef02461fc5918951225f27113687f7ffae20c677109143db4fd906f
+    image: ghcr.io/fluxerapp/fluxer-unfurl:2026.913.154247@sha256:9c71c9e9eef02461fc5918951225f27113687f7ffae20c677109143db4fd906f
     deploy:
       resources:
         limits:
@@ -726,7 +726,7 @@ services:
 
   admin:
     <<: *fluxer-service
-    image: ghcr.io/fluxerapp/fluxer-admin:v1@sha256:02d4b73307a33a5e57634839e3c686a5322721314b912dfdb8019766b06cc5ad
+    image: ghcr.io/fluxerapp/fluxer-admin:2026.925.203651@sha256:525a10530f348c70093483116e9a40f492e778877c51e25b58db54a95dde60b0
     deploy:
       resources:
         limits:

@@ -19,7 +19,7 @@ services:
       APP_PORT: 8080
 
   sandbox-certs:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.4.0@sha256:33d01f44779fba0bc49fa051818ac2f4054c68ead17862543b684ba6a7c3b693
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.5.0@sha256:bbc90f08a28a39609b170acc3a13978e6aee7fb7e85cafd37da15049386eef1c
     restart: on-failure
     user: '0:0'
     entrypoint: ['sh', '-c']
@@ -34,7 +34,7 @@ services:
       - ${APP_DATA_DIR}/tls:/tls
 
   sandbox-api:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.4.0@sha256:33d01f44779fba0bc49fa051818ac2f4054c68ead17862543b684ba6a7c3b693
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.5.0@sha256:bbc90f08a28a39609b170acc3a13978e6aee7fb7e85cafd37da15049386eef1c
     restart: on-failure
     depends_on:
       - sandbox-certs
@@ -63,7 +63,7 @@ services:
     # n8n reaches this container by its Umbrel main-network name.
 
   sandbox-runner-1:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind:1.4.0@sha256:ccb9b68e70d845bf8ee87083e51732e8eb898558110c541751ea7995a66128ad
+    image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind:1.5.0@sha256:23b44cf6357c458840cc1275683848ad85be4a53291b724cd04e1ac65321ead9
     # Required by the upstream n8n sandbox design: Docker-in-Docker.
     privileged: true
     restart: on-failure
@@ -75,7 +75,7 @@ services:
       SANDBOX_RUNNER_CONTROL_GRPC_LISTEN_ADDR: ':9091'
       SANDBOX_RUNNER_CONTROL_GRPC_ADVERTISE_ADDR: sandbox-runner-1:9091
       SANDBOX_RUNNER_ID: runner-1
-      SANDBOX_RUNNER_DOCKER_SANDBOX_IMAGE: ghcr.io/n8n-io/n8n-sandbox-service-sandbox:1.4.0@sha256:78be9ecdbf644add3f6fb3b5a5b7d889ee533f74ea6b435c0144a1ff1b867883
+      SANDBOX_RUNNER_DOCKER_SANDBOX_IMAGE: ghcr.io/n8n-io/n8n-sandbox-service-sandbox:1.5.0@sha256:7cc16e21c87d44a6f944f37796b1e5576d8a2dab273349724929baad8f1888b7
       SANDBOX_RUNNER_REGISTRATION_TOKEN: 3a5ecae8c24580fee12c5d08289330cf5808af50606dedee
       SANDBOX_RUNNER_API_KEYS: 6d9e6667ce85e484f0b967d2ace97fb7d9c821e03fbd2756
       SANDBOX_RUNNER_REGISTRATION_GRPC_CA_FILE: /tls/runner/ca.crt
@@ -90,7 +90,7 @@ services:
     # Never expose this container's ports — it runs privileged Docker-in-Docker.
 
   searxng:
-    image: ghcr.io/searxng/searxng:latest@sha256:bcfaed4091d59f7ce85670bd701a2d0295872196dc19908a3965a8353b149f83
+    image: ghcr.io/searxng/searxng:2026.9.25-12f8b6515@sha256:5286edb35782454ab8a102c5eff6b54bff745853191b46aeead95f225aa6dfb6
     restart: on-failure
     depends_on:
       - searxng-init
