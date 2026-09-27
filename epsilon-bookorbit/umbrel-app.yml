@@ -1,0 +1,58 @@
+manifestVersion: 1
+id: epsilon-bookorbit
+category: files
+name: BookOrbit
+version: "3.1.0"
+tagline: Your self-hosted reading space
+icon: https://raw.githubusercontent.com/bookorbit/bookorbit/v3.1.0/docs/images/bookorbit-icon.png
+description: >-
+  BookOrbit is a self-hosted library and reading platform for ebooks, audiobooks,
+  comics, and PDFs. It includes browser-based readers and players, multi-user
+  libraries, metadata tools, reading analytics, OPDS access, and progress sync
+  with Kobo and KOReader.
+
+
+  This package includes BookOrbit and its PostgreSQL/pgvector database. Books are
+  stored in Umbrel's shared Downloads folder at /downloads/books and appear inside
+  BookOrbit as /books. Application data and the database remain in BookOrbit's own
+  persistent app-data directory.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  On first launch, create the administrator account. When BookOrbit asks for the
+  setup bootstrap token, copy the generated password shown by Umbrel for this app.
+  Create your first library below /books. The web interface and client APIs are
+  available at http://umbrel.local:3010; replace umbrel.local if your Umbrel uses a
+  different hostname.
+releaseNotes: >-
+  BookOrbit 3.1.0 adds dedicated ebook and audiobook covers, improves reader-setting
+  synchronization and read-along playback, automatically re-ranks formats after
+  imports, and includes fixes across authentication, metadata, scanning, search,
+  statistics, and the web reader.
+
+
+  Full release notes: https://github.com/bookorbit/bookorbit/releases/tag/v3.1.0
+
+developer: BookOrbit
+website: https://bookorbit.app
+dependencies: []
+repo: https://github.com/bookorbit/bookorbit
+support: https://github.com/bookorbit/bookorbit/issues
+
+port: 3010
+gallery:
+  - https://raw.githubusercontent.com/bookorbit/bookorbit-site/1d3964e90de2f3ee1e0b1ed03c4b403d5085f28c/public/images/home/dashboard-overview-1600.webp
+  - https://raw.githubusercontent.com/bookorbit/bookorbit-site/1d3964e90de2f3ee1e0b1ed03c4b403d5085f28c/public/images/home/book-details-2000.webp
+  - https://raw.githubusercontent.com/bookorbit/bookorbit-site/1d3964e90de2f3ee1e0b1ed03c4b403d5085f28c/public/images/home/ebook-reader-2000.webp
+  - https://raw.githubusercontent.com/bookorbit/bookorbit-site/1d3964e90de2f3ee1e0b1ed03c4b403d5085f28c/public/images/home/audiobook-player-2000.webp
+path: ""
+
+defaultUsername: ""
+deterministicPassword: true
+
+permissions:
+  - STORAGE_DOWNLOADS
+submitter: GeekIO
+submission: https://github.com/geek1o/epsilon-umbrel-app-store

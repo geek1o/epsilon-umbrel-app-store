@@ -1,0 +1,74 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    depends_on:
+      - server
+    environment:
+      APP_HOST: epsilon-bookorbit_server_1
+      APP_PORT: 3000
+      # BookOrbit provides its own authentication and exposes APIs used by
+      # native clients, Kobo, KOReader, and OPDS readers.
+      PROXY_AUTH_ADD: "false"
+
+  server:
+    image: ghcr.io/bookorbit/bookorbit:3.1.0@sha256:78b6eac18306eb7eba0dbf6592ecdee01b15f24de9a941cb853db4a0232d7999
+    restart: on-failure
+    init: true
+    stop_grace_period: 30s
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: bookorbit
+      POSTGRES_PASSWORD: ${APP_BOOKORBIT_DB_PASSWORD}
+      POSTGRES_DB: bookorbit
+      JWT_SECRET: ${APP_BOOKORBIT_JWT_SECRET}
+      PODCAST_ENCRYPTION_KEY: ${APP_BOOKORBIT_PODCAST_ENCRYPTION_KEY}
+      SETUP_BOOTSTRAP_TOKEN: ${APP_PASSWORD}
+      EMAIL_ENCRYPTION_KEY: ${APP_BOOKORBIT_EMAIL_ENCRYPTION_KEY}
+      MIGRATION_ENCRYPTION_KEY: ${APP_BOOKORBIT_MIGRATION_ENCRYPTION_KEY}
+      BOOK_REQUEST_ENCRYPTION_KEY: ${APP_BOOKORBIT_REQUEST_ENCRYPTION_KEY}
+      APP_URL: http://${DEVICE_DOMAIN_NAME}:3010
+      CLIENT_URL: http://${DEVICE_DOMAIN_NAME}:3010
+      TZ: Europe/Moscow
+      PUID: "1000"
+      PGID: "1000"
+      LIBRARY_BROWSE_ROOT: /books
+    volumes:
+      - ${APP_DATA_DIR}/data/app:/data
+      - ${UMBREL_ROOT}/data/storage/downloads/books:/books
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+      - SETGID
+      - SETUID
+    security_opt:
+      - no-new-privileges:true
+  postgres:
+    image: pgvector/pgvector:pg18@sha256:2ba9ca5f2e7daa0f0e7723cba1ee9167bab54efd3640516a44ac1a928dd67e7a
+    restart: on-failure
+    stop_grace_period: 1m
+    environment:
+      POSTGRES_USER: bookorbit
+      POSTGRES_PASSWORD: ${APP_BOOKORBIT_DB_PASSWORD}
+      POSTGRES_DB: bookorbit
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - ${APP_DATA_DIR}/data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -q -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
