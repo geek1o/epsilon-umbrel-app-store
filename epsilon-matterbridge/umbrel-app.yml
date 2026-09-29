@@ -1,0 +1,35 @@
+manifestVersion: 1
+id: epsilon-matterbridge
+name: Matterbridge
+version: "3.10.11"
+tagline: Matter bridge and plugin manager for your smart home
+icon: https://raw.githubusercontent.com/Luligu/matterbridge/main/apps/frontend/public/matterbridge.svg
+category: networking
+port: 8283
+description: >-
+  Matterbridge is a self-hosted Matter bridge and plugin manager. It lets you
+  expose devices from supported smart-home systems and plugins to Matter
+  controllers such as Apple Home, Google Home, Home Assistant, Alexa, and
+  SmartThings while keeping the bridge on your Umbrel.
+
+
+  The package uses the upstream Docker image and stores plugins, configuration,
+  certificates, and Matter fabric data in this app's persistent data directory.
+  It uses the host network because Matter commissioning and mDNS discovery must
+  be available on your local network. After installation, open the web interface
+  to install plugins and commission the bridge with your Matter controller.
+releaseNotes: >-
+  Initial Epsilon package for Matterbridge 3.10.11.
+
+developer: Luligu
+website: https://matterbridge.io
+dependencies: []
+repo: https://github.com/Luligu/matterbridge
+support: https://github.com/Luligu/matterbridge/issues
+gallery:
+  - https://raw.githubusercontent.com/Luligu/matterbridge/main/docs/screenshots/Screenshot%20Matterbridge%20Logger%20Debug.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+submitter: GeekIO
+submission: https://github.com/geek1o/epsilon-umbrel-app-store
