@@ -1,22 +1,14 @@
 version: "3.7"
 
 services:
-  app_proxy:
-    depends_on:
-      - matterbridge
-    environment:
-      # Matterbridge requires host networking for Matter and mDNS. Reach its
-      # frontend through Docker's host gateway from Umbrel's proxy network.
-      APP_HOST: host.docker.internal
-      APP_PORT: 8283
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-
   matterbridge:
     image: luligu/matterbridge:latest@sha256:e278cf685f91d6953fb74ed13b7013b514d1417975cf1846599c780bcf551420
+    # Matter commissioning and mDNS require direct host networking. umbrelOS
+    # LAN ingress serves the manifest port itself; do not add app_proxy here.
     network_mode: host
     restart: on-failure
     stop_grace_period: 1m
+    command: ["matterbridge", "--docker", "--frontend", "8283"]
     volumes:
       - ${APP_DATA_DIR}/data/plugins:/root/Matterbridge
       - ${APP_DATA_DIR}/data/storage:/root/.matterbridge

@@ -1,7 +1,7 @@
 manifestVersion: 1
 id: epsilon-matterbridge
 name: Matterbridge
-version: "3.10.11"
+version: "3.10.11-1"
 tagline: Matter bridge and plugin manager for your smart home
 icon: https://raw.githubusercontent.com/Luligu/matterbridge/main/apps/frontend/public/matterbridge.svg
 category: networking
@@ -19,7 +19,9 @@ description: >-
   be available on your local network. After installation, open the web interface
   to install plugins and commission the bridge with your Matter controller.
 releaseNotes: >-
-  Initial Epsilon package for Matterbridge 3.10.11.
+  3.10.11-1: use Umbrel's native LAN ingress for the host-networked frontend.
+  The app opens at http://umbrel.local:8283; the package no longer uses an
+  app_proxy target that resolves only from inside Docker.
 
 developer: Luligu
 website: https://matterbridge.io

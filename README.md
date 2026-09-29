@@ -43,6 +43,7 @@ trusting their upstream developers.
 | [Pocket ID](epsilon-pocket-id) | Networking | Passkey-only OpenID Connect provider with a local trusted-HTTPS setup powered by Caddy. | [pocket-id/pocket-id](https://github.com/pocket-id/pocket-id) |
 | [Suwayomi](epsilon-suwayomi) | Media | Browser-based manga server and reader compatible with Mihon/Tachiyomi extensions. | [Suwayomi/Suwayomi-Server](https://github.com/Suwayomi/Suwayomi-Server) |
 | [Hermes WebUI](epsilon-hermes-webui) | AI | Browser interface for Hermes Agent with streaming chat, sessions, workspace browsing, and tasks; connects to the official Hermes Agent app data. | [nesquena/hermes-webui](https://github.com/nesquena/hermes-webui) |
+| [Home Assistant Matter Hub](epsilon-home-assistant-matter-hub) | Automation | Exposes selected Home Assistant devices to Matter controllers with a bridge configuration interface. | [RiDDiX/home-assistant-matter-hub](https://github.com/RiDDiX/home-assistant-matter-hub) |
 | [Matterbridge](epsilon-matterbridge) | Networking | Self-hosted Matter bridge and plugin manager for exposing supported smart-home devices to Matter controllers. | [Luligu/matterbridge](https://github.com/Luligu/matterbridge) |
 
 Some applications need extra first-run steps or access to shared Umbrel storage.

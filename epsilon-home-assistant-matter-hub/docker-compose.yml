@@ -1,0 +1,16 @@
+version: "3.7"
+
+services:
+  home-assistant-matter-hub:
+    image: ghcr.io/riddix/home-assistant-matter-hub:2.0.57@sha256:3f63aca9cd94162c0736859b43949e95d164d2d47dbd1239574738e583c77661
+    # Matter uses host networking for mDNS, IPv6, and commissioning. Umbrel
+    # LAN ingress serves the manifest port directly, without app_proxy.
+    network_mode: host
+    restart: on-failure
+    stop_grace_period: 1m
+    environment:
+      HAMH_HOME_ASSISTANT_URL: http://${DEVICE_DOMAIN_NAME}:8123
+      HAMH_HTTP_PORT: "8482"
+      HAMH_LOG_LEVEL: info
+    volumes:
+      - ${APP_DATA_DIR}/data:/data

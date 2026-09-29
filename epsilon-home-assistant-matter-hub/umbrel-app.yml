@@ -1,0 +1,44 @@
+manifestVersion: 1
+id: epsilon-home-assistant-matter-hub
+name: Home Assistant Matter Hub
+version: "2.0.57"
+tagline: Expose Home Assistant devices to Matter controllers
+icon: https://raw.githubusercontent.com/RiDDiX/home-assistant-matter-hub/main/packages/frontend/public/hamh-logo.svg
+category: automation
+port: 8482
+description: >-
+  Home Assistant Matter Hub publishes selected Home Assistant devices to Matter
+  controllers such as Apple Home, Google Home, Alexa, Aqara Home, and
+  SmartThings. It provides a web interface for creating bridges, choosing
+  entities, and commissioning them with Matter controllers.
+
+
+  Matter commissioning, IPv6, and mDNS discovery require host networking. This
+  package uses Umbrel's native LAN ingress and stores all bridge configuration,
+  Matter fabrics, and backups in its own persistent app-data directory.
+
+
+  🛠️ SETUP INSTRUCTIONS
+
+
+  Before starting, create a Long-Lived Access Token in your Home Assistant user
+  profile. In Umbrel open this app's Settings → Environment and add
+  HAMH_HOME_ASSISTANT_ACCESS_TOKEN with that token. If Home Assistant is not on
+  this Umbrel, also set HAMH_HOME_ASSISTANT_URL to its HTTP URL, for example
+  http://homeassistant.local:8123. The default URL points to Home Assistant on
+  this Umbrel at http://umbrel.local:8123.
+releaseNotes: >-
+  Initial Epsilon package for Home Assistant Matter Hub 2.0.57.
+
+developer: RiDDiX
+website: https://riddix.github.io/home-assistant-matter-hub
+repo: https://github.com/RiDDiX/home-assistant-matter-hub
+support: https://github.com/RiDDiX/home-assistant-matter-hub/issues
+dependencies: []
+gallery:
+  - https://raw.githubusercontent.com/RiDDiX/home-assistant-matter-hub/main/docs-site/static/img/hamh-logo-large.png
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+submitter: GeekIO
+submission: https://github.com/geek1o/epsilon-umbrel-app-store
