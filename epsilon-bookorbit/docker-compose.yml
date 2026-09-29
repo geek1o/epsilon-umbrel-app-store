@@ -59,6 +59,24 @@ services:
     image: pgvector/pgvector:pg18@sha256:2ba9ca5f2e7daa0f0e7723cba1ee9167bab54efd3640516a44ac1a928dd67e7a
     restart: on-failure
     stop_grace_period: 1m
+    # PostgreSQL applies POSTGRES_PASSWORD only when it creates a cluster. Keep
+    # the role password synchronized on every boot so a regenerated Umbrel
+    # environment cannot strand an existing database with stale credentials.
+    entrypoint: ["/bin/sh", "-ec"]
+    command: |
+      docker-entrypoint.sh postgres &
+      postgres_pid="$!"
+      trap 'kill -TERM "$postgres_pid" 2>/dev/null || true; wait "$postgres_pid"; exit 0' TERM INT
+      until pg_isready -q -U "$POSTGRES_USER" -d "$POSTGRES_DB"; do
+        if ! kill -0 "$postgres_pid" 2>/dev/null; then
+          wait "$postgres_pid"
+        fi
+        sleep 1
+      done
+      psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB" \
+        -v db_password="$POSTGRES_PASSWORD" \
+        -c "ALTER ROLE bookorbit PASSWORD :'db_password';"
+      wait "$postgres_pid"
     environment:
       POSTGRES_USER: bookorbit
       POSTGRES_PASSWORD: ${APP_BOOKORBIT_DB_PASSWORD}
