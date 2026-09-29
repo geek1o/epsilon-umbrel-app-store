@@ -73,10 +73,9 @@ services:
         fi
         sleep 1
       done
-      # APP_BOOKORBIT_DB_PASSWORD is a derive_entropy SHA-256 hexadecimal value,
-      # so it is safe to embed in this SQL string without further escaping.
       psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" -d "$POSTGRES_DB" \
-        -c "ALTER ROLE bookorbit PASSWORD '$POSTGRES_PASSWORD';"
+        -v db_password="$POSTGRES_PASSWORD" \
+        -c "ALTER ROLE bookorbit PASSWORD :'db_password';"
       wait "$postgres_pid"
     environment:
       POSTGRES_USER: bookorbit
