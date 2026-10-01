@@ -2,9 +2,9 @@ manifestVersion: 1
 id: epsilon-bookorbit
 category: files
 name: BookOrbit
-version: "3.1.0"
+version: "3.2.0"
 tagline: Your self-hosted reading space
-icon: https://raw.githubusercontent.com/bookorbit/bookorbit/v3.1.0/docs/images/bookorbit-icon.png
+icon: https://raw.githubusercontent.com/bookorbit/bookorbit/v3.2.0/docs/images/bookorbit-icon.png
 description: >-
   BookOrbit is a self-hosted library and reading platform for ebooks, audiobooks,
   comics, and PDFs. It includes browser-based readers and players, multi-user
@@ -27,13 +27,11 @@ description: >-
   available at http://umbrel.local:3010; replace umbrel.local if your Umbrel uses a
   different hostname.
 releaseNotes: >-
-  BookOrbit 3.1.0 adds dedicated ebook and audiobook covers, improves reader-setting
-  synchronization and read-along playback, automatically re-ranks formats after
-  imports, and includes fixes across authentication, metadata, scanning, search,
-  statistics, and the web reader.
+  BookOrbit 3.2.0 adds an iPad experience, simplifies library management, and
+  improves metadata comparison, media covers, account settings, and reliability.
 
 
-  Full release notes: https://github.com/bookorbit/bookorbit/releases/tag/v3.1.0
+  Full release notes: https://github.com/bookorbit/bookorbit/releases/tag/v3.2.0
 
 developer: BookOrbit
 website: https://bookorbit.app
