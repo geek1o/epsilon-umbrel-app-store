@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-lampac
 category: media
 name: Lampac
-version: "1.68.0"
+version: "1.68.1"
 tagline: Media aggregator server for the Lampa client
 icon: https://raw.githubusercontent.com/lampac-nextgen/lampac/main/docs/assets/logo-mark.png
 description: >-
@@ -33,7 +33,7 @@ description: >-
   ExternalBind); enable them by their manifest.json as described in the
   project documentation.
 releaseNotes: >-
-  Lampac NextGen 1.68.0 updates the DatabaseEditor schema and interface, including user merging.
+  Lampac NextGen 1.68.1 keeps the DLNA list position when leaving the player.
 developer: Lampac NextGen
 website: https://lampac.dev
 dependencies: []
