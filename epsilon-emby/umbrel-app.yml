@@ -3,9 +3,9 @@ id: epsilon-emby
 name: Emby
 tagline: A personal media server
 category: media
-version: "4.10.0.40"
+version: "4.10.0.40-ui.1"
 icon: https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/emby.svg
-port: 8096
+port: 8098
 description: >-
   Emby turns your Umbrel into a private home media server for movies, TV shows,
   music, photos and personal videos. It scans your files into a polished library,
@@ -31,7 +31,8 @@ gallery:
   - https://raw.githubusercontent.com/getumbrel/umbrel-apps-gallery/master/emby/1.jpg
   - https://raw.githubusercontent.com/getumbrel/umbrel-apps-gallery/master/emby/2.jpg
   - https://raw.githubusercontent.com/getumbrel/umbrel-apps-gallery/master/emby/3.jpg
-releaseNotes: ""
+releaseNotes: >-
+  Change the external Emby port from 8096 to 8098. The internal server port remains 8096.
 dependencies: []
 path: ""
 defaultUsername: ""

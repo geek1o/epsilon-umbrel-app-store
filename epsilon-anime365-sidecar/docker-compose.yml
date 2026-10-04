@@ -16,7 +16,7 @@ services:
       CONFIG_PATH: /config/.env
       LIBRARY_PATH: /library
       DEFAULT_EMBY_BASE_URL: http://epsilon-emby_server_1:8096/emby
-      DEFAULT_EMBY_PUBLIC_BASE_URL: http://${DEVICE_DOMAIN_NAME}:8096
+      DEFAULT_EMBY_PUBLIC_BASE_URL: http://${DEVICE_DOMAIN_NAME}:8098
     volumes:
       - ${APP_DATA_DIR}/web:/app:ro
       - ${APP_DATA_DIR}/data/config:/config
