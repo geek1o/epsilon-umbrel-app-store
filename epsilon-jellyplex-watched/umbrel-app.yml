@@ -1,0 +1,40 @@
+manifestVersion: 1
+id: epsilon-jellyplex-watched
+name: JellyPlex-Watched
+category: media
+version: "8.5.3-ui.1"
+tagline: Keep your watched history in sync across media servers
+icon: https://raw.githubusercontent.com/geek1o/epsilon-umbrel-app-store/main/epsilon-jellyplex-watched/web/static/logo.svg
+port: 8370
+description: >-
+  JellyPlex-Watched syncs watched status and playback progress between Plex, Jellyfin, and Emby. It matches movies and episodes using filenames and provider IDs, and supports multiple servers of each type.
+
+
+  This Umbrel package adds a Russian-language web panel to the official stable container. Add servers and API tokens, test connectivity, choose sync directions, map user and library names, and set filters and a schedule. Start a run manually or follow its progress in the redacted log. Settings apply to the next run without restarting the app.
+
+
+  First-run defaults keep the schedule disabled and dry-run enabled. Add at least two servers, check access, save the configuration, and run a dry-run to inspect the proposed changes. When the results match your expectations, turn off dry-run and enable the schedule.
+
+
+  For Jellyfin and Emby, create an administrator API key in the server dashboard. For Plex, use an administrator X-Plex-Token. Servers may run on the same Umbrel or elsewhere on your network. No specific media server app is required. Do not use localhost as the address of another server.
+
+
+  For Emby from Epsilon, use http://epsilon-emby_server_1:8096/emby internally, or port 8098 when connecting through the Umbrel host address. Sync directions apply to all servers of the selected types, including same-type syncing when multiple servers are configured.
+
+
+  Umbrel login protects the panel. Tokens are stored in the app data directory with restricted permissions and are not returned to the browser after saving. This package does not need access to media files or the Docker socket. Matching depends on consistent metadata and filenames; review the dry-run before enabling writes.
+developer: luigi311
+website: https://github.com/luigi311/JellyPlex-Watched
+repo: https://github.com/luigi311/JellyPlex-Watched
+support: https://github.com/geek1o/epsilon-umbrel-app-store/issues
+gallery:
+  - https://raw.githubusercontent.com/geek1o/epsilon-umbrel-app-store/main/epsilon-jellyplex-watched/preview.png
+releaseNotes: >-
+  Package the official stable JellyPlex-Watched 8.5.3 multi-platform image with a configuration panel. Includes connection checks, multiple servers, sync directions, user and library mappings, filters, dry-run, scheduled and manual runs, and redacted logs. Upstream 8.5.3 fixes partial-only TV shows being re-synced on every run.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+permissions: []
+submitter: GeekIO
+submission: https://github.com/geek1o/epsilon-umbrel-app-store

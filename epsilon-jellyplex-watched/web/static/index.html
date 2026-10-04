@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JellyPlex · Синхронизация просмотров</title><link rel="icon" href="/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/app.css"><script src="/app.js" defer></script></head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" href="/"><img src="/logo.svg" alt="" width="42" height="42"><span>JellyPlex<small>WATCHED / EPSILON</small></span></a>
+    <div class="sidebar-intro">Одна история просмотров.<br>На всех твоих серверах.</div>
+    <nav aria-label="Разделы панели">
+      <button class="nav-item active" data-tab="servers" aria-selected="true"><span>01</span> Серверы</button>
+      <button class="nav-item" data-tab="sync" aria-selected="false"><span>02</span> Синхронизация</button>
+      <button class="nav-item" data-tab="filters" aria-selected="false"><span>03</span> Пользователи и библиотеки</button>
+      <button class="nav-item" data-tab="logs" aria-selected="false"><span>04</span> Журнал</button>
+    </nav>
+    <div class="sidebar-bottom"><span class="small-label">ПРИЛОЖЕНИЕ</span><p>JellyPlex-Watched <span id="version">8.5.3</span></p><a href="https://github.com/luigi311/JellyPlex-Watched" target="_blank" rel="noreferrer">Исходный проект ↗</a></div>
+  </aside>
+  <main>
+    <header class="topbar"><span class="crumb">МЕДИАТЕКА <span>/</span> ИСТОРИЯ ПРОСМОТРОВ</span><span class="status-chip" id="status-chip">Загрузка…</span></header>
+    <section class="hero"><div><p class="eyebrow">PLEX · JELLYFIN · EMBY</p><h1>Продолжай с того же места.</h1><p class="lede">Объедини просмотренное и прогресс воспроизведения.<br>Добавь серверы, выбери направления — остальное по расписанию.</p></div><div class="hero-symbol" aria-hidden="true">↔</div></section>
+    <section class="metrics" aria-label="Состояние синхронизации">
+      <div><span class="small-label">СЕРВЕРЫ</span><strong id="server-count">0 <small>подключено</small></strong></div>
+      <div><span class="small-label">РЕЖИМ</span><strong id="mode-label">Проверка <small>без изменений</small></strong></div>
+      <div><span class="small-label">ПОСЛЕДНИЙ ЗАПУСК</span><strong id="last-run">Ещё не было</strong></div>
+      <div><span class="small-label">СЛЕДУЮЩИЙ ЗАПУСК</span><strong id="next-run">Расписание выключено</strong></div>
+    </section>
+    <div id="message" class="notice" role="status" hidden></div>
+    <form id="settings-form" autocomplete="off">
+      <section class="tab-panel" id="tab-servers">
+        <div class="section-heading"><div><h2>Твои серверы</h2><p>Для синхронизации нужны хотя бы два сервера. Можно добавить несколько серверов одного типа.</p></div><button type="button" class="button secondary" id="add-server">＋ Добавить сервер</button></div>
+        <div id="servers" class="server-list"></div>
+        <div class="empty-state" id="empty-state"><div class="empty-symbol">↔</div><h3>Начни с двух серверов</h3><p>Добавь Plex, Jellyfin или Emby и укажи API-токен.<br>Проверь доступ перед первым запуском.</p><button type="button" class="button primary" id="add-first">Добавить первый сервер</button></div>
+        <div class="help-card"><strong>Где взять токен</strong><p><b>Jellyfin / Emby:</b> Панель управления → Дополнительно → API-ключи. Создай ключ для JellyPlex-Watched.</p><p><b>Plex:</b> используй <a href="https://support.plex.tv/articles/204059436-finding-an-authentication-token-x-plex-token/" target="_blank" rel="noreferrer">X-Plex-Token администратора ↗</a>.</p><p>Для Emby из магазина Epsilon можно использовать внутренний адрес <code>http://epsilon-emby_server_1:8096/emby</code>. При доступе по IP Umbrel внешний порт Emby — <code>8098</code>. Для Plex и Jellyfin укажи адрес, доступный из приложения, а не localhost.</p></div>
+      </section>
+      <section class="tab-panel" id="tab-sync" hidden>
+        <div class="section-heading"><div><h2>Как синхронизировать</h2><p>Изменения настроек применяются со следующего запуска. Текущий запуск завершится со своими настройками.</p></div></div>
+        <div class="settings-grid">
+          <article class="panel"><h3>Режим и расписание</h3>
+            <label class="toggle-row"><span><b>Проверка без изменений</b><small>Показывать в журнале, что будет синхронизировано, без записи на серверы.</small></span><input type="checkbox" name="dryrun" checked></label>
+            <label class="toggle-row"><span><b>Автоматические запуски</b><small>Начать после сохранения, затем повторять с выбранным интервалом. При выключении текущий запуск завершится.</small></span><input type="checkbox" name="enabled"></label>
+            <label class="field">Интервал, секунд<input type="number" name="interval" min="60" max="604800" value="3600" required><small>3600 секунд = 1 час. От 60 секунд до 7 дней.</small></label>
+          </article>
+          <article class="panel"><h3>Направления</h3><p class="hint">Строка — источник, столбец — получатель. Направление действует на все серверы выбранного типа. Для обмена в обе стороны включи оба направления.</p><div id="directions"></div></article>
+        </div>
+        <details class="panel advanced"><summary>Дополнительные параметры</summary><div class="advanced-content">
+          <div class="settings-grid"><label class="field">Тайм-аут запросов, секунд<input name="request_timeout" type="number" min="5" max="1800" required></label><label class="field">Потоки обработки<input name="max_threads" type="number" min="1" max="16" required></label><label class="field">Уровень журнала<select name="debug_level"><option>INFO</option><option>DEBUG</option><option>TRACE</option></select></label></div>
+          <label class="toggle-row"><span><b>Сопоставлять по ID провайдеров</b><small>IMDb, TMDb и другим идентификаторам. Подходит для разных файлов одного фильма.</small></span><input name="generate_guids" type="checkbox" checked></label>
+          <label class="toggle-row"><span><b>Сопоставлять по именам файлов</b><small>Подходит, когда серверы используют одни и те же медиафайлы.</small></span><input name="generate_locations" type="checkbox" checked></label>
+          <label class="toggle-row"><span><b>Не проверять имя узла в сертификате Plex</b><small>Для Plex, когда сертификат выдан на другое имя. Доверие к сертификату всё равно проверяется.</small></span><input name="ssl_bypass" type="checkbox"></label>
+        </div></details>
+      </section>
+      <section class="tab-panel" id="tab-filters" hidden>
+        <div class="section-heading"><div><h2>Пользователи и библиотеки</h2><p>Без фильтров участвуют все совпадающие пользователи и библиотеки. Настрой соответствия, если имена различаются.</p></div></div>
+        <div class="settings-grid"><article class="panel"><h3>Имена пользователей</h3><p class="hint">JSON из пар имён. Например: {"alice": "Алиса"}. Соответствие работает в обе стороны.</p><label class="field">Сопоставления<textarea name="user_mapping" rows="5" spellcheck="false" placeholder='{"alice": "Алиса"}'>{}</textarea></label></article><article class="panel"><h3>Названия библиотек</h3><p class="hint">JSON из пар названий. Например: {"Movies": "Фильмы"}. Не добавляй одно имя в несколько пар.</p><label class="field">Сопоставления<textarea name="library_mapping" rows="5" spellcheck="false" placeholder='{"Movies": "Фильмы"}'>{}</textarea></label></article></div>
+        <article class="panel filter-panel"><h3>Кто участвует в синхронизации</h3><p class="hint">Перечисли имена через запятую. Пустой разрешающий список означает «все». Запреты и сопоставления обрабатывает JellyPlex-Watched.</p><div class="settings-grid"><label class="field">Только пользователи<input name="whitelist_users" placeholder="alice, bob"></label><label class="field">Исключить пользователей<input name="blacklist_users" placeholder="guest"></label><label class="field">Только библиотеки<input name="whitelist_library" placeholder="Movies, Shows"></label><label class="field">Исключить библиотеки<input name="blacklist_library" placeholder="Home videos"></label><label class="field">Только типы библиотек<input name="whitelist_library_type" placeholder="movie, show, movies, tvshows"><small>Plex: movie, show · Jellyfin/Emby: movies, tvshows</small></label><label class="field">Исключить типы библиотек<input name="blacklist_library_type" placeholder="movies"></label></div></article>
+      </section>
+      <section class="tab-panel" id="tab-logs" hidden>
+        <div class="section-heading"><div><h2>Журнал запусков</h2><p>Последние 300 строк. Токены скрываются перед сохранением журнала.</p></div><button type="button" class="button secondary" id="refresh-logs">Обновить</button></div>
+        <pre class="log-view" id="log-output" tabindex="0">Запусков пока не было.</pre>
+      </section>
+      <footer class="actions"><div><span class="dirty-dot" id="dirty-dot" hidden></span><span id="save-status">Настройки ещё не изменены</span></div><div class="action-buttons"><button type="button" class="button secondary" id="run-now">Запустить сейчас</button><button type="submit" class="button primary" id="save">Сохранить настройки</button></div></footer>
+    </form>
+    <p class="footnote">Настройки и токены хранятся в данных приложения. Доступ к панели защищён входом в Umbrel.</p>
+  </main>
+</div>
+<template id="server-template"><article class="server-card">
+  <div class="server-head"><span class="server-number">СЕРВЕР</span><span class="server-kind">PLEX</span><button type="button" class="remove-server" aria-label="Удалить сервер">Удалить</button></div>
+  <div class="server-fields"><label class="field">Тип<select data-field="kind"><option value="plex">Plex</option><option value="jellyfin">Jellyfin</option><option value="emby">Emby</option></select></label><label class="field">Название<input data-field="name" maxlength="100" placeholder="Основной сервер"></label><label class="field url-field">Адрес сервера<input data-field="url" type="url" required placeholder="http://192.168.1.10:32400" spellcheck="false"></label><label class="field token-field">API-токен<input data-field="token" type="password" autocomplete="new-password" placeholder="Введите токен" spellcheck="false"><small class="token-hint">Токен никогда не возвращается в браузер после сохранения.</small></label></div>
+  <div class="server-footer"><span class="test-result" role="status">Подключение ещё не проверено</span><button type="button" class="button secondary test-server">Проверить подключение</button></div>
+</article></template>
+</body></html>

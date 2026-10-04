@@ -1,0 +1,39 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: epsilon-jellyplex-watched_server_1
+      APP_PORT: 8080
+
+  server:
+    image: ghcr.io/luigi311/jellyplex-watched:8.5.3@sha256:e23a0d3dc686e4bbc9eeb655aeb96a2a1352bd2a26297ec77e06ef6f8eb2d5e1
+    restart: on-failure
+    user: "1000:1000"
+    command: ["python", "-u", "/umbrel-ui/app.py"]
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    stop_grace_period: 30s
+    environment:
+      TZ: Europe/Moscow
+      PORT: "8080"
+      JPW_DATA_DIR: /data
+      JPW_UPSTREAM_DIR: /app
+      JPW_RUNTIME_DIR: /tmp/jellyplex-watched
+      LOG_FILE: /tmp/jellyplex-watched/entrypoint.log
+      MARK_FILE: /tmp/jellyplex-watched/entrypoint-mark.log
+      PYTHONDONTWRITEBYTECODE: "1"
+    tmpfs:
+      - /tmp:uid=1000,gid=1000,mode=1777,size=64m
+    volumes:
+      - ${APP_DATA_DIR}/web:/umbrel-ui:ro
+      - ${APP_DATA_DIR}/data:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
