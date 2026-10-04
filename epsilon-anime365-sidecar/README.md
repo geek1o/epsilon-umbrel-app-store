@@ -1,10 +1,21 @@
 # Anime365 Sidecar on Umbrel
 
 This package runs the official
-[Anime365 Sidecar](https://github.com/flaksp/anime365-sidecar) image unchanged
+[Anime365 Sidecar](https://github.com/flaksp/anime365-sidecar) beta image unchanged
 and adds a separate, lightweight web container for configuration and status.
 The two containers share only the generated `.env` file and the Anime365 media
 directory.
+
+## Release channel
+
+Use the official `beta` image published by the upstream
+[Release Beta workflow](https://github.com/flaksp/anime365-sidecar/actions/workflows/release_beta.yaml)
+from `main`. Keep this package on the beta channel during image updates.
+The image is pinned by its multi-platform digest, so new upstream beta builds
+require a store update before they reach installed apps.
+
+Current build: September 30, 2026, upstream commit
+[`2610d2f`](https://github.com/flaksp/anime365-sidecar/commit/2610d2fb98d1e454e3236033b127097cade825a3).
 
 ## Requirements
 

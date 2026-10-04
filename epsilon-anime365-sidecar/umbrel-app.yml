@@ -2,14 +2,14 @@ manifestVersion: 1
 id: epsilon-anime365-sidecar
 category: media
 name: Anime365 Sidecar
-version: "0.13.1-ui.2"
+version: "2026.09.30-beta.2610d2f-ui.2"
 tagline: Download your Anime 365 list into Emby
 icon: https://smotret-anime.app/apple-touch-icon.png?v=pgrAWgkp53
 description: >-
   Anime365 Sidecar connects an Anime 365 account to Emby. It follows selected Anime 365 lists, downloads episodes and metadata into a shared Emby library, and marks episodes watched in Emby as watched on Anime 365.
 
 
-  This Umbrel package keeps the official sidecar container unchanged and adds a separate browser-based configuration panel. The panel stores the upstream environment variables, checks Anime 365 reachability and Emby API access, and reports statistics from the generated library manifest.
+  This Umbrel package uses the official beta sidecar container unchanged and adds a separate browser-based configuration panel. The panel stores the upstream environment variables, checks Anime 365 reachability and Emby API access, and reports statistics from the generated library manifest.
 
 
   ⚠️ An Anime 365 account with an active premium subscription is required. The upstream project is under active development and may change between releases. Downloaded media can require substantial storage space.
@@ -23,7 +23,7 @@ description: >-
 
   Umbrel authentication protects the configuration panel. Secrets are stored in the app data directory with restricted file permissions and are never returned to the browser after saving. The media library is stored in Umbrel's shared downloads directory so Emby can access it.
 releaseNotes: >-
-  Fix translation downloads by creating the writable temporary directory required by Anime365 Sidecar.
+  Switch to the official beta channel, pinned to the successful September 30, 2026 build from upstream commit 2610d2f. This build includes the latest fixes for the Anime 365 active-episode check. The configuration panel and storage paths remain unchanged.
 
 developer: flaksp
 website: https://github.com/flaksp/anime365-sidecar
