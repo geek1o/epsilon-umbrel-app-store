@@ -1,7 +1,7 @@
 manifestVersion: 1
 id: epsilon-home-assistant-matter-hub
 name: Home Assistant Matter Hub
-version: "2.0.57"
+version: "2.0.58"
 tagline: Expose Home Assistant devices to Matter controllers
 icon: https://raw.githubusercontent.com/RiDDiX/home-assistant-matter-hub/main/packages/frontend/public/hamh-logo.svg
 category: automation
@@ -28,7 +28,9 @@ description: >-
   http://homeassistant.local:8123. The default URL points to Home Assistant on
   this Umbrel at http://umbrel.local:8123.
 releaseNotes: >-
-  Initial Epsilon package for Home Assistant Matter Hub 2.0.57.
+  Updates Home Assistant Matter Hub to 2.0.58, including upstream fixes for
+  restoring entity state after failed calls and for backup pruning and archive
+  validation.
 
 developer: RiDDiX
 website: https://riddix.github.io/home-assistant-matter-hub

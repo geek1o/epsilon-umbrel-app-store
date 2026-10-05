@@ -2,9 +2,9 @@ manifestVersion: 1
 id: epsilon-atvloadly
 category: developer
 name: atvloadly
-version: "0.6.0"
+version: "0.6.1"
 tagline: Sideload and refresh apps on Apple TV
-icon: https://raw.githubusercontent.com/bitxeno/atvloadly/v0.6.0/doc/preview/logo.png
+icon: https://raw.githubusercontent.com/bitxeno/atvloadly/v0.6.1/doc/preview/logo.png
 description: >-
   atvloadly is a web-based tool for pairing with Apple TV, sideloading IPA files, and automatically refreshing installed apps before their signatures expire. This release supports Apple TV devices running tvOS 17.4 or later.
 
@@ -29,8 +29,8 @@ support: https://github.com/bitxeno/atvloadly/issues
 
 port: 5533
 gallery:
-  - https://raw.githubusercontent.com/bitxeno/atvloadly/v0.6.0/doc/preview/home_en.png
-  - https://raw.githubusercontent.com/bitxeno/atvloadly/v0.6.0/doc/preview/install_en.png
+  - https://raw.githubusercontent.com/bitxeno/atvloadly/v0.6.1/doc/preview/home_en.png
+  - https://raw.githubusercontent.com/bitxeno/atvloadly/v0.6.1/doc/preview/install_en.png
 path: ""
 
 defaultUsername: ""

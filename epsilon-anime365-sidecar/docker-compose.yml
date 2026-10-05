@@ -29,7 +29,7 @@ services:
       start_period: 10s
 
   sidecar:
-    image: ghcr.io/flaksp/anime365-sidecar:beta@sha256:9dab7915ad5874bf56b0b61c5eafd1e4709d548d6909b86ac0d8e6425c614fa6
+    image: ghcr.io/flaksp/anime365-sidecar:beta@sha256:de9b387a981bcf4d92de3dc1fd5ea73de472d9d14dfdcd9846db282702182b91
     restart: on-failure
     user: "1000:1000"
     working_dir: /config

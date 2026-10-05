@@ -14,8 +14,8 @@ from `main`. Keep this package on the beta channel during image updates.
 The image is pinned by its multi-platform digest, so new upstream beta builds
 require a store update before they reach installed apps.
 
-Current build: September 30, 2026, upstream commit
-[`2610d2f`](https://github.com/flaksp/anime365-sidecar/commit/2610d2fb98d1e454e3236033b127097cade825a3).
+Current build: October 4, 2026, upstream commit
+[`7889011`](https://github.com/flaksp/anime365-sidecar/commit/7889011f4b59e15caf5ab48f7c6af61b4e460b73).
 
 ## Requirements
 
