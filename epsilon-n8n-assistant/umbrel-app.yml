@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-n8n-assistant
 category: automation
 name: n8n Assistant Sandbox
-version: "1.5.0-1"
+version: "1.6.0-1"
 tagline: Self-hosted sandbox and web search for the n8n Assistant
 icon: https://raw.githubusercontent.com/n8n-io/n8n/master/packages/@n8n/mcp-browser-extension/icons/icon-128.png
 description: >-
@@ -28,7 +28,7 @@ description: >-
   adding a model API key (Anthropic, OpenAI or OpenRouter) in the n8n editor's
   AI settings.
 releaseNotes: >-
-  Updates the n8n Assistant sandbox stack to 1.5.0 and refreshes the bundled
+  Updates the n8n Assistant sandbox stack to 1.6.0 and refreshes the bundled
   SearXNG image.
 
 developer: n8n

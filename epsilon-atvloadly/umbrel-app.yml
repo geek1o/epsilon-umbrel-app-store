@@ -2,9 +2,9 @@ manifestVersion: 1
 id: epsilon-atvloadly
 category: developer
 name: atvloadly
-version: "0.6.1"
+version: "0.6.2"
 tagline: Sideload and refresh apps on Apple TV
-icon: https://raw.githubusercontent.com/bitxeno/atvloadly/v0.6.1/doc/preview/logo.png
+icon: https://raw.githubusercontent.com/bitxeno/atvloadly/v0.6.2/doc/preview/logo.png
 description: >-
   atvloadly is a web-based tool for pairing with Apple TV, sideloading IPA files, and automatically refreshing installed apps before their signatures expire. This release supports Apple TV devices running tvOS 17.4 or later.
 
@@ -19,7 +19,9 @@ description: >-
 
 
   Umbrel authentication protects the web interface. Device discovery requires access to the host system D-Bus and Avahi sockets, and upstream requires unconfined seccomp. This package does not enable privileged mode, host networking, or Docker socket access.
-releaseNotes: ""
+releaseNotes: >-
+  Isolates Apple ID staging directories, prevents deleting apps during install,
+  improves Telegram error handling, and removes a deprecated TTY route.
 
 developer: bitxeno
 website: https://github.com/bitxeno/atvloadly
@@ -29,8 +31,8 @@ support: https://github.com/bitxeno/atvloadly/issues
 
 port: 5533
 gallery:
-  - https://raw.githubusercontent.com/bitxeno/atvloadly/v0.6.1/doc/preview/home_en.png
-  - https://raw.githubusercontent.com/bitxeno/atvloadly/v0.6.1/doc/preview/install_en.png
+  - https://raw.githubusercontent.com/bitxeno/atvloadly/v0.6.2/doc/preview/home_en.png
+  - https://raw.githubusercontent.com/bitxeno/atvloadly/v0.6.2/doc/preview/install_en.png
 path: ""
 
 defaultUsername: ""

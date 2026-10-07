@@ -26,7 +26,7 @@ services:
   # files once; it never overwrites them afterwards, so edits survive restarts
   # and updates.
   init:
-    image: ghcr.io/lampac-nextgen/lampac:1.68.1@sha256:e72f19091515292252b359d3d8f98a521ea9c2279fc97548dcbb65ec868dda5b
+    image: ghcr.io/lampac-nextgen/lampac:1.72.0@sha256:625efab38cf54cca73d118f9fdb79533250a28d621136c9a77aa4bf7cd54ee12
     entrypoint: ["/bin/sh", "-c"]
     user: "0:0"
     restart: "no"
@@ -56,7 +56,7 @@ services:
         echo "Lampac config ready"
 
   lampac:
-    image: ghcr.io/lampac-nextgen/lampac:1.68.1@sha256:e72f19091515292252b359d3d8f98a521ea9c2279fc97548dcbb65ec868dda5b
+    image: ghcr.io/lampac-nextgen/lampac:1.72.0@sha256:625efab38cf54cca73d118f9fdb79533250a28d621136c9a77aa4bf7cd54ee12
     restart: unless-stopped
     stop_grace_period: 30s
     # Chromium (Playwright) uses shared memory heavily; the 64 MB default is not
