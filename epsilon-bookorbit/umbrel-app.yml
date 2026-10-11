@@ -2,9 +2,9 @@ manifestVersion: 1
 id: epsilon-bookorbit
 category: files
 name: BookOrbit
-version: "3.2.0"
+version: "3.3.0"
 tagline: Your self-hosted reading space
-icon: https://raw.githubusercontent.com/bookorbit/bookorbit/v3.2.0/docs/images/bookorbit-icon.png
+icon: https://raw.githubusercontent.com/bookorbit/bookorbit/v3.3.0/docs/images/bookorbit-icon.png
 description: >-
   BookOrbit is a self-hosted library and reading platform for ebooks, audiobooks,
   comics, and PDFs. It includes browser-based readers and players, multi-user

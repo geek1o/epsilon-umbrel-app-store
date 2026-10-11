@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-lampac
 category: media
 name: Lampac
-version: "1.72.0"
+version: "1.81.0"
 tagline: Media aggregator server for the Lampa client
 icon: https://raw.githubusercontent.com/lampac-nextgen/lampac/main/docs/assets/logo-mark.png
 description: >-
@@ -33,7 +33,7 @@ description: >-
   ExternalBind); enable them by their manifest.json as described in the
   project documentation.
 releaseNotes: >-
-  Lampac NextGen 1.72.0 adds new VoKino balancers.
+  Lampac NextGen 1.81.0 adds the Aladin module and restores Alloha to its official state.
 developer: Lampac NextGen
 website: https://lampac.dev
 dependencies: []

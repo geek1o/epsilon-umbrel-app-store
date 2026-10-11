@@ -1,7 +1,7 @@
 manifestVersion: 1
 id: epsilon-playwright
 name: Playwright
-version: "0.0.82-4"
+version: "0.0.83"
 tagline: Remote browser automation with Playwright MCP
 icon: https://playwright.dev/img/playwright-logo.svg
 category: developer
@@ -20,10 +20,10 @@ description: >-
   Because the proxy forwards the public host name, the built-in host check is
   disabled, so the endpoint must never be published to the internet.
 releaseNotes: >-
-  Initial release of Playwright MCP 0.0.82 in the Epsilon store. Fixed the
-  "Access is only allowed at localhost:8931" error by allowing the host name
-  forwarded by Umbrel's reverse proxy and bypassing the proxy login for MCP
-  endpoints (/mcp, /sse).
+  Playwright MCP 0.0.83 improves browser dialogs, download process cleanup,
+  WebMCP tool binding, and Chromium 155+ support. The Epsilon package retains
+  its reverse proxy host handling and MCP endpoint configuration.
+
 developer: Microsoft
 website: https://playwright.dev
 dependencies: []
