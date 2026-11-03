@@ -7,7 +7,7 @@ services:
       APP_PORT: 4567
 
   server:
-    image: ghcr.io/suwayomi/suwayomi-server:preview@sha256:9397e89561c3d0d05bd8657b89808bb306f4a228ca3d055b81c471cee834af41
+    image: ghcr.io/suwayomi/suwayomi-server:preview@sha256:97e1a6d10fbd1217ffdf68aefa8610fd4be8a041488a1c674d14aea0fdeb5c45
     restart: on-failure
     stop_grace_period: 1m
     environment:
