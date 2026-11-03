@@ -33,23 +33,16 @@ trusting their upstream developers.
 | [Aliasarr](epsilon-aliasarr) | Media | Media manager for movies, series, and anime with multilingual titles, download automation, imports, and hardlink support. | [lQwestl/aliasarr](https://github.com/lQwestl/aliasarr) |
 | [Anime365 Sidecar](epsilon-anime365-sidecar) | Media | Anime 365 and Emby integration with automated episode downloads, metadata, watch-state sync, and a dedicated configuration panel. | [flaksp/anime365-sidecar](https://github.com/flaksp/anime365-sidecar) |
 | [atvloadly](epsilon-atvloadly) | Developer | Web interface for pairing with Apple TV, sideloading IPA files, and refreshing signed applications. | [bitxeno/atvloadly](https://github.com/bitxeno/atvloadly) |
-| [BookOrbit](epsilon-bookorbit) | Files | Self-hosted library and reading platform for ebooks, audiobooks, comics, and PDFs, with Kobo, KOReader, and OPDS support. | [bookorbit/bookorbit](https://github.com/bookorbit/bookorbit) |
 | [Emby](epsilon-emby) | Media | Personal media server for organising and streaming movies, TV shows, music, photos, and home videos. | [MediaBrowser/Emby](https://github.com/MediaBrowser/Emby) |
-| [Ente Photos](epsilon-ente-photos) | Files | End-to-end encrypted photo and video backup with self-hosted web apps, API, database, and object storage. | [ente/ente](https://github.com/ente/ente) |
-| [JellyPlex-Watched](epsilon-jellyplex-watched) | Media | Watched-state and playback-progress sync between Plex, Jellyfin, and Emby, with a configuration panel, connection checks, dry-run, and scheduler. | [luigi311/JellyPlex-Watched](https://github.com/luigi311/JellyPlex-Watched) |
-| [netboot.xyz](epsilon-netbootxyz) | Networking | Menu-based network boot environment for booting OS installers and live images over the network via iPXE, with a web menu editor and TFTP/HTTP menu hosting. | [netbootxyz/docker-netbootxyz](https://github.com/netbootxyz/docker-netbootxyz) |
 | [n8n](epsilon-n8n) | Automation | Epsilon-maintained n8n alternative with the official external task runner, n8n Assistant sandbox service, privileged sandbox runner, and bundled SearXNG JSON web search. Uses a separate `epsilon-n8n` app/data directory; back up existing official n8n data before migrating. | [n8n-io/n8n](https://github.com/n8n-io/n8n) |
 | [n8n Assistant Sandbox](epsilon-n8n-assistant) | Automation | Companion sandbox provider for the Epsilon n8n package, with the official n8n sandbox service and bundled SearXNG web search. For users who keep the official n8n app; the integrated `epsilon-n8n` package is recommended for new installs. | [n8n-io/n8n-sandbox-service](https://github.com/n8n-io/n8n-sandbox-service) |
 | [Newt](epsilon-newt) | Networking | Userspace WireGuard connector with Pangolin discovery for containers on the shared Umbrel network. | [fosrl/newt](https://github.com/fosrl/newt) |
-| [Pocket ID](epsilon-pocket-id) | Networking | Passkey-only OpenID Connect provider with a local trusted-HTTPS setup powered by Caddy. | [pocket-id/pocket-id](https://github.com/pocket-id/pocket-id) |
 | [Suwayomi](epsilon-suwayomi) | Media | Browser-based manga server and reader compatible with Mihon/Tachiyomi extensions. | [Suwayomi/Suwayomi-Server](https://github.com/Suwayomi/Suwayomi-Server) |
-| [Hermes WebUI](epsilon-hermes-webui) | AI | Browser interface for Hermes Agent with streaming chat, sessions, workspace browsing, and tasks; connects to the official Hermes Agent app data. | [nesquena/hermes-webui](https://github.com/nesquena/hermes-webui) |
 | [Home Assistant Matter Hub](epsilon-home-assistant-matter-hub) | Automation | Exposes selected Home Assistant devices to Matter controllers with a bridge configuration interface. | [RiDDiX/home-assistant-matter-hub](https://github.com/RiDDiX/home-assistant-matter-hub) |
 | [Matterbridge](epsilon-matterbridge) | Networking | Self-hosted Matter bridge and plugin manager for exposing supported smart-home devices to Matter controllers. | [Luligu/matterbridge](https://github.com/Luligu/matterbridge) |
 
 Some applications need extra first-run steps or access to shared Umbrel storage.
-Read the full description in the App Store before installation. Ente Photos also
-includes a dedicated [setup and backup guide](epsilon-ente-photos/README.md).
+Read the full description in the App Store before installation.
 
 ## Updates and compatibility
 
