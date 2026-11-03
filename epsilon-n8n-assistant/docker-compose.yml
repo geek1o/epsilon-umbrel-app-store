@@ -19,7 +19,7 @@ services:
       APP_PORT: 8080
 
   sandbox-certs:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.6.0@sha256:505bb8f367391b23c6e89a09df9476a03e67a2893817b1c69ff370dede846cf3
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.13.0@sha256:fc4912f9023ac46ec58fd6cc30d5dae8bddd3b4589cf8d5d6d58db7417a12385
     restart: on-failure
     user: '0:0'
     entrypoint: ['sh', '-c']
@@ -34,7 +34,7 @@ services:
       - ${APP_DATA_DIR}/tls:/tls
 
   sandbox-api:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.6.0@sha256:505bb8f367391b23c6e89a09df9476a03e67a2893817b1c69ff370dede846cf3
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.13.0@sha256:fc4912f9023ac46ec58fd6cc30d5dae8bddd3b4589cf8d5d6d58db7417a12385
     restart: on-failure
     depends_on:
       - sandbox-certs
@@ -63,7 +63,7 @@ services:
     # n8n reaches this container by its Umbrel main-network name.
 
   sandbox-runner-1:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind:1.6.0@sha256:9187a67466dc4e58c5b085b4da6e8c9818608646b6d846275e96024a29651fd9
+    image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind:1.13.0@sha256:c3f06048fe1df2a0eb879fc8391dea2bcb068a63b99e9156ff32ed932df39ee0
     # Required by the upstream n8n sandbox design: Docker-in-Docker.
     privileged: true
     restart: on-failure

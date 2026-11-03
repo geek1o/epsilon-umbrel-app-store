@@ -7,7 +7,7 @@ services:
       APP_PORT: 8787
 
   web:
-    image: ghcr.io/nesquena/hermes-webui:0.52.113@sha256:48ba6ee4a837079955c00e997b751065cc0324ae6eaa0f2fec592c8f4b2a746e
+    image: ghcr.io/nesquena/hermes-webui:0.52.544@sha256:03e6d1dc9ebabbb53a6b270dc11395db00146f63e76ec8f51686f1e89a0be0a4
     restart: on-failure
     stop_grace_period: 1m
     environment:

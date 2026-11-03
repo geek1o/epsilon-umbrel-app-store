@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   matterbridge:
-    image: luligu/matterbridge:3.10.12@sha256:da28a7789ca91ceae164c6e3bd18cd36b8e67cd20a423919a27520a7012ef47c
+    image: luligu/matterbridge:3.11.1@sha256:bb83780384dfcb311bcd529a2e7b0279784f1422e37f66b94a83d8265060402c
     # Matter commissioning and mDNS require direct host networking. umbrelOS
     # LAN ingress serves the manifest port itself; do not add app_proxy here.
     network_mode: host

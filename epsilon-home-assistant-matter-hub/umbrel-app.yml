@@ -1,7 +1,7 @@
 manifestVersion: 1
 id: epsilon-home-assistant-matter-hub
 name: Home Assistant Matter Hub
-version: "2.0.58"
+version: "2.0.59"
 tagline: Expose Home Assistant devices to Matter controllers
 icon: https://raw.githubusercontent.com/RiDDiX/home-assistant-matter-hub/main/packages/frontend/public/hamh-logo.svg
 category: automation

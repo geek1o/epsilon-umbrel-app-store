@@ -1,7 +1,7 @@
 manifestVersion: 1
 id: epsilon-hermes-webui
 name: Hermes WebUI
-version: "0.52.117"
+version: "0.52.544"
 tagline: Browser interface for the Hermes Agent already on your Umbrel
 icon: https://raw.githubusercontent.com/nesquena/hermes-webui/master/static/favicon-512.png
 category: ai

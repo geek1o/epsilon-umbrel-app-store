@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-bookorbit
 category: files
 name: BookOrbit
-version: "3.3.0"
+version: "3.6.0"
 tagline: Your self-hosted reading space
 icon: https://raw.githubusercontent.com/bookorbit/bookorbit/v3.3.0/docs/images/bookorbit-icon.png
 description: >-
@@ -31,7 +31,7 @@ releaseNotes: >-
   improves metadata comparison, media covers, account settings, and reliability.
 
 
-  Full release notes: https://github.com/bookorbit/bookorbit/releases/tag/v3.2.0
+  Full release notes: https://github.com/bookorbit/bookorbit/releases/tag/v3.6.0
 
 developer: BookOrbit
 website: https://bookorbit.app
