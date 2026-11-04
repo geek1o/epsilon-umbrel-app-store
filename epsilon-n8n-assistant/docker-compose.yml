@@ -90,7 +90,7 @@ services:
     # Never expose this container's ports — it runs privileged Docker-in-Docker.
 
   searxng:
-    image: ghcr.io/searxng/searxng:2026.10.4-d48c4b555@sha256:76b0bf285aca014c7191fc4d9234c4bfb358624ac33d8883833d496c059ec072
+    image: ghcr.io/searxng/searxng:2026.11.2-cccbc9e15@sha256:892ed5710603e38f9dc201e6a0b2f3f14dbdb8108edcadac30e55b165c979fb7
     restart: on-failure
     depends_on:
       - searxng-init
@@ -101,7 +101,7 @@ services:
     # Internal-only: n8n reaches it by its Umbrel main-network name.
 
   searxng-init:
-    image: busybox:1.38.0-musl@sha256:ea2b9914a16a4ac1981994af97b318f7c7d4db76b580c56177f08bf76f4a0be8
+    image: busybox:1.38.0-musl@sha256:80e38f9a1b39188b8bdb28879178edb322a4402b081a9aedda1924609decd6f6
     restart: "no"
     volumes:
       - ${APP_DATA_DIR}/searxng:/data
@@ -113,7 +113,7 @@ services:
         '    - html' '    - json' > /data/settings.yml
 
   web:
-    image: busybox:1.38.0-musl@sha256:ea2b9914a16a4ac1981994af97b318f7c7d4db76b580c56177f08bf76f4a0be8
+    image: busybox:1.38.0-musl@sha256:80e38f9a1b39188b8bdb28879178edb322a4402b081a9aedda1924609decd6f6
     restart: on-failure
     command:
       - /bin/sh
