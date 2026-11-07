@@ -19,7 +19,7 @@ services:
       APP_PORT: 8080
 
   sandbox-certs:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.13.0@sha256:fc4912f9023ac46ec58fd6cc30d5dae8bddd3b4589cf8d5d6d58db7417a12385
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.14.0@sha256:bca5e76d828306c0e319e946cfd0f4ff22941ce9e61bb5fcc118a1cce59c180d
     restart: on-failure
     user: '0:0'
     entrypoint: ['sh', '-c']
@@ -34,7 +34,7 @@ services:
       - ${APP_DATA_DIR}/tls:/tls
 
   sandbox-api:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.13.0@sha256:fc4912f9023ac46ec58fd6cc30d5dae8bddd3b4589cf8d5d6d58db7417a12385
+    image: ghcr.io/n8n-io/n8n-sandbox-service-api:1.14.0@sha256:bca5e76d828306c0e319e946cfd0f4ff22941ce9e61bb5fcc118a1cce59c180d
     restart: on-failure
     depends_on:
       - sandbox-certs
@@ -63,7 +63,7 @@ services:
     # n8n reaches this container by its Umbrel main-network name.
 
   sandbox-runner-1:
-    image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind:1.13.0@sha256:c3f06048fe1df2a0eb879fc8391dea2bcb068a63b99e9156ff32ed932df39ee0
+    image: ghcr.io/n8n-io/n8n-sandbox-service-runner-dind:1.14.0@sha256:e7ffb6dbfaa831861fe03b66ff9ae7d4f8c8541fa60738c58c12c059c806f6a4
     # Required by the upstream n8n sandbox design: Docker-in-Docker.
     privileged: true
     restart: on-failure
@@ -90,7 +90,7 @@ services:
     # Never expose this container's ports — it runs privileged Docker-in-Docker.
 
   searxng:
-    image: ghcr.io/searxng/searxng:2026.11.2-cccbc9e15@sha256:892ed5710603e38f9dc201e6a0b2f3f14dbdb8108edcadac30e55b165c979fb7
+    image: ghcr.io/searxng/searxng:2026.11.6-ac11e14c5@sha256:c750ee1d859b26d3aeae51c07f6a48c3a0bfbaa9195d71a18b258862d88c4c3c
     restart: on-failure
     depends_on:
       - searxng-init

@@ -1,7 +1,7 @@
 manifestVersion: 1
 id: epsilon-matterbridge
 name: Matterbridge
-version: "3.11.1-1"
+version: "3.11.2-1"
 tagline: Matter bridge and plugin manager for your smart home
 icon: https://raw.githubusercontent.com/Luligu/matterbridge/main/apps/frontend/public/matterbridge.svg
 category: networking
@@ -19,7 +19,8 @@ description: >-
   be available on your local network. After installation, open the web interface
   to install plugins and commission the bridge with your Matter controller.
 releaseNotes: >-
-  3.10.12-1: update Matterbridge to upstream 3.10.12.
+  Updates Matterbridge to 3.11.2, adding device reset and controller-name actions,
+  new Matter device types, and authentication checks for plugin API routes.
 
 developer: Luligu
 website: https://matterbridge.io

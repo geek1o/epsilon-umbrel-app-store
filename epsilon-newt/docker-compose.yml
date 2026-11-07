@@ -7,7 +7,7 @@ services:
       APP_PORT: 8080
 
   ui:
-    image: python:3.13.18-alpine3.24@sha256:7984cf56ceaddebe4fefeb75d64000b9f45d8b77b11a09b24524da6cdc3af0c8
+    image: python:3.13.18-alpine3.24@sha256:1e1f6334529d1fb26a2ef619d7cffb30a7c7d7cc1cc7338ebee283a58d1aeaca
     restart: on-failure
     user: "1000:1000"
     command: ["python", "/app/app.py"]
@@ -27,7 +27,7 @@ services:
       start_period: 10s
 
   docker_socket_proxy:
-    image: ghcr.io/linuxserver/socket-proxy:3.4.7-r0-ls104@sha256:4e5e59efd3338205561c54262581992036e5a36ccca97d487b1d4ec41f9adc58
+    image: ghcr.io/linuxserver/socket-proxy:3.4.7-r0-ls105@sha256:823dda971e9a3951257eb251586a804199819fe1587c35faa43adc7b52a2ff16
     restart: on-failure
     read_only: true
     network_mode: none
