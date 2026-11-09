@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-lampac
 category: media
 name: Lampac
-version: "1.87.8"
+version: "1.87.9"
 tagline: Media aggregator server for the Lampa client
 icon: https://raw.githubusercontent.com/lampac-nextgen/lampac/main/docs/assets/logo-mark.png
 description: >-
@@ -33,7 +33,7 @@ description: >-
   ExternalBind); enable them by their manifest.json as described in the
   project documentation.
 releaseNotes: >-
-  Lampac NextGen 1.81.0 adds the Aladin module and restores Alloha to its official state.
+  Lampac NextGen 1.87.9 updates the Gencit API host and referer.
 developer: Lampac NextGen
 website: https://lampac.dev
 dependencies: []
