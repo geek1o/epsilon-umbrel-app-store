@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-atvloadly
 category: developer
 name: atvloadly
-version: "0.8.2"
+version: "0.8.3"
 tagline: Sideload and refresh apps on Apple TV
 icon: https://raw.githubusercontent.com/bitxeno/atvloadly/v0.6.2/doc/preview/logo.png
 description: >-
@@ -20,8 +20,9 @@ description: >-
 
   Umbrel authentication protects the web interface. Device discovery requires access to the host system D-Bus and Avahi sockets, and upstream requires unconfined seccomp. This package does not enable privileged mode, host networking, or Docker socket access.
 releaseNotes: >-
-  Isolates Apple ID staging directories, prevents deleting apps during install,
-  improves Telegram error handling, and removes a deprecated TTY route.
+  Adds custom app icons for iOS installs and release notifications with a UI
+  banner. Improves custom icon display and large uploads, allows iPhone and
+  iPad installs without device_id, and updates plumesign for ZIP64 support.
 
 developer: bitxeno
 website: https://github.com/bitxeno/atvloadly
