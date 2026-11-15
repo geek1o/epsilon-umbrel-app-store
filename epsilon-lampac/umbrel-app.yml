@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-lampac
 category: media
 name: Lampac
-version: "1.90.0"
+version: "1.90.1"
 tagline: Media aggregator server for the Lampa client
 icon: https://raw.githubusercontent.com/lampac-nextgen/lampac/main/docs/assets/logo-mark.png
 description: >-
@@ -33,9 +33,10 @@ description: >-
   ExternalBind); enable them by their manifest.json as described in the
   project documentation.
 releaseNotes: >-
-  Updates Lampac NextGen to 1.90.0 with sign-in for the native Lampa Apple TV
-  client. Full upstream changelog:
-  https://github.com/lampac-nextgen/lampac/compare/1.89.0...1.90.0
+  Updates Lampac NextGen to 1.90.1 with correct MIME types for Mirage MP4 and
+  media segments, hardened TorrServer request authorization, and hardened
+  TelegramAuth API authorization and user state sync. Full upstream changelog:
+  https://github.com/lampac-nextgen/lampac/compare/1.90.0...1.90.1
 developer: Lampac NextGen
 website: https://lampac.dev
 dependencies: []
