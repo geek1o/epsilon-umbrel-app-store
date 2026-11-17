@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-atvloadly
 category: developer
 name: atvloadly
-version: "0.8.3"
+version: "0.8.4"
 tagline: Sideload and refresh apps on Apple TV
 icon: https://raw.githubusercontent.com/bitxeno/atvloadly/v0.6.2/doc/preview/logo.png
 description: >-
@@ -20,9 +20,9 @@ description: >-
 
   Umbrel authentication protects the web interface. Device discovery requires access to the host system D-Bus and Avahi sockets, and upstream requires unconfined seccomp. This package does not enable privileged mode, host networking, or Docker socket access.
 releaseNotes: >-
-  Adds custom app icons for iOS installs and release notifications with a UI
-  banner. Improves custom icon display and large uploads, allows iPhone and
-  iPad installs without device_id, and updates plumesign for ZIP64 support.
+  Adds device-type filtering for installs. Loads manual devices at startup
+  with zeroconf disabled, updates plumesign for correct device platforms,
+  preserves the selected UI language, and fixes IPA uploads taking over five minutes.
 
 developer: bitxeno
 website: https://github.com/bitxeno/atvloadly

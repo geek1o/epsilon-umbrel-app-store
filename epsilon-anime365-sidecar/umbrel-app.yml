@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-anime365-sidecar
 category: media
 name: Anime365 Sidecar
-version: "0.14.1-ui.3"
+version: "0.15.0-ui.3"
 tagline: Download your Anime 365 list into Emby
 icon: https://smotret-anime.app/apple-touch-icon.png?v=pgrAWgkp53
 description: >-
@@ -23,8 +23,11 @@ description: >-
 
   Umbrel authentication protects the configuration panel. Secrets are stored in the app data directory with restricted file permissions and are never returned to the browser after saving. The media library is stored in Umbrel's shared downloads directory so Emby can access it.
 releaseNotes: >-
-  Release 0.14.1 stops Telegram notifications for deleted watched episodes
-  and improves download reliability to prevent saving corrupted files.
+  Release 0.15.0 adds experimental Jellyfin support and configurable cleanup
+  of watched episodes. File and directory names use a new format, with stricter
+  special-character filtering, a 255-character directory limit, and season and
+  title-type markers. Upstream recommends deleting previously downloaded episodes
+  and downloading them again before upgrading because the naming format changed.
 
 developer: flaksp
 website: https://github.com/flaksp/anime365-sidecar
