@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-anime365-sidecar
 category: media
 name: Anime365 Sidecar
-version: "0.15.0-ui.4"
+version: "0.15.0-ui.5"
 tagline: Download your Anime 365 list into Emby or Jellyfin
 icon: https://smotret-anime.app/apple-touch-icon.png?v=pgrAWgkp53
 description: >-
