@@ -31,7 +31,7 @@ trusting their upstream developers.
 | Application | Category | Description | Upstream |
 | --- | --- | --- | --- |
 | [Aliasarr](epsilon-aliasarr) | Media | Media manager for movies, series, and anime with multilingual titles, download automation, imports, and hardlink support. | [lQwestl/aliasarr](https://github.com/lQwestl/aliasarr) |
-| [Anime365 Sidecar](epsilon-anime365-sidecar) | Media | Anime 365 and Emby integration with automated episode downloads, metadata, watch-state sync, and a dedicated configuration panel. | [flaksp/anime365-sidecar](https://github.com/flaksp/anime365-sidecar) |
+| [Anime365 Sidecar](epsilon-anime365-sidecar) | Media | Anime 365 integration with Emby or Jellyfin, automated episode downloads, cleanup, watch-state sync, and a dedicated configuration panel. | [flaksp/anime365-sidecar](https://github.com/flaksp/anime365-sidecar) |
 | [atvloadly](epsilon-atvloadly) | Developer | Web interface for pairing with Apple TV, sideloading IPA files, and refreshing signed applications. | [bitxeno/atvloadly](https://github.com/bitxeno/atvloadly) |
 | [Emby](epsilon-emby) | Media | Personal media server for organising and streaming movies, TV shows, music, photos, and home videos. | [MediaBrowser/Emby](https://github.com/MediaBrowser/Emby) |
 | [n8n](epsilon-n8n) | Automation | Epsilon-maintained n8n alternative with the official external task runner, n8n Assistant sandbox service, privileged sandbox runner, and bundled SearXNG JSON web search. Uses a separate `epsilon-n8n` app/data directory; back up existing official n8n data before migrating. | [n8n-io/n8n](https://github.com/n8n-io/n8n) |
