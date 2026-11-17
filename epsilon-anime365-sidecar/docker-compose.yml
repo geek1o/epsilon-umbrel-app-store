@@ -10,7 +10,7 @@ services:
     image: python:3.13.18-alpine3.24@sha256:9ef1a599f863231c3d91e941389bfdc4a2d6070557243d54df1a4e57015b960e
     restart: on-failure
     user: "1000:1000"
-    command: ["python", "/app/app.py"]
+    command: ["python", "/bundle/ui.py"]
     environment:
       PORT: "8080"
       CONFIG_PATH: /config/.env
@@ -18,7 +18,7 @@ services:
       DEFAULT_EMBY_BASE_URL: http://epsilon-emby_server_1:8096/emby
       DEFAULT_EMBY_PUBLIC_BASE_URL: http://${DEVICE_DOMAIN_NAME}:8098
     volumes:
-      - ${APP_DATA_DIR}/web:/app:ro
+      - ${APP_DATA_DIR}/ui.py:/bundle/ui.py:ro
       - ${APP_DATA_DIR}/data/config:/config
       - ${UMBREL_ROOT}/data/storage/downloads/anime365:/library:ro
     healthcheck:

@@ -28,6 +28,7 @@ CONFIG_PATH = Path(os.environ.get("CONFIG_PATH", "/config/.env"))
 LIBRARY_PATH = Path(os.environ.get("LIBRARY_PATH", "/library"))
 PORT = int(os.environ.get("PORT", "8080"))
 STARTED_AT = time.time()
+UI_VERSION = os.environ.get("ANIME365_UI_VERSION", "development")
 
 FIELD_SPECS = (
     ("media_server", "SIDECAR_MEDIA_SERVER", "emby", True, False),
@@ -319,6 +320,7 @@ def public_config() -> dict[str, Any]:
     for key in SECRET_KEYS:
         config[key] = ""
     return {
+        "ui_version": UI_VERSION,
         "config": config,
         "secret_set": secret_set,
         "library_directory": "/library",
@@ -482,6 +484,8 @@ class Handler(BaseHTTPRequestHandler):
             self.send_error(HTTPStatus.NOT_FOUND)
             return
         body = path.read_bytes()
+        if filename == "index.html":
+            body = body.replace(b"__UI_VERSION__", UI_VERSION.encode("utf-8"))
         self.send_response(HTTPStatus.OK)
         self.send_header("Content-Type", content_type)
         self.send_header("Content-Length", str(len(body)))
@@ -522,7 +526,7 @@ class Handler(BaseHTTPRequestHandler):
         elif parsed.path == "/api/status":
             self.send_json(status_payload())
         elif parsed.path == "/health":
-            self.send_json({"status": "ok"})
+            self.send_json({"status": "ok", "ui_version": UI_VERSION})
         else:
             self.send_error(HTTPStatus.NOT_FOUND)
 

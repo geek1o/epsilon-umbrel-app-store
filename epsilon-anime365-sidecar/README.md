@@ -2,6 +2,8 @@
 
 This package runs the official [Anime365 Sidecar 0.15.0](https://github.com/flaksp/anime365-sidecar/releases/tag/0.15.0) container unchanged and adds a separate Python web panel for configuration and library statistics. The image is pinned by its multi-platform digest in `docker-compose.yml`.
 
+The panel's Python and static files are bundled in the generated root-level `ui.py.template`. Umbrel copies and renders root templates on both installation and update; it does not refresh arbitrary directories such as `web/` on update. The UI container mounts the rendered `ui.py`, extracts its bundled resources into its own temporary directory, and runs the panel there. No code downloads or image build are needed at startup. The panel version is shown in the footer and returned by `/health` so it can be checked independently of the installed package manifest.
+
 ## Requirements
 
 - An Anime 365 account with an active premium subscription.
@@ -49,9 +51,15 @@ The web panel has no Docker socket access and cannot control the sidecar contain
 
 The panel uses the Python standard library and static HTML/CSS/JavaScript, without a frontend build step.
 
+After changing anything in `web/app.py`, `web/static/`, or the package version, regenerate and commit `ui.py.template`. Its encoded payload protects JavaScript template literals from Umbrel's `envsubst` rendering.
+
 ```sh
+python3 epsilon-anime365-sidecar/web/build_bundle.py
+python3 epsilon-anime365-sidecar/web/build_bundle.py --check
 python3 -m unittest discover -s epsilon-anime365-sidecar/web/tests -v
 node --check epsilon-anime365-sidecar/web/static/app.js
 ```
+
+The bundle integration test reproduces an update with Umbrel's file allowlist and a stale installed `web/` directory. It starts the rendered bundle, checks the new form fields and static resources, and verifies that the existing configuration is unchanged.
 
 This independent community package is not affiliated with Anime 365, Emby, Jellyfin, Umbrel, or the upstream developer.

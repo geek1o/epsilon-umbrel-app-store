@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-anime365-sidecar
 category: media
 name: Anime365 Sidecar
-version: "0.15.0-ui.5"
+version: "0.15.0-ui.6"
 tagline: Download your Anime 365 list into Emby or Jellyfin
 icon: https://smotret-anime.app/apple-touch-icon.png?v=pgrAWgkp53
 description: >-
@@ -23,6 +23,12 @@ description: >-
 
   Umbrel authentication protects the configuration panel. Secrets are stored in the app data directory with restricted file permissions and are never returned to the browser after saving. Media is stored in Umbrel's shared downloads directory for access by the selected media server.
 releaseNotes: >-
+  Fix delivery of configuration panel files during Umbrel updates. The panel
+  is now shipped in a generated root-level template, which Umbrel refreshes
+  on every update. Previously the package version could change while the
+  installed web directory stayed unchanged. Existing settings and media are
+  preserved. The running panel version is visible in the footer.
+
   The configuration panel now supports all 0.15.0 settings: Emby or Jellyfin,
   watched-episode cleanup policies and cleanup delay. Settings are grouped into
   sections with navigation, contextual help, and light and dark themes.
