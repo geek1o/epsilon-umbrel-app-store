@@ -13,6 +13,8 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import uuid
+from decimal import Decimal
 from datetime import datetime, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -28,6 +30,7 @@ PORT = int(os.environ.get("PORT", "8080"))
 STARTED_AT = time.time()
 
 FIELD_SPECS = (
+    ("media_server", "SIDECAR_MEDIA_SERVER", "emby", True, False),
     ("anime365_base_url", "SIDECAR_ANIME365_BASE_URL", "https://smotret-anime.app", True, False),
     ("anime365_login", "SIDECAR_ANIME365_LOGIN", "", True, False),
     ("anime365_password", "SIDECAR_ANIME365_PASSWORD", "", True, True),
@@ -44,6 +47,13 @@ FIELD_SPECS = (
     ("emby_api_key", "SIDECAR_EMBY_API_KEY", "", True, True),
     ("emby_library_id", "SIDECAR_EMBY_LIBRARY_ID", "", True, False),
     ("emby_user_id", "SIDECAR_EMBY_USER_ID", "", True, False),
+    ("jellyfin_base_url", "SIDECAR_JELLYFIN_BASE_URL", "", True, False),
+    ("jellyfin_public_base_url", "SIDECAR_JELLYFIN_PUBLIC_BASE_URL", "", False, False),
+    ("jellyfin_api_key", "SIDECAR_JELLYFIN_API_KEY", "", True, True),
+    ("jellyfin_library_id", "SIDECAR_JELLYFIN_LIBRARY_ID", "", True, False),
+    ("jellyfin_user_id", "SIDECAR_JELLYFIN_USER_ID", "", True, False),
+    ("watched_episodes_cleanup_policy", "SIDECAR_WATCHED_EPISODES_CLEANUP_POLICY", "do_not_delete", True, False),
+    ("watched_episodes_cleanup_after", "SIDECAR_WATCHED_EPISODES_CLEANUP_AFTER", "336h", True, False),
     ("translations", "SIDECAR_TRANSLATIONS", "ru_subtitles,ru_dub", True, False),
     ("preferred_translation_authors", "SIDECAR_PREFERRED_TRANSLATION_AUTHORS", "", False, False),
     ("blacklisted_translation_authors", "SIDECAR_BLACKLISTED_TRANSLATION_AUTHORS", "", False, False),
@@ -68,6 +78,7 @@ ENV_TO_SPEC = {spec[1]: spec for spec in FIELD_SPECS}
 SECRET_KEYS = {spec[0] for spec in FIELD_SPECS if spec[4]}
 REQUIRED_KEYS = {spec[0] for spec in FIELD_SPECS if spec[3]}
 DURATION_KEYS = {
+    "watched_episodes_cleanup_after",
     "anime_list_refresh_idle_interval",
     "download_timeout_image",
     "download_timeout_video",
@@ -76,6 +87,8 @@ DURATION_KEYS = {
     "fresh_items_metadata_refresh_idle_interval",
 }
 URL_KEYS = {
+    "jellyfin_base_url",
+    "jellyfin_public_base_url",
     "anime365_base_url",
     "anime_list_database_url",
     "emby_base_url",
@@ -94,7 +107,9 @@ FIXED_ENV = {
     "SIDECAR_LIBRARY_DIRECTORY": "/library",
     "SIDECAR_TEMPORARY_DIRECTORY": "/tmp/anime365-sidecar",
 }
-GO_DURATION_RE = re.compile(r"^(?:\d+(?:\.\d+)?(?:ns|us|µs|ms|s|m|h))+$")
+GO_DURATION_RE = re.compile(r"^(?:\+)?(?:(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)(?:ns|us|µs|μs|ms|s|m|h))+$")
+CLEANUP_POLICIES = {"do_not_delete", "delete_watched_episodes", "delete_completed_and_dropped_shows"}
+MANIFEST_NAMES = {"emby": "manifest.json", "jellyfin": "manifest-jellyfin.json"}
 
 state_lock = threading.Lock()
 restart_required = False
@@ -151,6 +166,22 @@ def normalize_list(value: Any) -> str:
     return ",".join(part.strip() for part in items if str(part).strip())
 
 
+def required_keys(config: dict[str, str]) -> set[str]:
+    inactive = "emby_" if config.get("media_server") == "jellyfin" else "jellyfin_"
+    return {key for key in REQUIRED_KEYS if not key.startswith(inactive)}
+
+
+def check_library_provider(provider: str) -> None:
+    # Upstream cannot migrate a library between providers. Never remove its files here.
+    other = "emby" if provider == "jellyfin" else "jellyfin"
+    if (LIBRARY_PATH / MANIFEST_NAMES[other]).exists():
+        raise ValueError(
+            f"В общей папке уже есть библиотека {other.capitalize()}. "
+            "Переключение существующей библиотеки не поддерживается. "
+            "Для другого сервера нужен отдельный каталог в Docker Compose."
+        )
+
+
 def validate_url(key: str, value: str) -> None:
     if not value:
         return
@@ -164,6 +195,9 @@ def validate_config(payload: dict[str, Any], existing: dict[str, str]) -> dict[s
         raise ValueError("Ожидался JSON-объект с настройками")
 
     result = config_from_env(existing)
+    clear_secrets = payload.get("_clear_secrets", [])
+    if not isinstance(clear_secrets, list) or any(not isinstance(key, str) or key not in SECRET_KEYS for key in clear_secrets):
+        raise ValueError("Некорректный список секретов для удаления")
     for key, value in payload.items():
         if key not in KEY_TO_SPEC:
             continue
@@ -176,7 +210,17 @@ def validate_config(payload: dict[str, Any], existing: dict[str, str]) -> dict[s
             continue
         result[key] = normalize_list(value) if key in LIST_KEYS else value
 
-    missing = [key for key in sorted(REQUIRED_KEYS) if not result.get(key, "").strip()]
+    for key in clear_secrets:
+        result[key] = ""
+    provider = result["media_server"]
+    if provider not in MANIFEST_NAMES:
+        raise ValueError("media_server: выберите Emby или Jellyfin")
+    inactive = "emby_" if provider == "jellyfin" else "jellyfin_"
+    for key in result:
+        if key.startswith(inactive):
+            result[key] = ""
+    check_library_provider(provider)
+    missing = [key for key in sorted(required_keys(result)) if not result.get(key, "").strip()]
     if missing:
         raise ValueError("Не заполнены обязательные поля: " + ", ".join(missing))
 
@@ -185,15 +229,21 @@ def validate_config(payload: dict[str, Any], existing: dict[str, str]) -> dict[s
 
     for key in DURATION_KEYS:
         value = result.get(key, "")
-        if not GO_DURATION_RE.fullmatch(value):
+        if value not in {"0", "+0"} and not GO_DURATION_RE.fullmatch(value):
             raise ValueError(f"{key}: неверный интервал, пример: 30s, 5m или 1h30m")
+        units = {"ns": 1, "us": 1000, "µs": 1000, "μs": 1000, "ms": 1000000,
+                 "s": 1000000000, "m": 60000000000, "h": 3600000000000}
+        nanoseconds = sum(int(Decimal(number) * units[unit]) for number, unit in
+                          re.findall(r"([0-9]+(?:\.[0-9]*)?|\.[0-9]+)(ns|us|µs|μs|ms|s|m|h)", value))
+        if nanoseconds > 2**63 - 1:
+            raise ValueError(f"{key}: интервал превышает предел Go time.Duration")
 
     try:
         episodes = int(result["episodes_to_download_ahead"])
     except ValueError as exc:
         raise ValueError("episodes_to_download_ahead: требуется целое число") from exc
-    if episodes < 0 or episodes > 10000:
-        raise ValueError("episodes_to_download_ahead: допустимо значение от 0 до 10000")
+    if episodes < 0 or episodes > 2**32 - 1:
+        raise ValueError("episodes_to_download_ahead: допустимо значение от 0 до 4294967295")
     result["episodes_to_download_ahead"] = str(episodes)
 
     log_level = result["log_level"].upper()
@@ -205,6 +255,17 @@ def validate_config(payload: dict[str, Any], existing: dict[str, str]) -> dict[s
     if delete_removed not in {"true", "false"}:
         raise ValueError("delete_removed_translations: требуется true или false")
     result["delete_removed_translations"] = delete_removed
+
+    if result["watched_episodes_cleanup_policy"] not in CLEANUP_POLICIES:
+        raise ValueError("watched_episodes_cleanup_policy: выберите политику удаления из списка")
+    if provider == "jellyfin":
+        for key in ("jellyfin_library_id", "jellyfin_user_id"):
+            try:
+                parsed_id = uuid.UUID(result[key])
+            except ValueError as exc:
+                raise ValueError(f"{key}: требуется UUID с дефисами или без них") from exc
+            if not parsed_id.int:
+                raise ValueError(f"{key}: UUID не должен быть нулевым")
 
     telegram = result.get("telegram_bot_api_credentials", "")
     if telegram and urllib.parse.urlsplit(telegram).scheme != "telegram":
@@ -221,7 +282,10 @@ def write_env_file(config: dict[str, str], existing: dict[str, str], path: Path 
         "# Managed by the Anime365 Sidecar web configuration panel.",
         "# Manual edits are allowed, but saving in the panel will rewrite known values.",
     ]
+    inactive = "emby_" if config.get("media_server") == "jellyfin" else "jellyfin_"
     for key, env_name, _, _, _ in FIELD_SPECS:
+        if key.startswith(inactive):
+            continue
         value = config.get(key, "")
         lines.append(f"{env_name}={json.dumps(value, ensure_ascii=False)}")
     for env_name, value in FIXED_ENV.items():
@@ -264,17 +328,20 @@ def public_config() -> dict[str, Any]:
 
 def required_status(values: dict[str, str]) -> tuple[bool, list[str]]:
     config = config_from_env(values)
-    missing = [key for key in sorted(REQUIRED_KEYS) if not config.get(key, "").strip()]
+    missing = [key for key in sorted(required_keys(config)) if not config.get(key, "").strip()]
+    if config["media_server"] not in MANIFEST_NAMES:
+        missing.append("media_server")
     return not missing, missing
 
 
-def library_status(path: Path | None = None) -> dict[str, Any]:
+def library_status(path: Path | None = None, provider: str = "emby") -> dict[str, Any]:
     path = path or LIBRARY_PATH
-    manifest_path = path / "manifest.json"
+    manifest_path = path / MANIFEST_NAMES.get(provider, "manifest.json")
     result: dict[str, Any] = {
         "available": path.is_dir(),
         "manifest_found": manifest_path.is_file(),
         "manifest_updated_at": None,
+        "manifest_name": manifest_path.name,
         "shows": 0,
         "episodes": 0,
         "translations": 0,
@@ -320,7 +387,7 @@ def status_payload() -> dict[str, Any]:
         state = "configuration_required"
     elif needs_restart:
         state = "restart_required"
-    elif (LIBRARY_PATH / "manifest.json").is_file():
+    elif (LIBRARY_PATH / MANIFEST_NAMES[config_from_env(values)["media_server"]]).is_file():
         state = "library_detected"
     else:
         state = "configured"
@@ -331,7 +398,7 @@ def status_payload() -> dict[str, Any]:
         "restart_required": needs_restart,
         "config_updated_at": utc_iso(CONFIG_PATH.stat().st_mtime) if CONFIG_PATH.is_file() else None,
         "ui_uptime_seconds": int(time.time() - STARTED_AT),
-        "library": library_status(),
+        "library": library_status(provider=config_from_env(values)["media_server"]),
         "note": "Статус процесса sidecar смотрите в Umbrel; upstream не предоставляет health API.",
     }
 
@@ -346,6 +413,11 @@ def merge_test_config(payload: dict[str, Any]) -> dict[str, str]:
         if key in SECRET_KEYS and not value:
             continue
         config[key] = value
+    clear_secrets = payload.get("_clear_secrets", [])
+    if isinstance(clear_secrets, list):
+        for key in clear_secrets:
+            if isinstance(key, str) and key in SECRET_KEYS:
+                config[key] = ""
     return config
 
 
@@ -367,21 +439,22 @@ def test_connection(service: str, payload: dict[str, Any]) -> dict[str, Any]:
             raise ValueError(f"Anime365 отвечает с ошибкой HTTP {code}")
         return {"ok": True, "message": f"Сайт Anime365 доступен (HTTP {code}). Логин проверит sidecar после перезапуска."}
 
-    if service == "emby":
-        validate_url("emby_base_url", config.get("emby_base_url", ""))
-        base = config["emby_base_url"].rstrip("/")
-        api_key = config.get("emby_api_key", "")
+    if service in {"emby", "jellyfin"}:
+        label = "Emby" if service == "emby" else "Jellyfin"
+        validate_url(f"{service}_base_url", config.get(f"{service}_base_url", ""))
+        base = config[f"{service}_base_url"].rstrip("/")
+        api_key = config.get(f"{service}_api_key", "")
         if not api_key:
-            raise ValueError("Сначала укажите API key Emby")
+            raise ValueError(f"Сначала укажите API key {label}")
         code, body = request_url(base + "/System/Info", {"X-Emby-Token": api_key})
         if code != 200:
-            raise ValueError(f"Emby отклонил запрос (HTTP {code}); проверьте адрес и API key")
+            raise ValueError(f"{label} отклонил запрос (HTTP {code}); проверьте адрес и API key")
         try:
             info = json.loads(body)
             version = info.get("Version", "неизвестна")
         except (ValueError, TypeError):
             version = "неизвестна"
-        return {"ok": True, "message": f"Соединение и API key работают. Версия Emby: {version}."}
+        return {"ok": True, "message": f"Соединение и API key работают. Версия {label}: {version}."}
 
     raise ValueError("Неизвестный тип проверки")
 
@@ -475,8 +548,8 @@ class Handler(BaseHTTPRequestHandler):
             if parsed.path == "/api/test/anime365":
                 self.send_json(test_connection("anime365", payload))
                 return
-            if parsed.path == "/api/test/emby":
-                self.send_json(test_connection("emby", payload))
+            if parsed.path in {"/api/test/emby", "/api/test/jellyfin"}:
+                self.send_json(test_connection(parsed.path.rsplit("/", 1)[1], payload))
                 return
             self.send_error(HTTPStatus.NOT_FOUND)
         except ValueError as exc:
