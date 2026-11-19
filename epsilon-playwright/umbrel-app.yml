@@ -1,7 +1,7 @@
 manifestVersion: 1
 id: epsilon-playwright
 name: Playwright
-version: "0.0.85"
+version: "0.0.86"
 tagline: Remote browser automation with Playwright MCP
 icon: https://playwright.dev/img/playwright-logo.svg
 category: developer
@@ -20,9 +20,10 @@ description: >-
   Because the proxy forwards the public host name, the built-in host check is
   disabled, so the endpoint must never be published to the internet.
 releaseNotes: >-
-  Playwright MCP 0.0.85 improves accessible snapshots, evaluation results,
-  configuration path resolution, and browser settling waits, and adds
-  background-tab and tab-group controls for extension connections.
+  Playwright MCP 0.0.86 adds resumable extension tab groups and session names
+  and colors, supports stable Chrome installation on Linux ARM64, preserves
+  downloads with duplicate names, and limits busy-page waits when connecting
+  over CDP. The container runtime and base packages are refreshed.
 
 developer: Microsoft
 website: https://playwright.dev

@@ -7,7 +7,7 @@ services:
       APP_PORT: 80
 
   server:
-    image: ghcr.io/bitxeno/atvloadly:v0.8.4@sha256:fc2f72e1589d2946a7fe27870b85724958f001712893f982561c5c0f9d679046
+    image: ghcr.io/bitxeno/atvloadly:v0.8.5@sha256:99d82783c189b634142ab69d1df32d1524f339cfa273ea9e6ff442fe440b2737
     restart: on-failure
     stop_grace_period: 30s
     security_opt:
