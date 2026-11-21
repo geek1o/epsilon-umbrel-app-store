@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+
+mkdir -p /run/haproxy /proxy
+rm -f /proxy/docker.sock
+# Use the image's default timeouts and bind only to the private Unix socket.
+sed -e 's|@@BIND_PROTO@@|/proxy/docker.sock mode 0666|' \
+    -e 's|@@TIMEOUT_CLIENT@@|10m|' \
+    -e 's|@@TIMEOUT_SERVER@@|10m|' \
+    /templates/haproxy.cfg > /run/haproxy/haproxy.cfg
+
+exec /usr/sbin/haproxy -f /run/haproxy/haproxy.cfg -W -db

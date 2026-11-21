@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-newt
 category: networking
 name: Newt
-version: "1.20.1-ui.3"
+version: "1.20.1-ui.4"
 tagline: Connect this Umbrel to a Pangolin network
 icon: https://avatars.githubusercontent.com/u/183037913?v=4
 description: >-
@@ -14,7 +14,7 @@ description: >-
 
   Newt initiates outbound connections to the configured Pangolin server. Docker discovery is provided through a network-isolated read-only socket proxy and a private Unix socket mounted only into Newt. It denies container changes, exec, logs, archives, process lists, and filesystem exports. Newt does not use host networking, privileged mode, or extra Linux capabilities. Services published through Pangolin become reachable according to the access policies you configure there, so review every target carefully.
 releaseNotes: >-
-  Updates Newt to 1.20.1 with local endpoint discovery and fixes for ICMP alias replies, TCP download stalls after packet loss, macOS socket recovery, and CLI telemetry.
+  Fixes Newt startup with Docker Socket Proxy 3.4.8 and delivers the corrected proxy startup script to existing Umbrel installations.
 
 developer: Pangolin
 website: https://docs.pangolin.net/manage/sites/understanding-sites
