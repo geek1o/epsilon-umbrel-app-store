@@ -2,7 +2,7 @@ manifestVersion: 1
 id: epsilon-lampac
 category: media
 name: Lampac
-version: "1.90.2"
+version: "1.91.0"
 tagline: Media aggregator server for the Lampa client
 icon: https://raw.githubusercontent.com/lampac-nextgen/lampac/main/docs/assets/logo-mark.png
 description: >-
@@ -33,9 +33,9 @@ description: >-
   ExternalBind); enable them by their manifest.json as described in the
   project documentation.
 releaseNotes: >-
-  Updates Lampac NextGen to 1.90.2. Fixes favorite sync to read through
-  Lampa.Storage instead of localStorage. Full upstream changelog:
-  https://github.com/lampac-nextgen/lampac/compare/1.90.1...1.90.2
+  Updates Lampac NextGen to 1.91.0. Adds the NinePeso online source and
+  updates .NET and web dependencies. Full upstream changelog:
+  https://github.com/lampac-nextgen/lampac/compare/1.90.2...1.91.0
 developer: Lampac NextGen
 website: https://lampac.dev
 dependencies: []
