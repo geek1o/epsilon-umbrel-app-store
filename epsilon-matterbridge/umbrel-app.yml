@@ -1,7 +1,7 @@
 manifestVersion: 1
 id: epsilon-matterbridge
 name: Matterbridge
-version: "3.11.4-1"
+version: "3.11.5-1"
 tagline: Matter bridge and plugin manager for your smart home
 icon: https://raw.githubusercontent.com/Luligu/matterbridge/main/apps/frontend/public/matterbridge.svg
 category: networking
@@ -19,10 +19,9 @@ description: >-
   be available on your local network. After installation, open the web interface
   to install plugins and commission the bridge with your Matter controller.
 releaseNotes: >-
-  Updates Matterbridge to 3.11.4 with logger-cache replay, new mDNS tools,
-  improved DNS label handling, and fixes for concurrent Thread requests.
-  Updates s6-overlay and dependencies.
-  https://github.com/Luligu/matterbridge/releases/tag/3.11.4
+  Updates matter.js to 0.18.1 and improves thermostat preset handling.
+  The mDNS and CoAP monitor CLI options now use kebab-case.
+  https://github.com/Luligu/matterbridge/releases/tag/3.11.5
 
 developer: Luligu
 website: https://matterbridge.io
